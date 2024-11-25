@@ -1,0 +1,14 @@
+{
+  "name": "dev.limitex.mono-ui.Editor.Tests",
+  "references": [
+    "dev.limitex.mono-ui.Editor",
+    "dev.limitex.mono-ui"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": []
+}

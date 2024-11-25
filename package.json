@@ -1,0 +1,14 @@
+{
+  "name": "dev.limitex.mono-ui",
+  "version": "0.0.0",
+  "displayName": "Mono UI",
+  "description": "This is an package",
+  "unity": "2022.3",
+  "unityRelease": "22f1",
+  "dependencies": {},
+  "keywords": [],
+  "author": {
+    "name": "Limitex",
+    "url": "https://github.com/Limitex/mono-ui"
+  }
+}
