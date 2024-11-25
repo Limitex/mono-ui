@@ -9,6 +9,12 @@
   "keywords": [],
   "author": {
     "name": "Limitex",
+    "email": "76650151+Limitex@users.noreply.github.com",
     "url": "https://github.com/Limitex/mono-ui"
-  }
+  },
+  "vpmDependencies" : {
+    "com.vrchat.worlds" : "3.7.3"
+  },
+  "url": "https://github.com/Limitex/mono-ui",
+  "license": "MIT"
 }
