@@ -5,7 +5,9 @@
   "description": "This is an package",
   "unity": "2022.3",
   "unityRelease": "22f1",
-  "dependencies": {},
+  "dependencies": {
+    "com.unity.textmeshpro": "3.0.6"
+  },
   "keywords": [],
   "author": {
     "name": "Limitex",
