@@ -1,13 +1,29 @@
 {
-  "name": "dev.limitex.mono-ui.Editor",
-  "references": [],
-  "includePlatforms": [],
-  "excludePlatforms": [],
-  "allowUnsafeCode": false,
-  "overrideReferences": false,
-  "precompiledReferences": [],
-  "autoReferenced": true,
-  "defineConstraints": [],
-  "versionDefines": [],
-  "noEngineReferences": false
+    "name": "dev.limitex.mono-ui.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:d1e8c2ba944807d4a9213e2de6930a0b",
+        "GUID:6490804aa441dfe4b88eb56cccbdf081",
+        "GUID:1b3abf7e59395d84c84b48d69677daaa",
+        "GUID:6e9c6119ac4eb334284fb7b4bc6d1f05",
+        "GUID:3c1bc1267eab5884ebe7f232c09ee0d9",
+        "GUID:f70a94b0bedfa8ec50ed757f72032810",
+        "GUID:627c4d5cd580ddf41bd320e784fe8b9d",
+        "GUID:99835874ee819da44948776e0df4ff1d",
+        "GUID:84265b35cca3905448e623ef3903f0ff",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:cb907f1c865d8c04897b89c03d9531f9"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
