@@ -1,0 +1,56 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.get-version.outputs.version }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get version from package.json
+        id: get-version
+        run: |
+          VERSION=$(jq -r .version package.json)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Check if tag exists
+        run: |
+          if git ls-remote --tags origin | grep -q "refs/tags/v${{ steps.get-version.outputs.version }}"; then
+            echo "Error: Version v${{ steps.get-version.outputs.version }} already exists"
+            exit 1
+          fi
+
+      - name: Create ZIP archive
+        run: |
+          zip -r mono-ui-${{ steps.get-version.outputs.version }}.zip . -x "*.git*"
+
+      - name: Update package.json URL
+        run: |
+          jq '.url = "https://github.com/Limitex/mono-ui/releases/download/v${{ steps.get-version.outputs.version }}/mono-ui-${{ steps.get-version.outputs.version }}.zip"' package.json > updated-package.json
+          mv updated-package.json package.json
+
+      - name: Create Tag
+        run: |
+          git tag v${{ steps.get-version.outputs.version }}
+          git push origin v${{ steps.get-version.outputs.version }}
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.get-version.outputs.version }}
+          name: Release v${{ steps.get-version.outputs.version }}
+          files: |
+            mono-ui-${{ steps.get-version.outputs.version }}.zip
+            package.json
+          draft: false
+          prerelease: false

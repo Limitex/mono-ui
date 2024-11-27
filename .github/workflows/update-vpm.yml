@@ -1,0 +1,78 @@
+name: Update VPM Manifest
+
+on:
+  workflow_run:
+    workflows: ["Create Release"]
+    types:
+      - completed
+
+jobs:
+  update-vpm:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout docs repository
+        uses: actions/checkout@v4
+        with:
+          repository: Limitex/docs
+          token: ${{ secrets.PAT_TOKEN }}
+          sparse-checkout: |
+            public/vpm.json
+          sparse-checkout-cone-mode: false
+
+      - name: Download release assets
+        run: |
+          RELEASE_URL=$(curl -s -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
+            "https://api.github.com/repos/Limitex/mono-ui/releases/latest" | \
+            jq -r '.assets[] | select(.name=="package.json").browser_download_url')
+          curl -L -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
+            -H "Accept: application/octet-stream" \
+            -o package.json "$RELEASE_URL"
+
+      - name: Update VPM manifest
+        id: update-manifest
+        run: |
+          PACKAGE_JSON=$(cat package.json)
+          PACKAGE_NAME=$(echo "$PACKAGE_JSON" | jq -r .name)
+          PACKAGE_VERSION=$(echo "$PACKAGE_JSON" | jq -r .version)
+
+          echo "package_version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
+
+          VPM_JSON=$(cat public/vpm.json)
+
+          if [ "$(echo "$VPM_JSON" | jq -r '.packages | has("'$PACKAGE_NAME'")')" = "false" ]; then
+            CURRENT_PACKAGES=$(echo "$VPM_JSON" | jq '.packages')
+            NEW_PACKAGE='{"versions": {}}'
+            NEW_PACKAGES=$(echo "{\"$PACKAGE_NAME\": $NEW_PACKAGE}" | jq ". + $CURRENT_PACKAGES")
+            VPM_JSON=$(echo "$VPM_JSON" | jq ".packages = $NEW_PACKAGES")
+          fi
+
+          if [ "$(echo "$VPM_JSON" | jq -r '.packages."'$PACKAGE_NAME'".versions | has("'$PACKAGE_VERSION'")')" = "true" ]; then
+            echo "Error: Version $PACKAGE_VERSION already exists in VPM manifest"
+            exit 1
+          fi
+
+          CURRENT_VERSIONS=$(echo "$VPM_JSON" | jq '.packages."'$PACKAGE_NAME'".versions')
+          NEW_VERSION_OBJ=$(echo "{\"$PACKAGE_VERSION\": $PACKAGE_JSON}")
+          NEW_VERSIONS=$(echo "$NEW_VERSION_OBJ" | jq ". + $CURRENT_VERSIONS")
+          VPM_JSON=$(echo "$VPM_JSON" | jq '.packages."'$PACKAGE_NAME'".versions = '"$NEW_VERSIONS"'')
+
+          echo "$VPM_JSON" | jq '.' > public/vpm.json
+
+      - name: Cleanup mono-ui directory
+        run: rm -rf mono-ui
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          commit-message: "Update VPM manifest for mono-ui v${{ steps.update-manifest.outputs.package_version }}"
+          title: "Update VPM manifest for mono-ui v${{ steps.update-manifest.outputs.package_version }}"
+          body: |
+            This PR updates the VPM manifest to include the new release of mono-ui v${{ steps.update-manifest.outputs.package_version }}.
+
+            - Added new version to VPM manifest
+            - Release: https://github.com/Limitex/mono-ui/releases/tag/v${{ steps.update-manifest.outputs.package_version }}
+          branch: update-vpm-mono-ui-v${{ steps.update-manifest.outputs.package_version }}
+          base: main
+          delete-branch: true
