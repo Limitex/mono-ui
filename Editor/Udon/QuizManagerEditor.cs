@@ -12,6 +12,7 @@ public class QuizManagerEditor : Editor
     private SerializedProperty answer2;
     private SerializedProperty answer3;
     private SerializedProperty successfulObjects;
+    private SerializedProperty failureObjects;
     private SerializedProperty questions;
     private SerializedProperty answers0;
     private SerializedProperty answers1;
@@ -27,6 +28,7 @@ public class QuizManagerEditor : Editor
     private Vector2 scrollPosition;
     private bool showQuizList = true;
     private bool showSettings = true;
+    private bool showObjects = true;
     private readonly string[] answerOptions = new string[] { "Option 1", "Option 2", "Option 3", "Option 4" };
     private readonly Color correctAnswerColor = new Color(0.7f, 1f, 0.7f);
 
@@ -38,6 +40,7 @@ public class QuizManagerEditor : Editor
         answer2 = serializedObject.FindProperty("answer2");
         answer3 = serializedObject.FindProperty("answer3");
         successfulObjects = serializedObject.FindProperty("successfulObjects");
+        failureObjects = serializedObject.FindProperty("failureObjects");
         questions = serializedObject.FindProperty("questions");
         answers0 = serializedObject.FindProperty("answers0");
         answers1 = serializedObject.FindProperty("answers1");
@@ -71,8 +74,19 @@ public class QuizManagerEditor : Editor
         EditorGUILayout.PropertyField(answer1);
         EditorGUILayout.PropertyField(answer2);
         EditorGUILayout.PropertyField(answer3);
-        EditorGUILayout.PropertyField(successfulObjects, true);
         EditorGUI.indentLevel--;
+
+        EditorGUILayout.Space(10);
+
+        // Toggle Objects
+        showObjects = EditorGUILayout.Foldout(showObjects, "Toggle Objects", true);
+        if (showObjects)
+        {
+            EditorGUI.indentLevel++;
+            EditorGUILayout.PropertyField(successfulObjects, new GUIContent("Success Objects"), true);
+            EditorGUILayout.PropertyField(failureObjects, new GUIContent("Failure Objects"), true);
+            EditorGUI.indentLevel--;
+        }
 
         EditorGUILayout.Space(10);
 

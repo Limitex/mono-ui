@@ -13,6 +13,7 @@ public class QuizManager : UdonSharpBehaviour
     [SerializeField] private TMP_Text answer2;
     [SerializeField] private TMP_Text answer3;
     [SerializeField] private Transform[] successfulObjects;
+    [SerializeField] private Transform[] failureObjects;
 
     [SerializeField] private int requiredSuccesses = 3;
     [SerializeField] private string successMessage = "Success!";
@@ -32,20 +33,20 @@ public class QuizManager : UdonSharpBehaviour
     public void OnButton2Pressed() => OnButtonPressed_handler(2);
     public void OnButton3Pressed() => OnButtonPressed_handler(3);
 
-    private int[] history;
-    private int historyIndex = 0;
+    private int[] questionHistory;
     private int historyCount = 0;
     private int currentQuestionIndex = -1;
-    private bool isExit = false;
+    private int correctAnswerCount = 0;
+    private bool isGameOver = false;
 
     private void OnButtonPressed_handler(int index)
     {
-        if (isExit) return;
+        if (isGameOver) return;
 
         if (correctAnswers[currentQuestionIndex] == index)
         {
-            requiredSuccesses--;
-            if (requiredSuccesses <= 0)
+            correctAnswerCount++;
+            if (correctAnswerCount >= requiredSuccesses)
             {
                 ShowSuccess();
             }
@@ -62,9 +63,23 @@ public class QuizManager : UdonSharpBehaviour
 
     private void ShowSuccess()
     {
-        isExit = true;
+        isGameOver = true;
         questionText.text = successMessage;
-        foreach (var obj in successfulObjects)
+        ToggleObjects(successfulObjects);
+    }
+
+    private void ShowFailure()
+    {
+        isGameOver = true;
+        questionText.text = failureMessage;
+        ToggleObjects(failureObjects);
+    }
+
+    private void ToggleObjects(Transform[] objects)
+    {
+        if (objects == null) return;
+
+        foreach (var obj in objects)
         {
             if (obj != null)
             {
@@ -73,21 +88,21 @@ public class QuizManager : UdonSharpBehaviour
         }
     }
 
-    private void ShowFailure()
-    {
-        isExit = true;
-        questionText.text = failureMessage;
-    }
-
     void Start()
     {
         if (!ValidateArrays())
         {
             Debug.LogError("[QuizManager] Array lengths do not match!");
-            isExit = true;
+            isGameOver = true;
             return;
         }
 
+        InitializeQuiz();
+        NextQuestion();
+    }
+
+    private void InitializeQuiz()
+    {
         if (maxHistorySize > questions.Length)
         {
             maxHistorySize = questions.Length;
@@ -97,8 +112,10 @@ public class QuizManager : UdonSharpBehaviour
             maxHistorySize = 1;
         }
 
-        history = new int[maxHistorySize];
-        NextQuestion();
+        questionHistory = new int[maxHistorySize];
+        historyCount = 0;
+        correctAnswerCount = 0;
+        isGameOver = false;
     }
 
     private bool ValidateArrays()
@@ -113,12 +130,23 @@ public class QuizManager : UdonSharpBehaviour
 
     void NextQuestion()
     {
-        int index = GetRandom(0, questions.Length - 1);
-        SetQuestion(index);
-        currentQuestionIndex = index;
+        if (historyCount >= maxHistorySize)
+        {
+            historyCount = 0;
+        }
+
+        int newIndex;
+        do
+        {
+            newIndex = Random.Range(0, questions.Length);
+        } while (IsInHistory(newIndex));
+
+        questionHistory[historyCount++] = newIndex;
+        currentQuestionIndex = newIndex;
+        DisplayQuestion(newIndex);
     }
 
-    void SetQuestion(int index)
+    void DisplayQuestion(int index)
     {
         if (index < 0 || index >= questions.Length) return;
 
@@ -129,58 +157,12 @@ public class QuizManager : UdonSharpBehaviour
         answer3.text = answers3[index];
     }
 
-    int GetRandom(int min, int max)
-    {
-        if (max <= min) return min;
-        if (max - min + 1 <= maxHistorySize)
-        {
-            return GetRandomWithFullHistory(min, max);
-        }
-
-        int number;
-        do
-        {
-            number = Random.Range(min, max + 1);
-        } while (IsInHistory(number));
-
-        AddToHistory(number);
-        return number;
-    }
-
-    private int GetRandomWithFullHistory(int min, int max)
-    {
-        for (int i = min; i <= max; i++)
-        {
-            if (!IsInHistory(i))
-            {
-                AddToHistory(i);
-                return i;
-            }
-        }
-
-        historyCount = 0;
-        historyIndex = 0;
-        int number = Random.Range(min, max + 1);
-        AddToHistory(number);
-        return number;
-    }
-
     private bool IsInHistory(int number)
     {
         for (int i = 0; i < historyCount; i++)
         {
-            if (history[i] == number) return true;
+            if (questionHistory[i] == number) return true;
         }
         return false;
-    }
-
-    private void AddToHistory(int number)
-    {
-        history[historyIndex] = number;
-        historyIndex = (historyIndex + 1) % maxHistorySize;
-        if (historyCount < maxHistorySize)
-        {
-            historyCount++;
-        }
     }
 }

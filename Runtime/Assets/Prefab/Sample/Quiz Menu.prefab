@@ -163,6 +163,8 @@ MonoBehaviour:
   answer3: {fileID: 4503729935463069704}
   successfulObjects:
   - {fileID: 6765565177108368201}
+  failureObjects:
+  - {fileID: 6765565177108368201}
   requiredSuccesses: 3
   successMessage: Success!
   failureMessage: Failure!
