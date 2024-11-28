@@ -1,0 +1,39 @@
+name: Package Version Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-package-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compare package.json Versions
+        id: version-check
+        run: |
+          base_version=$(git show origin/${{ github.base_ref }}:package.json | grep -oP '(?<="version": ")[^"]*')
+          
+          head_version=$(grep -oP '(?<="version": ")[^"]*' package.json)
+          
+          echo "Base branch version: $base_version"
+          echo "Head branch version: $head_version"
+          
+          if [ "$base_version" = "$head_version" ]; then
+            echo "::warning::Package version has not been incremented. You can continue, but this will not be reflected in the docs."
+            echo "status=warn" >> $GITHUB_OUTPUT
+            exit 1
+          else
+            echo "Version has been updated"
+            echo "status=pass" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check Version Status
+        if: steps.version-check.outputs.status == 'warn'
+        run: |
+          echo "::warning::Package version not incremented. Continuing with caution."
