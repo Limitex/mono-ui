@@ -23,8 +23,8 @@ jobs:
       - name: Download release assets
         run: |
           RELEASE_URL=$(curl -s -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
-            "https://api.github.com/repos/Limitex/mono-ui/releases/latest" | \
-            jq -r '.assets[] | select(.name=="package.json").browser_download_url')
+            "https://api.github.com/repos/Limitex/mono-ui/releases?per_page=1" | \
+            jq -r '.[0].assets[] | select(.name=="package.json").browser_download_url')
           curl -L -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
             -H "Accept: application/octet-stream" \
             -o package.json "$RELEASE_URL"
