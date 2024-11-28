@@ -31,6 +31,7 @@ public class QuizManagerEditor : Editor
     private bool showObjects = true;
     private readonly string[] answerOptions = new string[] { "Option 1", "Option 2", "Option 3", "Option 4" };
     private readonly Color correctAnswerColor = new Color(0.7f, 1f, 0.7f);
+    private readonly Color warningColor = new Color(1f, 0.8f, 0.8f);
 
     private void OnEnable()
     {
@@ -83,8 +84,53 @@ public class QuizManagerEditor : Editor
         if (showObjects)
         {
             EditorGUI.indentLevel++;
+            
+            // Success Objects
+            bool hasEmptySuccessObjects = HasEmptyElements(successfulObjects);
+            if (hasEmptySuccessObjects)
+            {
+                GUI.backgroundColor = warningColor;
+            }
+            
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.PropertyField(successfulObjects, new GUIContent("Success Objects"), true);
+            if (hasEmptySuccessObjects)
+            {
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.HelpBox("Success Objects contains empty elements!", MessageType.Warning);
+                if (GUILayout.Button("Fix", GUILayout.Width(40)))
+                {
+                    RemoveEmptyElements(successfulObjects);
+                }
+                EditorGUILayout.EndHorizontal();
+            }
+            EditorGUILayout.EndVertical();
+            
+            GUI.backgroundColor = Color.white;
+
+            // Failure Objects
+            bool hasEmptyFailureObjects = HasEmptyElements(failureObjects);
+            if (hasEmptyFailureObjects)
+            {
+                GUI.backgroundColor = warningColor;
+            }
+            
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.PropertyField(failureObjects, new GUIContent("Failure Objects"), true);
+            if (hasEmptyFailureObjects)
+            {
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.HelpBox("Failure Objects contains empty elements!", MessageType.Warning);
+                if (GUILayout.Button("Fix", GUILayout.Width(40)))
+                {
+                    RemoveEmptyElements(failureObjects);
+                }
+                EditorGUILayout.EndHorizontal();
+            }
+            EditorGUILayout.EndVertical();
+            
+            GUI.backgroundColor = Color.white;
+            
             EditorGUI.indentLevel--;
         }
 
@@ -104,6 +150,14 @@ public class QuizManagerEditor : Editor
 
         EditorGUILayout.Space(10);
 
+        // Quiz List
+        DrawQuizList();
+
+        serializedObject.ApplyModifiedProperties();
+    }
+
+    private void DrawQuizList()
+    {
         showQuizList = EditorGUILayout.Foldout(showQuizList, "Quiz List", true);
         if (showQuizList)
         {
@@ -123,65 +177,73 @@ public class QuizManagerEditor : Editor
                 foldouts = new bool[newSize];
             }
 
-            for (int i = 0; i < questions.arraySize; i++)
-            {
-                EditorGUILayout.Space(5);
-                EditorGUILayout.BeginVertical(GUI.skin.box);
-
-                string questionPreview = questions.GetArrayElementAtIndex(i).stringValue;
-                if (string.IsNullOrEmpty(questionPreview))
-                {
-                    questionPreview = "<No question>";
-                }
-                else if (questionPreview.Length > 50)
-                {
-                    questionPreview = questionPreview.Substring(0, 47) + "...";
-                }
-
-                string foldoutLabel = $"Quiz {i + 1} - {questionPreview}";
-                foldouts[i] = EditorGUILayout.Foldout(foldouts[i], foldoutLabel, true);
-
-                if (foldouts[i])
-                {
-                    EditorGUI.indentLevel++;
-
-                    EditorGUILayout.PropertyField(questions.GetArrayElementAtIndex(i), new GUIContent("Question"));
-
-                    EditorGUILayout.LabelField("Options", EditorStyles.boldLabel);
-                    EditorGUI.indentLevel++;
-
-                    int currentCorrectAnswer = correctAnswers.GetArrayElementAtIndex(i).intValue;
-
-                    DrawOptionField(answers0.GetArrayElementAtIndex(i), "Option 1", currentCorrectAnswer == 0);
-                    DrawOptionField(answers1.GetArrayElementAtIndex(i), "Option 2", currentCorrectAnswer == 1);
-                    DrawOptionField(answers2.GetArrayElementAtIndex(i), "Option 3", currentCorrectAnswer == 2);
-                    DrawOptionField(answers3.GetArrayElementAtIndex(i), "Option 4", currentCorrectAnswer == 3);
-
-                    EditorGUI.indentLevel--;
-
-                    EditorGUILayout.Space(5);
-                    using (new EditorGUILayout.HorizontalScope())
-                    {
-                        EditorGUILayout.LabelField("Correct Answer", GUILayout.Width(120));
-                        SerializedProperty correctAnswer = correctAnswers.GetArrayElementAtIndex(i);
-                        int newAnswer = EditorGUILayout.Popup(correctAnswer.intValue, answerOptions);
-                        if (correctAnswer.intValue != newAnswer)
-                        {
-                            correctAnswer.intValue = newAnswer;
-                        }
-                    }
-
-                    EditorGUI.indentLevel--;
-                }
-
-                EditorGUILayout.EndVertical();
-            }
+            DrawQuestions();
 
             EditorGUILayout.EndScrollView();
             EditorGUI.indentLevel--;
         }
+    }
 
-        serializedObject.ApplyModifiedProperties();
+    private void DrawQuestions()
+    {
+        for (int i = 0; i < questions.arraySize; i++)
+        {
+            EditorGUILayout.Space(5);
+            EditorGUILayout.BeginVertical(GUI.skin.box);
+
+            string questionPreview = questions.GetArrayElementAtIndex(i).stringValue;
+            if (string.IsNullOrEmpty(questionPreview))
+            {
+                questionPreview = "<No question>";
+            }
+            else if (questionPreview.Length > 50)
+            {
+                questionPreview = questionPreview.Substring(0, 47) + "...";
+            }
+
+            string foldoutLabel = $"Quiz {i + 1} - {questionPreview}";
+            foldouts[i] = EditorGUILayout.Foldout(foldouts[i], foldoutLabel, true);
+
+            if (foldouts[i])
+            {
+                DrawQuestionDetails(i);
+            }
+
+            EditorGUILayout.EndVertical();
+        }
+    }
+
+    private void DrawQuestionDetails(int index)
+    {
+        EditorGUI.indentLevel++;
+
+        EditorGUILayout.PropertyField(questions.GetArrayElementAtIndex(index), new GUIContent("Question"));
+
+        EditorGUILayout.LabelField("Options", EditorStyles.boldLabel);
+        EditorGUI.indentLevel++;
+
+        int currentCorrectAnswer = correctAnswers.GetArrayElementAtIndex(index).intValue;
+
+        DrawOptionField(answers0.GetArrayElementAtIndex(index), "Option 1", currentCorrectAnswer == 0);
+        DrawOptionField(answers1.GetArrayElementAtIndex(index), "Option 2", currentCorrectAnswer == 1);
+        DrawOptionField(answers2.GetArrayElementAtIndex(index), "Option 3", currentCorrectAnswer == 2);
+        DrawOptionField(answers3.GetArrayElementAtIndex(index), "Option 4", currentCorrectAnswer == 3);
+
+        EditorGUI.indentLevel--;
+
+        EditorGUILayout.Space(5);
+        using (new EditorGUILayout.HorizontalScope())
+        {
+            EditorGUILayout.LabelField("Correct Answer", GUILayout.Width(120));
+            SerializedProperty correctAnswer = correctAnswers.GetArrayElementAtIndex(index);
+            int newAnswer = EditorGUILayout.Popup(correctAnswer.intValue, answerOptions);
+            if (correctAnswer.intValue != newAnswer)
+            {
+                correctAnswer.intValue = newAnswer;
+            }
+        }
+
+        EditorGUI.indentLevel--;
     }
 
     private void DrawOptionField(SerializedProperty property, string label, bool isCorrect)
@@ -193,7 +255,6 @@ public class QuizManagerEditor : Editor
         if (isCorrect)
         {
             GUI.backgroundColor = correctAnswerColor;
-
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
         }
 
@@ -206,6 +267,37 @@ public class QuizManagerEditor : Editor
         }
 
         EditorGUILayout.EndHorizontal();
+    }
+
+    private bool HasEmptyElements(SerializedProperty arrayProperty)
+    {
+        if (arrayProperty == null || !arrayProperty.isArray) return false;
+
+        for (int i = 0; i < arrayProperty.arraySize; i++)
+        {
+            SerializedProperty element = arrayProperty.GetArrayElementAtIndex(i);
+            if (element.objectReferenceValue == null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void RemoveEmptyElements(SerializedProperty arrayProperty)
+    {
+        if (arrayProperty == null || !arrayProperty.isArray) return;
+
+        for (int i = arrayProperty.arraySize - 1; i >= 0; i--)
+        {
+            SerializedProperty element = arrayProperty.GetArrayElementAtIndex(i);
+            if (element.objectReferenceValue == null)
+            {
+                arrayProperty.DeleteArrayElementAtIndex(i);
+            }
+        }
+        
+        serializedObject.ApplyModifiedProperties();
     }
 }
 #endif
