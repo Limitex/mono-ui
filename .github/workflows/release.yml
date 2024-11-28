@@ -12,6 +12,7 @@ jobs:
       contents: write
     outputs:
       version: ${{ steps.get-version.outputs.version }}
+      is_prerelease: ${{ steps.check-prerelease.outputs.is_prerelease }}
 
     steps:
       - name: Checkout repository
@@ -22,6 +23,16 @@ jobs:
         run: |
           VERSION=$(jq -r .version package.json)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Check if prerelease version
+        id: check-prerelease
+        run: |
+          VERSION=${{ steps.get-version.outputs.version }}
+          if [[ $VERSION == *-a.* ]] || [[ $VERSION == *-b.* ]] || [[ $VERSION == *-rc.* ]]; then
+            echo "is_prerelease=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_prerelease=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Check if tag exists
         run: |
@@ -53,4 +64,4 @@ jobs:
             mono-ui-${{ steps.get-version.outputs.version }}.zip
             package.json
           draft: false
-          prerelease: false
+          prerelease: ${{ steps.check-prerelease.outputs.is_prerelease }}
