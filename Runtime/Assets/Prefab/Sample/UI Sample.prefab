@@ -6347,7 +6347,7 @@ PrefabInstance:
     - target: {fileID: 3193355438174188066, guid: 4f220805ef1d3664bbcc46fa823c9630,
         type: 3}
       propertyPath: m_text
-      value: Scroll
+      value: Layout
       objectReference: {fileID: 0}
     - target: {fileID: 3193355438174188066, guid: 4f220805ef1d3664bbcc46fa823c9630,
         type: 3}
@@ -11774,7 +11774,7 @@ PrefabInstance:
     - target: {fileID: 3193355438174188066, guid: 4f220805ef1d3664bbcc46fa823c9630,
         type: 3}
       propertyPath: m_text
-      value: Layout
+      value: Scroll
       objectReference: {fileID: 0}
     - target: {fileID: 3193355438174188066, guid: 4f220805ef1d3664bbcc46fa823c9630,
         type: 3}
