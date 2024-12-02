@@ -2233,8 +2233,8 @@ MonoBehaviour:
   m_Padding:
     m_Left: 50
     m_Right: 50
-    m_Top: 30
-    m_Bottom: 30
+    m_Top: 20
+    m_Bottom: 50
   m_ChildAlignment: 0
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
@@ -4426,8 +4426,8 @@ MonoBehaviour:
   m_Padding:
     m_Left: 50
     m_Right: 50
-    m_Top: 30
-    m_Bottom: 30
+    m_Top: 20
+    m_Bottom: 50
   m_ChildAlignment: 0
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
@@ -5643,8 +5643,8 @@ MonoBehaviour:
   m_Padding:
     m_Left: 50
     m_Right: 50
-    m_Top: 30
-    m_Bottom: 30
+    m_Top: 20
+    m_Bottom: 50
   m_ChildAlignment: 0
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
@@ -7056,8 +7056,8 @@ MonoBehaviour:
   m_Padding:
     m_Left: 50
     m_Right: 50
-    m_Top: 30
-    m_Bottom: 30
+    m_Top: 20
+    m_Bottom: 50
   m_ChildAlignment: 0
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
@@ -9697,17 +9697,17 @@ PrefabInstance:
     - target: {fileID: 3376237830037329915, guid: df3a616b8a2a90645915274799391b4d,
         type: 3}
       propertyPath: m_Size
-      value: 0.9999932
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3376237830037329915, guid: df3a616b8a2a90645915274799391b4d,
         type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3473909706552585920, guid: df3a616b8a2a90645915274799391b4d,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4800639688818293299, guid: df3a616b8a2a90645915274799391b4d,
         type: 3}
@@ -9717,7 +9717,7 @@ PrefabInstance:
     - target: {fileID: 4800639688818293299, guid: df3a616b8a2a90645915274799391b4d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.001326592
+      value: 0.002323915
       objectReference: {fileID: 0}
     - target: {fileID: 5414453824221464336, guid: df3a616b8a2a90645915274799391b4d,
         type: 3}
@@ -9862,12 +9862,12 @@ PrefabInstance:
     - target: {fileID: 6960779238159500233, guid: df3a616b8a2a90645915274799391b4d,
         type: 3}
       propertyPath: m_Size
-      value: 0.9825257
+      value: 0.97192764
       objectReference: {fileID: 0}
     - target: {fileID: 6960779238159500233, guid: df3a616b8a2a90645915274799391b4d,
         type: 3}
       propertyPath: m_Value
-      value: 0.9994278
+      value: 0.9996478
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
