@@ -7362,7 +7362,7 @@ PrefabInstance:
     - target: {fileID: 2308649825949250463, guid: 50bdf3adba60f3e40997e977288de70d,
         type: 3}
       propertyPath: m_Name
-      value: Toast
+      value: Toast Provider
       objectReference: {fileID: 0}
     - target: {fileID: 5495659401180597731, guid: 50bdf3adba60f3e40997e977288de70d,
         type: 3}
@@ -9667,7 +9667,7 @@ PrefabInstance:
     - target: {fileID: 52983727754610507, guid: 819aaedefc8bcae4da651e488c43fc19,
         type: 3}
       propertyPath: m_Name
-      value: Dialog
+      value: Dialog Provider
       objectReference: {fileID: 0}
     - target: {fileID: 7733849167942362400, guid: 819aaedefc8bcae4da651e488c43fc19,
         type: 3}
