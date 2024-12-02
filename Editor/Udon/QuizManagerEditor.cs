@@ -32,6 +32,7 @@ public class QuizManagerEditor : Editor
     private readonly string[] answerOptions = new string[] { "Option 1", "Option 2", "Option 3", "Option 4" };
     private readonly Color correctAnswerColor = new Color(0.7f, 1f, 0.7f);
     private readonly Color warningColor = new Color(1f, 0.8f, 0.8f);
+    private const string FOLDOUT_KEY_PREFIX = "QuizManagerEditor_Foldout_";
 
     private void OnEnable()
     {
@@ -56,6 +57,10 @@ public class QuizManagerEditor : Editor
         if (questions != null)
         {
             foldouts = new bool[questions.arraySize];
+            for (int i = 0; i < questions.arraySize; i++)
+            {
+                foldouts[i] = EditorPrefs.GetBool($"{FOLDOUT_KEY_PREFIX}{i}", false);
+            }
         }
     }
 
@@ -189,7 +194,7 @@ public class QuizManagerEditor : Editor
         for (int i = 0; i < questions.arraySize; i++)
         {
             EditorGUILayout.Space(5);
-            EditorGUILayout.BeginVertical(GUI.skin.box);
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
 
             string questionPreview = questions.GetArrayElementAtIndex(i).stringValue;
             if (string.IsNullOrEmpty(questionPreview))
@@ -202,7 +207,13 @@ public class QuizManagerEditor : Editor
             }
 
             string foldoutLabel = $"Quiz {i + 1} - {questionPreview}";
-            foldouts[i] = EditorGUILayout.Foldout(foldouts[i], foldoutLabel, true);
+            bool newFoldoutState = EditorGUILayout.Foldout(foldouts[i], foldoutLabel, true);
+
+            if (foldouts[i] != newFoldoutState)
+            {
+                foldouts[i] = newFoldoutState;
+                EditorPrefs.SetBool($"{FOLDOUT_KEY_PREFIX}{i}", newFoldoutState);
+            }
 
             if (foldouts[i])
             {
