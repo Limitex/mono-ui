@@ -15,6 +15,10 @@ public class QuizManager : UdonSharpBehaviour
     [SerializeField] private Transform[] successfulObjects;
     [SerializeField] private Transform[] failureObjects;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip successClip;
+    [SerializeField] private AudioClip failureClip;
+
     [SerializeField] private int requiredSuccesses = 3;
     [SerializeField] private string successMessage = "Success!";
     [SerializeField] private string failureMessage = "Failure!";
@@ -66,6 +70,10 @@ public class QuizManager : UdonSharpBehaviour
         isGameOver = true;
         questionText.text = successMessage;
         ToggleObjects(successfulObjects);
+        if (successClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(successClip);
+        }
     }
 
     private void ShowFailure()
@@ -73,6 +81,10 @@ public class QuizManager : UdonSharpBehaviour
         isGameOver = true;
         questionText.text = failureMessage;
         ToggleObjects(failureObjects);
+        if (failureClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(failureClip);
+        }
     }
 
     private void ToggleObjects(Transform[] objects)

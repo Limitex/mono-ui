@@ -23,12 +23,16 @@ public class QuizManagerEditor : Editor
     private SerializedProperty successMessage;
     private SerializedProperty failureMessage;
     private SerializedProperty maxHistorySize;
+    private SerializedProperty audioSource;
+    private SerializedProperty successClip;
+    private SerializedProperty failureClip;
 
     private bool[] foldouts;
     private Vector2 scrollPosition;
     private bool showQuizList = true;
     private bool showSettings = true;
     private bool showObjects = true;
+    private bool showAudio = true;
     private readonly string[] answerOptions = new string[] { "Option 1", "Option 2", "Option 3", "Option 4" };
     private readonly Color correctAnswerColor = new Color(0.7f, 1f, 0.7f);
     private readonly Color warningColor = new Color(1f, 0.8f, 0.8f);
@@ -53,6 +57,9 @@ public class QuizManagerEditor : Editor
         successMessage = serializedObject.FindProperty("successMessage");
         failureMessage = serializedObject.FindProperty("failureMessage");
         maxHistorySize = serializedObject.FindProperty("maxHistorySize");
+        audioSource = serializedObject.FindProperty("audioSource");
+        successClip = serializedObject.FindProperty("successClip");
+        failureClip = serializedObject.FindProperty("failureClip");
 
         if (questions != null)
         {
@@ -82,6 +89,20 @@ public class QuizManagerEditor : Editor
         EditorGUILayout.PropertyField(answer3);
         EditorGUI.indentLevel--;
 
+        EditorGUILayout.Space(10);
+
+        // Audio Settings
+        showAudio = EditorGUILayout.Foldout(showAudio, "Audio Settings", true);
+        if (showAudio)
+        {
+            EditorGUI.indentLevel++;
+
+            EditorGUILayout.PropertyField(audioSource, new GUIContent("Audio Source"));
+            EditorGUILayout.PropertyField(successClip, new GUIContent("Success Clip"));
+            EditorGUILayout.PropertyField(failureClip, new GUIContent("Failure Clip"));
+
+            EditorGUI.indentLevel--;
+        }
         EditorGUILayout.Space(10);
 
         // Toggle Objects
