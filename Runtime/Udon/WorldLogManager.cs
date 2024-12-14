@@ -342,17 +342,26 @@ public class WorldLogManager : UdonSharpBehaviour
 
     private void SyncBytes()
     {
+        DebugLog("Syncing Functions: SyncBytes", "Starting data synchronization");
         string totalUsersText = totalUsers.ToString();
         string timelineData = ConvertTimelineStructToString();
         string userlineData = ConvertUserlineStructToString();
         string data = totalUsersText + "\v" + timelineData + "\v" + userlineData;
+        DebugLog("Syncing Functions: SyncBytes", data);
         bytes = DATA_ENCODING.GetBytes(data);
+        DebugLog("Syncing Functions: SyncBytes", $"Data synchronized: {bytes.Length} bytes");
     }
 
     private void LoadBytes()
     {
-        if (bytes == null || bytes.Length == 0) return;
+        if (bytes == null || bytes.Length == 0)
+        {
+            DebugLog("Syncing Functions: LoadBytes", "No data to load (bytes array is null or empty)");
+            return;
+        }
+        DebugLog("Syncing Functions: LoadBytes", $"Loading data: {bytes.Length} bytes");
         string data = DATA_ENCODING.GetString(bytes);
+        DebugLog("Syncing Functions: LoadBytes", data);
         string[] lines = data.Split('\v');
         totalUsers = int.Parse(lines[0]);
         LoadTimelineStructFromString(lines[1]);
@@ -360,6 +369,7 @@ public class WorldLogManager : UdonSharpBehaviour
 
         int players = VRCPlayerApi.GetPlayerCount();
         UpdateTexts(totalUsers, players, struct_timeline_name.Length, players);
+        DebugLog("Syncing Functions: LoadBytes", $"Data loaded successfully. Total users: {totalUsers}, Online players: {players}");
     }
 
     private string ConvertTimelineStructToString()
@@ -442,6 +452,7 @@ public class WorldLogManager : UdonSharpBehaviour
 
     private void AddTimelineItem(string name, DateTime time, TimelineType type)
     {
+        DebugLog("UI Management Functions: AddTimelineItem", $"Adding timeline item - Name: {name}, Time: {time}, Type: {type}");
         GameObject item = Instantiate(timelineItemTemplate, timelineContainer);
         Transform transform = item.transform;
         TextMeshProUGUI nameTmp = GetTimelineNameText(transform);
@@ -455,10 +466,12 @@ public class WorldLogManager : UdonSharpBehaviour
         AddTimelineStructureItem(name, time, type, transform, nameTmp, timeTmp, typeTmp, icon);
         item.SetActive(true);
         ScrollTimelineToBottom();
+        DebugLog("UI Management Functions: AddTimelineItem", "Timeline item added successfully");
     }
 
     private void AddUserlineItem(string name, UserlineType type)
     {
+        DebugLog("UI Management Functions: AddUserlineItem", $"Adding userline item - Name: {name}, Type: {type}");
         GameObject item = Instantiate(userlineItemTemplate, userlineContainer);
         Transform transform = item.transform;
         TextMeshProUGUI nameTmp = GetUserlineNameText(transform);
@@ -470,14 +483,17 @@ public class WorldLogManager : UdonSharpBehaviour
         AddUserlineStructureItem(name, type, transform, nameTmp, typeTmp, icon);
         item.SetActive(true);
         ScrollUserlineToBottom();
+        DebugLog("UI Management Functions: AddTimelineItem", "Userline item added successfully");
     }
 
     private void UpdateUserlineInstance(int index, UserlineType type)
     {
+        DebugLog("UI Management Functions: UpdateUserlineInstance", $"Updating userline instance - Index: {index}, Type: {type}");
         struct_userline_type[index] = type;
         struct_userline_type_tmp[index].text = GetUserlineTypeString(type);
         struct_userline_name_tmp[index].color = GetUserlineTextColor(type);
         struct_userline_icon[index].color = GetUserlineTypeColor(type);
+        DebugLog("UI Management Functions: UpdateUserlineInstance", "Userline instance updated successfully");
     }
 
     private void UpdateTexts(int totalUsers, int onlineUsers, int totalActivity, int onlines)
@@ -531,20 +547,25 @@ public class WorldLogManager : UdonSharpBehaviour
     {
         if (!Networking.IsOwner(gameObject)) return;
 
+        DebugLog("Udon Callbacks (Player): OnPlayerJoined", $"Player joined: {player.displayName}");
+
         AddTimelineItem(player.displayName, GetCurrentUtcTime(), TimelineType.Enter);
         int userlineIndex = FindUserLineStructureIndex(player.displayName);
         if (userlineIndex == -1)
         {
             AddUserlineItem(player.displayName, UserlineType.Online);
             totalUsers++;
+            DebugLog("Udon Callbacks (Player): OnPlayerJoined", $"Userline item added for {player.displayName}");
         }
         else
         {
             UpdateUserlineInstance(userlineIndex, UserlineType.Online);
+            DebugLog("Udon Callbacks (Player): OnPlayerJoined", $"Userline item updated for {player.displayName}");
         }
 
         int players = VRCPlayerApi.GetPlayerCount();
         UpdateTexts(totalUsers, players, struct_timeline_name.Length, players);
+        DebugLog("Udon Callbacks (Player): OnPlayerJoined", $"Total users: {totalUsers}, Online players: {players}");
 
         RequestSerialization();
     }
@@ -553,16 +574,20 @@ public class WorldLogManager : UdonSharpBehaviour
     {
         if (!Networking.IsOwner(gameObject)) return;
 
+        DebugLog("Udon Callbacks (Player): OnPlayerLeft", $"Player left: {player.displayName}");
+
         AddTimelineItem(player.displayName, GetCurrentUtcTime(), TimelineType.Leave);
 
         int userlineIndex = FindUserLineStructureIndex(player.displayName);
         if (userlineIndex != -1)
         {
             UpdateUserlineInstance(userlineIndex, UserlineType.Offline);
+            DebugLog("Udon Callbacks (Player): OnPlayerLeft", $"Userline item updated for {player.displayName}");
         }
 
         int players = VRCPlayerApi.GetPlayerCount() - 1;
         UpdateTexts(totalUsers, players, struct_timeline_name.Length, players);
+        DebugLog("Udon Callbacks (Player): OnPlayerLeft", $"Total users: {totalUsers}, Online players: {players}");
 
         RequestSerialization();
     }
