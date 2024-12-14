@@ -91,6 +91,7 @@ public class WorldLogManager : UdonSharpBehaviour
     private DateTime[] struct_timeline_time = new DateTime[0];
     private TimelineType[] struct_timeline_type = new TimelineType[0];
     private Transform[] struct_timeline_transform = new Transform[0];
+    private uint[] struct_timeline_hash = new uint[0];
     private TextMeshProUGUI[] struct_timeline_name_tmp = new TextMeshProUGUI[0];
     private TextMeshProUGUI[] struct_timeline_time_tmp = new TextMeshProUGUI[0];
     private TextMeshProUGUI[] struct_timeline_type_tmp = new TextMeshProUGUI[0];
@@ -105,6 +106,7 @@ public class WorldLogManager : UdonSharpBehaviour
         DateTime[] newTimes = new DateTime[newLength];
         TimelineType[] newTypes = new TimelineType[newLength];
         Transform[] newTransforms = new Transform[newLength];
+        uint[] newHashes = new uint[newLength];
         TextMeshProUGUI[] newNameTmps = new TextMeshProUGUI[newLength];
         TextMeshProUGUI[] newTimeTmps = new TextMeshProUGUI[newLength];
         TextMeshProUGUI[] newTypeTmps = new TextMeshProUGUI[newLength];
@@ -116,6 +118,7 @@ public class WorldLogManager : UdonSharpBehaviour
             newTimes[i] = struct_timeline_time[i];
             newTypes[i] = struct_timeline_type[i];
             newTransforms[i] = struct_timeline_transform[i];
+            newHashes[i] = struct_timeline_hash[i];
             newNameTmps[i] = struct_timeline_name_tmp[i];
             newTimeTmps[i] = struct_timeline_time_tmp[i];
             newTypeTmps[i] = struct_timeline_type_tmp[i];
@@ -126,6 +129,7 @@ public class WorldLogManager : UdonSharpBehaviour
         newTimes[oldLength] = time;
         newTypes[oldLength] = type;
         newTransforms[oldLength] = transform;
+        newHashes[oldLength] = HashTimelineItem(name, time, type);
         newNameTmps[oldLength] = nameTmp;
         newTimeTmps[oldLength] = timeTmp;
         newTypeTmps[oldLength] = typeTmp;
@@ -135,10 +139,16 @@ public class WorldLogManager : UdonSharpBehaviour
         struct_timeline_time = newTimes;
         struct_timeline_type = newTypes;
         struct_timeline_transform = newTransforms;
+        struct_timeline_hash = newHashes;
         struct_timeline_name_tmp = newNameTmps;
         struct_timeline_time_tmp = newTimeTmps;
         struct_timeline_type_tmp = newTypeTmps;
         struct_timeline_icon = newIcons;
+    }
+
+    private uint HashTimelineItem(string name, DateTime time, TimelineType type)
+    {
+        return HashString(name + time.ToString(DATE_FORMAT) + type.ToString());
     }
 
     #endregion
@@ -147,6 +157,7 @@ public class WorldLogManager : UdonSharpBehaviour
 
     private string[] struct_userline_name = new string[0];
     private UserlineType[] struct_userline_type = new UserlineType[0];
+    private uint[] struct_userline_hash = new uint[0];
     private Transform[] struct_userline_transform = new Transform[0];
     private TextMeshProUGUI[] struct_userline_name_tmp = new TextMeshProUGUI[0];
     private TextMeshProUGUI[] struct_userline_type_tmp = new TextMeshProUGUI[0];
@@ -159,6 +170,7 @@ public class WorldLogManager : UdonSharpBehaviour
 
         string[] newNames = new string[newLength];
         UserlineType[] newTypes = new UserlineType[newLength];
+        uint[] newHashes = new uint[newLength];
         Transform[] newTransforms = new Transform[newLength];
         TextMeshProUGUI[] newNameTmps = new TextMeshProUGUI[newLength];
         TextMeshProUGUI[] newTypeTmps = new TextMeshProUGUI[newLength];
@@ -168,6 +180,7 @@ public class WorldLogManager : UdonSharpBehaviour
         {
             newNames[i] = struct_userline_name[i];
             newTypes[i] = struct_userline_type[i];
+            newHashes[i] = struct_userline_hash[i];
             newTransforms[i] = struct_userline_transform[i];
             newNameTmps[i] = struct_userline_name_tmp[i];
             newTypeTmps[i] = struct_userline_type_tmp[i];
@@ -176,6 +189,7 @@ public class WorldLogManager : UdonSharpBehaviour
 
         newNames[oldLength] = name;
         newTypes[oldLength] = type;
+        newHashes[oldLength] = HashUserlineItem(name, type);
         newTransforms[oldLength] = transform;
         newNameTmps[oldLength] = nameTmp;
         newTypeTmps[oldLength] = typeTmp;
@@ -183,10 +197,16 @@ public class WorldLogManager : UdonSharpBehaviour
 
         struct_userline_name = newNames;
         struct_userline_type = newTypes;
+        struct_userline_hash = newHashes;
         struct_userline_transform = newTransforms;
         struct_userline_name_tmp = newNameTmps;
         struct_userline_type_tmp = newTypeTmps;
         struct_userline_icon = newIcons;
+    }
+
+    private uint HashUserlineItem(string name, UserlineType type)
+    {
+        return HashString(name + type.ToString());
     }
 
     private int FindUserLineStructureIndex(string name)
@@ -285,9 +305,7 @@ public class WorldLogManager : UdonSharpBehaviour
     public uint HashString(string input)
     {
         byte[] inputBytes = DATA_ENCODING.GetBytes(input);
-        int unixTimestamp = (int)(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
-
-        return Hash(inputBytes, inputBytes.Length, (uint)unixTimestamp);
+        return Hash(inputBytes, inputBytes.Length);
     }
 
     #endregion
@@ -431,7 +449,8 @@ public class WorldLogManager : UdonSharpBehaviour
         {
             result += struct_timeline_name[i] + "\t";
             result += struct_timeline_time[i].ToString(DATE_FORMAT) + "\t";
-            result += (int)struct_timeline_type[i] + "\n";
+            result += (int)struct_timeline_type[i] + "\t";
+            result += struct_timeline_hash[i] + "\n";
         }
         return result;
     }
@@ -442,7 +461,8 @@ public class WorldLogManager : UdonSharpBehaviour
         for (int i = 0; i < struct_userline_name.Length; i++)
         {
             result += struct_userline_name[i] + "\t";
-            result += (int)struct_userline_type[i] + "\n";
+            result += (int)struct_userline_type[i] + "\t";
+            result += struct_userline_hash[i] + "\n";
         }
         return result;
     }
@@ -450,15 +470,25 @@ public class WorldLogManager : UdonSharpBehaviour
     private void LoadTimelineStructFromString(string data)
     {
         string[] lines = data.Split('\n');
-        for (int i = struct_timeline_name.Length; i < lines.Length; i++)
+        for (int i = 0; i < lines.Length; i++)
         {
             string[] parts = lines[i].Split('\t');
-            if (parts.Length != 3) continue;
+            if (parts.Length != 4) continue;
             string name = parts[0];
             DateTime time = DateTime.ParseExact(parts[1], DATE_FORMAT, null);
             TimelineType type = (TimelineType)int.Parse(parts[2]);
+            uint hash = uint.Parse(parts[3]);
 
-            AddTimelineItem(name, time, type);
+            if (i < struct_timeline_name.Length)
+            {
+                uint chash = HashTimelineItem(name, time, type);
+                if (chash == hash) continue;
+                UpdateTimelineInstance(i, name, time, type);
+            }
+            else
+            {
+                AddTimelineItem(name, time, type);
+            }
         }
     }
 
@@ -468,12 +498,15 @@ public class WorldLogManager : UdonSharpBehaviour
         for (int i = 0; i < lines.Length; i++)
         {
             string[] parts = lines[i].Split('\t');
-            if (parts.Length != 2) continue;
+            if (parts.Length != 3) continue;
             string name = parts[0];
             UserlineType type = (UserlineType)int.Parse(parts[1]);
+            uint hash = uint.Parse(parts[2]);
 
             if (i < struct_userline_name.Length)
             {
+                uint chash = HashUserlineItem(name, type);
+                if (chash == hash) continue;
                 UpdateUserlineInstance(i, type);
             }
             else
@@ -532,6 +565,17 @@ public class WorldLogManager : UdonSharpBehaviour
         AddUserlineStructureItem(name, type, transform, nameTmp, typeTmp, icon);
         item.SetActive(true);
         ScrollUserlineToBottom();
+    }
+
+    private void UpdateTimelineInstance(int index, string name, DateTime time, TimelineType type)
+    {
+        struct_timeline_name[index] = name;
+        struct_timeline_time[index] = time;
+        struct_timeline_type[index] = type;
+        struct_timeline_name_tmp[index].text = name;
+        struct_timeline_time_tmp[index].text = FormatLocalTime(time);
+        struct_timeline_type_tmp[index].text = GetTimelineTypeString(type);
+        struct_timeline_icon[index].color = GetTimelineTypeColor(type);
     }
 
     private void UpdateUserlineInstance(int index, UserlineType type)
