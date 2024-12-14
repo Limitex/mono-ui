@@ -50,10 +50,15 @@ public class WorldLogManager : UdonSharpBehaviour
 
     private const string ENTER_TEXT = "Entered the room";
     private const string LEAVE_TEXT = "Left the room";
-    private const string ONLINE = "Online";
-    private const string OFFLINE = "Offline";
+    private const string ONLINE = "In Instance";
+    private const string OFFLINE = "Not in Instance";
     private const string ONLINE_SUFFIX = "{0} online";
     private const string DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    private readonly Color ONLINE_COLOR = new Color(r: 0x2D / 255f, g: 0xB7 / 255f, b: 0x89 / 255f);
+    private readonly Color OFFLINE_COLOR = new Color(r: 0xE2 / 255f, g: 0x36 / 255f, b: 0x6F / 255f);
+    private readonly Color FOREGROUND_COLOR = new Color(r: 0xF9 / 255f, g: 0xF9 / 255f, b: 0xF9 / 255f);
+    private readonly Color MUTED_COLOR = new Color(r: 0xA1 / 255f, g: 0xA1 / 255f, b: 0xA9 / 255f);
 
     private readonly int[] TIMELINE_NAME_PATH = new int[] { 0, 1, 0, 0 };
     private readonly int[] TIMELINE_TIME_PATH = new int[] { 0, 1, 0, 1 };
@@ -254,9 +259,9 @@ public class WorldLogManager : UdonSharpBehaviour
         switch (timelineType)
         {
             case TimelineType.Enter:
-                return Color.green;
+                return ONLINE_COLOR;
             case TimelineType.Leave:
-                return Color.red;
+                return OFFLINE_COLOR;
             default:
                 return Color.white;
         }
@@ -280,9 +285,22 @@ public class WorldLogManager : UdonSharpBehaviour
         switch (userlineType)
         {
             case UserlineType.Online:
-                return Color.green;
+                return ONLINE_COLOR;
             case UserlineType.Offline:
-                return Color.red;
+                return OFFLINE_COLOR;
+            default:
+                return Color.white;
+        }
+    }
+
+    private Color GetUserlineTextColor(UserlineType userlineType)
+    {
+        switch (userlineType)
+        {
+            case UserlineType.Online:
+                return FOREGROUND_COLOR;
+            case UserlineType.Offline:
+                return MUTED_COLOR;
             default:
                 return Color.white;
         }
@@ -428,6 +446,7 @@ public class WorldLogManager : UdonSharpBehaviour
     {
         struct_userline_type[index] = type;
         struct_userline_type_tmp[index].text = GetUserlineTypeString(type);
+        struct_userline_name_tmp[index].color = GetUserlineTextColor(type);
         struct_userline_icon[index].color = GetUserlineTypeColor(type);
     }
 
