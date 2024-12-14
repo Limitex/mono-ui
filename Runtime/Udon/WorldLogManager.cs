@@ -495,6 +495,8 @@ public class WorldLogManager : UdonSharpBehaviour
 
     #endregion
 
+    #region Udon Callbacks (Player)
+
     public override void OnPlayerJoined(VRCPlayerApi player)
     {
         if (!Networking.IsOwner(gameObject)) return;
@@ -534,4 +536,6 @@ public class WorldLogManager : UdonSharpBehaviour
 
         RequestSerialization();
     }
+
+    #endregion
 }
