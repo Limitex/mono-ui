@@ -203,6 +203,95 @@ public class WorldLogManager : UdonSharpBehaviour
 
     #endregion
 
+    #region xxHash32 Class Definition
+
+    private const uint PRIME32_1 = 2654435761U;
+    private const uint PRIME32_2 = 2246822519U;
+    private const uint PRIME32_3 = 3266489917U;
+    private const uint PRIME32_4 = 668265263U;
+    private const uint PRIME32_5 = 374761393U;
+
+    public uint Hash(byte[] buf, int len, uint seed = 0)
+    {
+        uint h32;
+        int index = 0;
+
+        if (len >= 16)
+        {
+            int limit = len - 16;
+            uint v1 = seed + PRIME32_1 + PRIME32_2;
+            uint v2 = seed + PRIME32_2;
+            uint v3 = seed;
+            uint v4 = seed - PRIME32_1;
+
+            do
+            {
+                v1 += BitConverter.ToUInt32(buf, index) * PRIME32_2;
+                v1 = (v1 << 13) | (v1 >> 19);
+                v1 *= PRIME32_1;
+                index += 4;
+
+                v2 += BitConverter.ToUInt32(buf, index) * PRIME32_2;
+                v2 = (v2 << 13) | (v2 >> 19);
+                v2 *= PRIME32_1;
+                index += 4;
+
+                v3 += BitConverter.ToUInt32(buf, index) * PRIME32_2;
+                v3 = (v3 << 13) | (v3 >> 19);
+                v3 *= PRIME32_1;
+                index += 4;
+
+                v4 += BitConverter.ToUInt32(buf, index) * PRIME32_2;
+                v4 = (v4 << 13) | (v4 >> 19);
+                v4 *= PRIME32_1;
+                index += 4;
+            } while (index <= limit);
+
+            h32 = ((v1 << 1) | (v1 >> 31)) +
+                  ((v2 << 7) | (v2 >> 25)) +
+                  ((v3 << 12) | (v3 >> 20)) +
+                  ((v4 << 18) | (v4 >> 14));
+        }
+        else
+        {
+            h32 = seed + PRIME32_5;
+        }
+
+        h32 += (uint)len;
+
+        while (index <= len - 4)
+        {
+            h32 += BitConverter.ToUInt32(buf, index) * PRIME32_3;
+            h32 = ((h32 << 17) | (h32 >> 15)) * PRIME32_4;
+            index += 4;
+        }
+
+        while (index < len)
+        {
+            h32 += buf[index] * PRIME32_5;
+            h32 = ((h32 << 11) | (h32 >> 21)) * PRIME32_1;
+            index++;
+        }
+
+        h32 ^= h32 >> 15;
+        h32 *= PRIME32_2;
+        h32 ^= h32 >> 13;
+        h32 *= PRIME32_3;
+        h32 ^= h32 >> 16;
+
+        return h32;
+    }
+
+    public uint HashString(string input)
+    {
+        byte[] inputBytes = DATA_ENCODING.GetBytes(input);
+        int unixTimestamp = (int)(DateTimeOffset.UtcNow.ToUnixTimeSeconds());
+
+        return Hash(inputBytes, inputBytes.Length, (uint)unixTimestamp);
+    }
+
+    #endregion
+
     #region Hierarchy Path Getters
 
     private Transform GetComponentByHierarchyPath(Transform parent, int[] hierarchyPath)
