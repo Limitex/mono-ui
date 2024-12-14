@@ -47,6 +47,9 @@ public class WorldLogManager : UdonSharpBehaviour
     [SerializeField] private TMP_Text totalActivityText;
     [SerializeField] private TMP_Text onlineCountText;
 
+    [Header("Debugging")]
+    [SerializeField] private bool enableLogs = false;
+
     #region Constant Fields
 
     private const string ENTER_TEXT = "Entered the room";
@@ -55,6 +58,7 @@ public class WorldLogManager : UdonSharpBehaviour
     private const string OFFLINE = "Not in Instance";
     private const string ONLINE_SUFFIX = "{0} online";
     private const string DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private const string LOG_PREFIX = "WorldLogManager";
 
     private readonly Encoding DATA_ENCODING = Encoding.UTF8;
 
@@ -199,6 +203,29 @@ public class WorldLogManager : UdonSharpBehaviour
             }
         }
         return -1;
+    }
+
+    #endregion
+
+    #region Logger
+
+    private void DebugLog(string category, string message)
+    {
+        if (!enableLogs) return;
+
+        string[] lines = message.Split(
+            new[] { "\n", "\v" },
+            StringSplitOptions.None
+        );
+
+        foreach (string line in lines)
+        {
+            string trimmedLine = line.Trim();
+            if (!string.IsNullOrEmpty(trimmedLine))
+            {
+                Debug.Log($"[{LOG_PREFIX}] [{category}] {trimmedLine}");
+            }
+        }
     }
 
     #endregion
