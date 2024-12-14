@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Text;
 using TMPro;
 using UdonSharp;
 using UnityEngine;
@@ -54,6 +55,8 @@ public class WorldLogManager : UdonSharpBehaviour
     private const string OFFLINE = "Not in Instance";
     private const string ONLINE_SUFFIX = "{0} online";
     private const string DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    private readonly Encoding DATA_ENCODING = Encoding.UTF8;
 
     private readonly Color ONLINE_COLOR = new Color(r: 0x2D / 255f, g: 0xB7 / 255f, b: 0x89 / 255f);
     private readonly Color OFFLINE_COLOR = new Color(r: 0xE2 / 255f, g: 0x36 / 255f, b: 0x6F / 255f);
@@ -316,13 +319,13 @@ public class WorldLogManager : UdonSharpBehaviour
         string timelineData = ConvertTimelineStructToString();
         string userlineData = ConvertUserlineStructToString();
         string data = totalUsersText + "\v" + timelineData + "\v" + userlineData;
-        bytes = System.Text.Encoding.UTF8.GetBytes(data);
+        bytes = DATA_ENCODING.GetBytes(data);
     }
 
     private void LoadBytes()
     {
         if (bytes == null || bytes.Length == 0) return;
-        string data = System.Text.Encoding.UTF8.GetString(bytes);
+        string data = DATA_ENCODING.GetString(bytes);
         string[] lines = data.Split('\v');
         totalUsers = int.Parse(lines[0]);
         LoadTimelineStructFromString(lines[1]);
