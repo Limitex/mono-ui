@@ -46,6 +46,7 @@ public class WorldLogManager : UdonSharpBehaviour
     [SerializeField] private TMP_Text onlineUsersText;
     [SerializeField] private TMP_Text totalActivityText;
     [SerializeField] private TMP_Text onlineCountText;
+    [SerializeField] private TMP_Text syncDataSizeText;
 
     #region Constant Fields
 
@@ -480,6 +481,22 @@ public class WorldLogManager : UdonSharpBehaviour
         userlineScrollRect.normalizedPosition = new Vector2(userlineScrollRect.normalizedPosition.x, 0f);
     }
 
+    private string GetSyncDataSize()
+    {
+        double dataSize = bytes == null ? 0 : bytes.Length;
+        string[] units = { "byte", "KB", "MB", "GB" };
+        int unitIndex = 0;
+
+        while (dataSize >= 1024 && unitIndex < units.Length - 1)
+        {
+            dataSize /= 1024;
+            unitIndex++;
+        }
+
+        string format = unitIndex == 0 ? "{0} {1}" : "{0:F2} {1}";
+        return string.Format(format, dataSize, units[unitIndex]);
+    }
+
     #endregion
 
     #region Unity Callbacks
@@ -496,11 +513,13 @@ public class WorldLogManager : UdonSharpBehaviour
     public override void OnPreSerialization()
     {
         SyncBytes();
+        syncDataSizeText.text = GetSyncDataSize();
     }
 
     public override void OnDeserialization()
     {
         LoadBytes();
+        syncDataSizeText.text = GetSyncDataSize();
     }
 
     #endregion
