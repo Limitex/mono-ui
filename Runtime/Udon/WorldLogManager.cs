@@ -315,11 +315,13 @@ public class WorldLogManager : UdonSharpBehaviour
 
     private void SyncBytes()
     {
-        string totalUsersText = totalUsers.ToString();
-        string timelineData = ConvertTimelineStructToString();
-        string userlineData = ConvertUserlineStructToString();
-        string data = totalUsersText + "\v" + timelineData + "\v" + userlineData;
-        bytes = DATA_ENCODING.GetBytes(data);
+        StringBuilder sb = new StringBuilder();
+        sb.Append(totalUsers.ToString());
+        sb.Append('\v');
+        sb.Append(ConvertTimelineStructToString());
+        sb.Append('\v');
+        sb.Append(ConvertUserlineStructToString());
+        bytes = DATA_ENCODING.GetBytes(sb.ToString());
     }
 
     private void LoadBytes()
@@ -337,25 +339,30 @@ public class WorldLogManager : UdonSharpBehaviour
 
     private string ConvertTimelineStructToString()
     {
-        string result = string.Empty;
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < struct_timeline_name.Length; i++)
         {
-            result += struct_timeline_name[i] + "\t";
-            result += struct_timeline_time[i].ToString(DATE_FORMAT) + "\t";
-            result += (int)struct_timeline_type[i] + "\n";
+            sb.Append(struct_timeline_name[i]);
+            sb.Append('\t');
+            sb.Append(struct_timeline_time[i].ToString(DATE_FORMAT));
+            sb.Append('\t');
+            sb.Append((int)struct_timeline_type[i]);
+            sb.Append('\n');
         }
-        return result;
+        return sb.ToString();
     }
 
     private string ConvertUserlineStructToString()
     {
-        string result = string.Empty;
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < struct_userline_name.Length; i++)
         {
-            result += struct_userline_name[i] + "\t";
-            result += (int)struct_userline_type[i] + "\n";
+            sb.Append(struct_userline_name[i]);
+            sb.Append('\t');
+            sb.Append((int)struct_userline_type[i]);
+            sb.Append('\n');
         }
-        return result;
+        return sb.ToString();
     }
 
     private void LoadTimelineStructFromString(string data)
