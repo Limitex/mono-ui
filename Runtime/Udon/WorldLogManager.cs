@@ -148,7 +148,7 @@ public class WorldLogManager : UdonSharpBehaviour
 
     private uint HashTimelineItem(string name, DateTime time, TimelineType type)
     {
-        return HashString(name + time.ToString(DATE_FORMAT) + type.ToString());
+        return HashString($"{name}|{time.ToString(DATE_FORMAT)}|{type}");
     }
 
     #endregion
@@ -206,7 +206,7 @@ public class WorldLogManager : UdonSharpBehaviour
 
     private uint HashUserlineItem(string name, UserlineType type)
     {
-        return HashString(name + type.ToString());
+        return HashString($"{name}|{type}");
     }
 
     private int FindUserLineStructureIndex(string name)
