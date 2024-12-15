@@ -501,12 +501,11 @@ public class WorldLogManager : UdonSharpBehaviour
             if (parts.Length != 3) continue;
             string name = parts[0];
             UserlineType type = (UserlineType)int.Parse(parts[1]);
-            uint hash = uint.Parse(parts[2]);
+            uint _ = uint.Parse(parts[2]);
 
             if (i < struct_userline_name.Length)
             {
-                uint chash = HashUserlineItem(name, type);
-                if (chash == hash) continue;
+                if (struct_userline_type[i] == type) continue;
                 UpdateUserlineInstance(i, type);
             }
             else
