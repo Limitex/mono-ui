@@ -48,6 +48,12 @@ public class WorldLogManager : UdonSharpBehaviour
     [SerializeField] private TMP_Text onlineCountText;
     [SerializeField] private TMP_Text syncDataSizeText;
 
+    [Header("Toast Settings")]
+    [SerializeField] private TMP_Text toastText;
+    [SerializeField] private TMP_Text toastDescriptionText;
+    [SerializeField] private Animator Animator;
+    [SerializeField] private string toastTriggerName = "MonoUI_Toast_isTrigger";
+
     #region Constant Fields
 
     private const string ENTER_TEXT = "Entered the room";
@@ -499,6 +505,17 @@ public class WorldLogManager : UdonSharpBehaviour
 
     #endregion
 
+    #region Animation Functions
+
+    public void ShowToast(string text, string description)
+    {
+        toastText.text = text;
+        toastDescriptionText.text = description;
+        Animator.SetTrigger(toastTriggerName);
+    }
+
+    #endregion
+
     #region Unity Callbacks
 
     void Start()
@@ -528,6 +545,8 @@ public class WorldLogManager : UdonSharpBehaviour
 
     public override void OnPlayerJoined(VRCPlayerApi player)
     {
+        ShowToast($"{player.displayName} joined the world!", $"Welcome to the world, {player.displayName}!");
+
         if (!Networking.IsOwner(gameObject)) return;
 
         AddTimelineItem(player.displayName, GetCurrentUtcTime(), TimelineType.Enter);
@@ -550,6 +569,8 @@ public class WorldLogManager : UdonSharpBehaviour
 
     public override void OnPlayerLeft(VRCPlayerApi player)
     {
+        ShowToast($"{player.displayName} left the world!", $"Goodbye, {player.displayName}!");
+
         if (!Networking.IsOwner(gameObject)) return;
 
         AddTimelineItem(player.displayName, GetCurrentUtcTime(), TimelineType.Leave);
