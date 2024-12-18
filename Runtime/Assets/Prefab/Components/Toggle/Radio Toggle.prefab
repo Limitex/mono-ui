@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 3990871494048423631}
   - component: {fileID: 1349245213801161511}
   m_Layer: 0
-  m_Name: Radio
+  m_Name: Radio Toggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
