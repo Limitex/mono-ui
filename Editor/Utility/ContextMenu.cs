@@ -37,6 +37,7 @@ namespace Limitex.MonoUI.Editor.Util
 
             instance.transform.SetParent(parent ?? Selection.activeTransform);
             instance.transform.localPosition = Vector3.zero;
+            instance.transform.localRotation = Quaternion.identity;
             instance.transform.localScale = originalScale;
 
             Undo.RegisterCreatedObjectUndo(instance, $"Create {instance.name}");
