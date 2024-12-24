@@ -128,12 +128,25 @@ namespace Limitex.MonoUI.Editor.Util
         [MenuItem(MENU_ROOT + "Toggle/Radio Toggle", false, MENU_PRIORITY + 223)]
         private static void CreateRadioToggle() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Toggle/Radio Toggle.prefab");
 
+        [MenuItem(MENU_ROOT + "Toggle/Radio Toggle Group", false, MENU_PRIORITY + 224)]
+        private static void CreateRadioToggleGroup() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Toggle/Radio Toggle Group.prefab");
+
 
         [MenuItem(MENU_ROOT + "Card/Card", false, MENU_PRIORITY + 230)]
         private static void CreateCard() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Card/Card.prefab");
 
         [MenuItem(MENU_ROOT + "Card/Card Outline", false, MENU_PRIORITY + 231)]
         private static void CreateCardOutline() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Card/Card Outline.prefab");
+
+        
+        [MenuItem(MENU_ROOT + "Switch/Switch", false, MENU_PRIORITY + 240)]
+        private static void CreateSwitch() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Switch/Switch.prefab");
+
+        [MenuItem(MENU_ROOT + "Switch/Switch with Text (Left)", false, MENU_PRIORITY + 241)]
+        private static void CreateSwitchWithTextLeft() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Switch/Switch with Text (Left).prefab");
+
+        [MenuItem(MENU_ROOT + "Switch/Switch with Text (Right)", false, MENU_PRIORITY + 242)]
+        private static void CreateSwitchWithTextRight() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Switch/Switch with Text (Right).prefab");
 
 
         [MenuItem(MENU_ROOT + "Dropdown", false, MENU_PRIORITY + 300)]
@@ -144,9 +157,6 @@ namespace Limitex.MonoUI.Editor.Util
 
         [MenuItem(MENU_ROOT + "Slider", false, MENU_PRIORITY + 302)]
         private static void CreateSlider() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Slider.prefab");
-
-        [MenuItem(MENU_ROOT + "Switch", false, MENU_PRIORITY + 303)]
-        private static void CreateSwitch() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Switch.prefab");
 
 
         [MenuItem(MENU_ROOT + "Scroll View", false, MENU_PRIORITY + 400)]
@@ -161,6 +171,9 @@ namespace Limitex.MonoUI.Editor.Util
 
         [MenuItem(MENU_ROOT + "Span", false, MENU_PRIORITY + 501)]
         private static void CreateSpan() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Span.prefab");
+
+        [MenuItem(MENU_ROOT + "Separator", false, MENU_PRIORITY + 502)]
+        private static void CreateSeparator() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Separator.prefab");
 
 
         [MenuItem(MENU_ROOT + "Provider/Dialog", false, MENU_PRIORITY + 600)]
