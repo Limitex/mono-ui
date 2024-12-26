@@ -138,7 +138,7 @@ namespace Limitex.MonoUI.Editor.Util
         [MenuItem(MENU_ROOT + "Card/Card Outline", false, MENU_PRIORITY + 231)]
         private static void CreateCardOutline() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Card/Card Outline.prefab");
 
-        
+
         [MenuItem(MENU_ROOT + "Switch/Switch", false, MENU_PRIORITY + 240)]
         private static void CreateSwitch() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Switch/Switch.prefab");
 
