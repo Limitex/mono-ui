@@ -149,6 +149,10 @@ namespace Limitex.MonoUI.Editor.Util
         private static void CreateSwitchWithTextRight() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Switch/Switch with Text (Right).prefab");
 
 
+        [MenuItem(MENU_ROOT + "Lucide Icon", false, MENU_PRIORITY + 250)]
+        private static void CreateLucideIcon() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Lucide Icon.prefab");
+
+
         [MenuItem(MENU_ROOT + "Dropdown", false, MENU_PRIORITY + 300)]
         private static void CreateDropdown() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Dropdown.prefab");
 
