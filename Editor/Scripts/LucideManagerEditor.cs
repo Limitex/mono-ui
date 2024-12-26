@@ -33,6 +33,7 @@ namespace Limitex.MonoUI.Editor.Lucide
 
         private const string SPRITE_SEARCH_PATH = "Packages/dev.limitex.mono-ui/Runtime/Assets/Lucide";
         private const string LUCIDE_BROWSE_URL = "https://lucide.dev/icons/";
+        private const string LUCIDE_REPO_URL = "https://github.com/lucide-icons/lucide";
         private const string PACKAGE_VERSION = "lucide-react@0.469.0";
         private const string COPYRIGHT_TEXT = "© 2022 Lucide Contributors - ISC License";
 
@@ -86,7 +87,16 @@ namespace Limitex.MonoUI.Editor.Lucide
 
             GUILayout.FlexibleSpace();
 
-            EditorGUILayout.LabelField($"Using {PACKAGE_VERSION}", EditorStyles.miniLabel);
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Icons are converted from Lucide React SVGs to Unity sprites.", EditorStyles.miniLabel);
+            if (GUILayout.Button("View on GitHub", GUILayout.Width(120)))
+            {
+                Application.OpenURL(LUCIDE_REPO_URL);
+            }
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.LabelField(PACKAGE_VERSION, EditorStyles.miniLabel);
+
             EditorGUILayout.LabelField(COPYRIGHT_TEXT, EditorStyles.miniLabel);
 
             serializedObject.ApplyModifiedProperties();
