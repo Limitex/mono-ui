@@ -75,7 +75,9 @@ namespace Limitex.MonoUI.Udon
         private readonly int[] TIMELINE_NAME_PATH = new int[] { 0, 1, 0, 0 };
         private readonly int[] TIMELINE_TIME_PATH = new int[] { 0, 1, 0, 1 };
         private readonly int[] TIMELINE_TYPE_PATH = new int[] { 0, 1, 1, 1 };
-        private readonly int[] TIMELINE_ICON_PATH = new int[] { 0, 1, 1, 0 };
+        private readonly int[] TIMELINE_INFO_ICON_PATH = new int[] { 0, 1, 1, 0, 0 };
+        private readonly int[] TIMELINE_ENTER_ICON_PATH = new int[] { 0, 1, 1, 0, 1 };
+        private readonly int[] TIMELINE_LEFT_ICON_PATH = new int[] { 0, 1, 1, 0, 2 };
         private readonly int[] USERLINE_NAME_PATH = new int[] { 1, 0 };
         private readonly int[] USERLINE_TYPE_PATH = new int[] { 1, 1 };
         private readonly int[] USERLINE_ICON_PATH = new int[] { 0, 0, 0 };
@@ -237,8 +239,14 @@ namespace Limitex.MonoUI.Udon
         private TextMeshProUGUI GetTimelineTypeText(Transform transform) =>
             GetComponentByHierarchyPath(transform, TIMELINE_TYPE_PATH).GetComponent<TextMeshProUGUI>();
 
-        private Image GetTimelineIcon(Transform transform) =>
-            GetComponentByHierarchyPath(transform, TIMELINE_ICON_PATH).GetComponent<Image>();
+        private Transform GetTimelineInfoIcon(Transform transform) =>
+            GetComponentByHierarchyPath(transform, TIMELINE_INFO_ICON_PATH);
+
+        private Transform GetTimelineEnterIcon(Transform transform) =>
+            GetComponentByHierarchyPath(transform, TIMELINE_ENTER_ICON_PATH);
+
+        private Transform GetTimelineLeftIcon(Transform transform) =>
+            GetComponentByHierarchyPath(transform, TIMELINE_LEFT_ICON_PATH);
 
         private TextMeshProUGUI GetUserlineNameText(Transform transform) =>
             GetComponentByHierarchyPath(transform, USERLINE_NAME_PATH).GetComponent<TextMeshProUGUI>();
@@ -436,7 +444,7 @@ namespace Limitex.MonoUI.Udon
             TextMeshProUGUI nameTmp = GetTimelineNameText(transform);
             TextMeshProUGUI timeTmp = GetTimelineTimeText(transform);
             TextMeshProUGUI typeTmp = GetTimelineTypeText(transform);
-            Image icon = GetTimelineIcon(transform);
+            Image icon = SelectTimelineIcon(transform, type);
             nameTmp.text = name;
             timeTmp.text = FormatLocalTime(time);
             typeTmp.text = GetTimelineTypeString(type);
@@ -503,6 +511,28 @@ namespace Limitex.MonoUI.Udon
 
             string format = unitIndex == 0 ? "{0} {1}" : "{0:F2} {1}";
             return string.Format(format, dataSize, units[unitIndex]);
+        }
+
+        private Image SelectTimelineIcon(Transform transform, TimelineType type)
+        {
+            if (type == TimelineType.Enter)
+            {
+                Transform icon = GetTimelineEnterIcon(transform);
+                icon.gameObject.SetActive(true);
+                return icon.GetComponent<Image>();
+            }
+            else if (type == TimelineType.Leave)
+            {
+                Transform icon = GetTimelineLeftIcon(transform);
+                icon.gameObject.SetActive(true);
+                return icon.GetComponent<Image>();
+            }
+            else
+            {
+                Transform icon = GetTimelineInfoIcon(transform);
+                icon.gameObject.SetActive(true);
+                return icon.GetComponent<Image>();
+            }
         }
 
         #endregion
