@@ -181,9 +181,9 @@ namespace Limitex.MonoUI.Editor.Util
 
 
         [MenuItem(MENU_ROOT + "Provider/Dialog", false, MENU_PRIORITY + 600)]
-        private static void CreateProvider() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components 2/Dialog Provider.prefab", true);
+        private static void CreateProvider() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Providers/Dialog Provider.prefab", true);
 
         [MenuItem(MENU_ROOT + "Provider/Toast", false, MENU_PRIORITY + 601)]
-        private static void CreateToast() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components 2/Toast Provider.prefab", true);
+        private static void CreateToast() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Providers/Toast Provider.prefab", true);
     }
 }
