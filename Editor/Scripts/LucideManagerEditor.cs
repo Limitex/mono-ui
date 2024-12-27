@@ -1,5 +1,5 @@
 ﻿/*
- * This tool uses lucide-react@0.263.1
+ * This tool uses lucide-react
  * © 2022 Lucide Contributors - ISC License
  */
 
