@@ -229,5 +229,10 @@ namespace Limitex.MonoUI.Editor.Util
         [MenuItem(MENU_PROVIDER + "Toast", false, PROVIDER_PRIORITY + 1)]
         private static void CreateToast() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Providers/Toast Provider.prefab", true);
         #endregion
+
+        #region Credit
+        [MenuItem(MENU_ROOT + "Credit", false, 999)]
+        private static void CreateCredit() => SpawnPrefab(PREFAB_ROOT + "Credit.prefab");
+        #endregion
     }
 }
