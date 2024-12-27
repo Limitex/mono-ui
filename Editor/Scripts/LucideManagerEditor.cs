@@ -3,6 +3,7 @@
  * © 2022 Lucide Contributors - ISC License
  */
 
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
@@ -45,12 +46,20 @@ namespace Limitex.MonoUI.Editor.Lucide
         private const string MSG_FAILED_LOAD = "Failed to load icon at path: {0}";
         private const string MSG_SUCCESS = "Successfully applied icon: {0}";
 
+        public static readonly int[] RESOLUTION_OPTIONS = { 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384 };
+
         private SerializedProperty imageFileNameProperty;
+        private SerializedProperty maxResolutionProperty;
         private StatusMessage statusMessage;
+
+        private string[] resolutionOptionNames;
 
         private void OnEnable()
         {
             imageFileNameProperty = serializedObject.FindProperty("imageFileName");
+            maxResolutionProperty = serializedObject.FindProperty("maxResolution");
+
+            resolutionOptionNames = RESOLUTION_OPTIONS.Select(x => x.ToString()).ToArray();
 
             LucideManager manager = (LucideManager)target;
             if (!manager.GetComponent<Image>())
@@ -74,6 +83,16 @@ namespace Limitex.MonoUI.Editor.Lucide
                 Application.OpenURL(LUCIDE_BROWSE_URL);
             }
             EditorGUILayout.EndHorizontal();
+
+            int currentIndex = Array.IndexOf(RESOLUTION_OPTIONS, maxResolutionProperty.intValue);
+            if (currentIndex < 0) currentIndex = 0;
+
+            int newIndex = EditorGUILayout.Popup(
+                "Max Resolution",
+                currentIndex,
+                resolutionOptionNames
+            );
+            maxResolutionProperty.intValue = RESOLUTION_OPTIONS[newIndex];
 
             if (!string.IsNullOrEmpty(statusMessage.Text))
             {
@@ -133,6 +152,13 @@ namespace Limitex.MonoUI.Editor.Lucide
                 imageComponent.sprite = null;
                 EditorUtility.SetDirty(imageComponent);
                 return;
+            }
+
+            TextureImporter textureImporter = AssetImporter.GetAtPath(exactMatch) as TextureImporter;
+            if (textureImporter != null)
+            {
+                textureImporter.maxTextureSize = manager.maxResolution;
+                textureImporter.SaveAndReimport();
             }
 
             Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>(exactMatch);

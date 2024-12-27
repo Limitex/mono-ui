@@ -10,6 +10,6 @@ namespace Limitex.MonoUI.Lucide
     public class LucideManager : MonoBehaviour
     {
         public string imageFileName;
+        public int maxResolution = 1024;
     }
 }
-
