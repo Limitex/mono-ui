@@ -1173,7 +1173,7 @@ PrefabInstance:
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
       propertyPath: m_text
-      value: https://github.com/Limitex
+      value: "\xA9 2024 Limitex"
       objectReference: {fileID: 0}
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
