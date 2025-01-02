@@ -96,8 +96,8 @@ namespace Limitex.MonoUI.Editor.Util
         [MenuItem(MENU_SAMPLE + "World Log", false, SAMPLE_PRIORITY + 2)]
         private static void CreateWorldLog() => SpawnPrefab(PREFAB_ROOT + "Sample/World Log.prefab");
 
-        [MenuItem(MENU_SAMPLE + "Lucide Icon", false, SAMPLE_PRIORITY + 3)]
-        private static void CreateLucideIconSample() => SpawnPrefab(PREFAB_ROOT + "Sample/Lucide Icon.prefab");
+        [MenuItem(MENU_SAMPLE + "Lucide Icon Sample", false, SAMPLE_PRIORITY + 3)]
+        private static void CreateLucideIconSample() => SpawnPrefab(PREFAB_ROOT + "Sample/Lucide Icon Sample.prefab");
         #endregion
 
         #region Layout Menu Items
