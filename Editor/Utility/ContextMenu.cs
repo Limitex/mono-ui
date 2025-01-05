@@ -225,8 +225,11 @@ namespace Limitex.MonoUI.Editor.Util
         #endregion
 
         #region Loading Menu Items
-        [MenuItem(MENU_LOADING + "Loading (Bar)", false, LOADING_PRIORITY)]
-        private static void CreateLoadingBar() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Loading (Bar).prefab");
+        [MenuItem(MENU_LOADING + "Loading Bar", false, LOADING_PRIORITY)]
+        private static void CreateLoadingBar() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Loading/Loading Bar.prefab");
+
+        [MenuItem(MENU_LOADING + "Loading Circle", false, LOADING_PRIORITY + 1)]
+        private static void CreateLoadingCircle() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Loading/Loading Circle.prefab");
         #endregion
 
         #region Provider Menu Items
