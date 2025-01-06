@@ -98,7 +98,10 @@ namespace Limitex.MonoUI.Editor.Util
         [MenuItem(MENU_SAMPLE + "World Log", false, SAMPLE_PRIORITY + 2)]
         private static void CreateWorldLog() => SpawnPrefab(PREFAB_ROOT + "Sample/World Log.prefab");
 
-        [MenuItem(MENU_SAMPLE + "Lucide Icon Sample", false, SAMPLE_PRIORITY + 3)]
+        [MenuItem(MENU_SAMPLE + "Platform Statistics", false, SAMPLE_PRIORITY + 3)]
+        private static void CreatePlatformStatistics() => SpawnPrefab(PREFAB_ROOT + "Sample/Platform Statistics.prefab");
+
+        [MenuItem(MENU_SAMPLE + "Lucide Icon Sample", false, SAMPLE_PRIORITY + 4)]
         private static void CreateLucideIconSample() => SpawnPrefab(PREFAB_ROOT + "Sample/Lucide Icon Sample.prefab");
         #endregion
 
@@ -211,6 +214,10 @@ namespace Limitex.MonoUI.Editor.Util
 
         [MenuItem(MENU_NAVIGATION + "Scrollbar", false, NAVIGATION_PRIORITY + 1)]
         private static void CreateScrollbar() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Scrollbar.prefab");
+
+        [MenuItem(MENU_NAVIGATION + "Carousel", false, NAVIGATION_PRIORITY + 2)]
+        private static void CreateCarousel() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Carousel.prefab");
+
         #endregion
 
         #region Utility Menu Items
