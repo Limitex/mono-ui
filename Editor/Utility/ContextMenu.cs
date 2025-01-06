@@ -229,6 +229,9 @@ namespace Limitex.MonoUI.Editor.Util
 
         [MenuItem(MENU_UTILITY + "Separator", false, UTILITY_PRIORITY + 2)]
         private static void CreateSeparator() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Separator.prefab");
+
+        [MenuItem(MENU_UTILITY + "Table", false, UTILITY_PRIORITY + 3)]
+        private static void CreateTable() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Table.prefab");
         #endregion
 
         #region Loading Menu Items
