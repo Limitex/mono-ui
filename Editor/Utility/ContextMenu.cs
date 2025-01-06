@@ -24,6 +24,7 @@ namespace Limitex.MonoUI.Editor.Util
         private const string MENU_INPUT = MENU_ROOT + "Input Controls/";
         private const string MENU_NAVIGATION = MENU_ROOT + "Navigation/";
         private const string MENU_UTILITY = MENU_ROOT + "Utility/";
+        private const string MENU_LOADING = MENU_ROOT + "Loading/";
         private const string MENU_PROVIDER = MENU_ROOT + "Provider/";
 
         private const int MENU_PRIORITY = 0;
@@ -38,6 +39,7 @@ namespace Limitex.MonoUI.Editor.Util
         private const int INPUT_PRIORITY = MENU_PRIORITY + 300;
         private const int NAVIGATION_PRIORITY = MENU_PRIORITY + 310;
         private const int UTILITY_PRIORITY = MENU_PRIORITY + 320;
+        private const int LOADING_PRIORITY = MENU_PRIORITY + 330;
         private const int PROVIDER_PRIORITY = MENU_PRIORITY + 400;
         #endregion
 
@@ -220,6 +222,14 @@ namespace Limitex.MonoUI.Editor.Util
 
         [MenuItem(MENU_UTILITY + "Separator", false, UTILITY_PRIORITY + 2)]
         private static void CreateSeparator() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Separator.prefab");
+        #endregion
+
+        #region Loading Menu Items
+        [MenuItem(MENU_LOADING + "Loading Bar", false, LOADING_PRIORITY)]
+        private static void CreateLoadingBar() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Loading/Loading Bar.prefab");
+
+        [MenuItem(MENU_LOADING + "Loading Circle", false, LOADING_PRIORITY + 1)]
+        private static void CreateLoadingCircle() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Loading/Loading Circle.prefab");
         #endregion
 
         #region Provider Menu Items
