@@ -680,6 +680,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8935881898194820705}
+  - component: {fileID: 6364288552813217406}
   m_Layer: 0
   m_Name: Video Player
   m_TagString: Untagged
@@ -707,6 +708,27 @@ Transform:
   - {fileID: 8196139196662654987}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &6364288552813217406
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3920354011997636178}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8310dd96a5961e047aaf33704655d8c3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4334837578756847194
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,7 +974,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1339010617169373823}
+        - m_Target: {fileID: 6364288552813217406}
           m_TargetAssemblyTypeName: 
           m_MethodName: SetTrigger
           m_Mode: 5
@@ -968,7 +990,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1339010617169373823}
+        - m_Target: {fileID: 6364288552813217406}
           m_TargetAssemblyTypeName: 
           m_MethodName: SetTrigger
           m_Mode: 5
@@ -1486,10 +1508,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1432797977358093523, guid: c1c2e4cf3605aa644baebd986da3902e,
         type: 3}
       insertIndex: 7
-      addedObject: {fileID: 1339010617169373823}
-    - targetCorrespondingSourceObject: {fileID: 1432797977358093523, guid: c1c2e4cf3605aa644baebd986da3902e,
-        type: 3}
-      insertIndex: 8
       addedObject: {fileID: 6991046330482762842}
   m_SourcePrefab: {fileID: 100100000, guid: c1c2e4cf3605aa644baebd986da3902e, type: 3}
 --- !u!1 &1891552354189879969 stripped
@@ -1511,27 +1529,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
---- !u!95 &1339010617169373823
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1891552354189879969}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8310dd96a5961e047aaf33704655d8c3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &6991046330482762842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1549,7 +1546,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1339010617169373823}
+        - m_Target: {fileID: 6364288552813217406}
           m_TargetAssemblyTypeName: 
           m_MethodName: SetTrigger
           m_Mode: 5
@@ -1565,7 +1562,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1339010617169373823}
+        - m_Target: {fileID: 6364288552813217406}
           m_TargetAssemblyTypeName: 
           m_MethodName: SetTrigger
           m_Mode: 5
@@ -3831,7 +3828,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1339010617169373823}
+      objectReference: {fileID: 6364288552813217406}
     - target: {fileID: 2425794398923413017, guid: 4f220805ef1d3664bbcc46fa823c9630,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState

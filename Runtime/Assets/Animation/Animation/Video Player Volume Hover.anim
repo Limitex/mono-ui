@@ -34,7 +34,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_SizeDelta.x
-    path: Controls/Buttom Controls/Right Controls/Contents/Volume Control
+    path: Canvas/Controls/Buttom Controls/Right Controls/Contents/Volume Control
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -47,7 +47,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3155137668
+      path: 4084708447
       attribute: 1967290853
       script: {fileID: 0}
       typeID: 224
@@ -94,7 +94,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_SizeDelta.x
-    path: Controls/Buttom Controls/Right Controls/Contents/Volume Control
+    path: Canvas/Controls/Buttom Controls/Right Controls/Contents/Volume Control
     classID: 224
     script: {fileID: 0}
     flags: 0
