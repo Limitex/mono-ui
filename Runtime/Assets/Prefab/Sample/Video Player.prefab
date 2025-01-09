@@ -1916,6 +1916,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4266040037923018490}
     m_Modifications:
+    - target: {fileID: 4033413851503667828, guid: 4f220805ef1d3664bbcc46fa823c9630,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7879351328024436479}
+    - target: {fileID: 4033413851503667828, guid: 4f220805ef1d3664bbcc46fa823c9630,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7879351328024436479}
     - target: {fileID: 7862171779189980016, guid: 4f220805ef1d3664bbcc46fa823c9630,
         type: 3}
       propertyPath: m_Name
@@ -2021,7 +2031,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7016687764749544412, guid: 4f220805ef1d3664bbcc46fa823c9630, type: 3}
     m_RemovedGameObjects:
     - {fileID: 2335464643270044643, guid: 4f220805ef1d3664bbcc46fa823c9630, type: 3}
     m_AddedGameObjects:
@@ -2174,6 +2185,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4266040037923018490}
     m_Modifications:
+    - target: {fileID: 4033413851503667828, guid: 4f220805ef1d3664bbcc46fa823c9630,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7879351328024436479}
+    - target: {fileID: 4033413851503667828, guid: 4f220805ef1d3664bbcc46fa823c9630,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7879351328024436479}
     - target: {fileID: 7862171779189980016, guid: 4f220805ef1d3664bbcc46fa823c9630,
         type: 3}
       propertyPath: m_Name
@@ -2279,7 +2300,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7016687764749544412, guid: 4f220805ef1d3664bbcc46fa823c9630, type: 3}
     m_RemovedGameObjects:
     - {fileID: 2335464643270044643, guid: 4f220805ef1d3664bbcc46fa823c9630, type: 3}
     m_AddedGameObjects:
