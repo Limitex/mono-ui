@@ -447,9 +447,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3418120890953451150}
+  - {fileID: 5403511199663463442}
   - {fileID: 2611098093552779492}
   - {fileID: 5395171063284399497}
-  - {fileID: 5403511199663463442}
   m_Father: {fileID: 1357081083240229938}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1935,7 +1935,7 @@ PrefabInstance:
     - target: {fileID: 1489600514426412494, guid: 0430c287bf59513469a9acd5c25dcb3f,
         type: 3}
       propertyPath: imageFileName
-      value: maximize-2
+      value: link
       objectReference: {fileID: 0}
     - target: {fileID: 4259554866853467520, guid: 0430c287bf59513469a9acd5c25dcb3f,
         type: 3}
@@ -2041,7 +2041,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 29b7532ac4fac64478f9063571c04db7,
+      objectReference: {fileID: 21300000, guid: 05c65e8d82cb83a418de72347d3e3621,
         type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3624,7 +3624,7 @@ PrefabInstance:
     - target: {fileID: 7862171779189980016, guid: 4f220805ef1d3664bbcc46fa823c9630,
         type: 3}
       propertyPath: m_Name
-      value: Button Ghost (Maximize)
+      value: Button Ghost (Link)
       objectReference: {fileID: 0}
     - target: {fileID: 8432593963467710662, guid: 4f220805ef1d3664bbcc46fa823c9630,
         type: 3}
