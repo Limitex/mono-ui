@@ -79,7 +79,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Canvas/Up Next/Card Container
+    path: Canvas/Controls/Up Next/Card Container
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -109,7 +109,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Canvas/Up Next/Close
+    path: Canvas/Controls/Up Next/Close
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -122,7 +122,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 2795886655
+      path: 3012327612
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
@@ -131,7 +131,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 2852800224
+      path: 2900344888
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -223,7 +223,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: Canvas/Up Next/Card Container
+    path: Canvas/Controls/Up Next/Card Container
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -253,7 +253,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Canvas/Up Next/Close
+    path: Canvas/Controls/Up Next/Close
     classID: 1
     script: {fileID: 0}
     flags: 0
