@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af6f72c5e23b8fc46a8963a033110387, type: 3}
+  m_Name: Default
+  m_EditorClassIdentifier: 
+  Background: {r: 0.03137255, g: 0.03137255, b: 0.039215688, a: 1}
+  Foreground: {r: 0.9764706, g: 0.9764706, b: 0.9764706, a: 1}
+  Primary: {r: 0.9764706, g: 0.9764706, b: 0.9764706, a: 1}
+  Secondary: {r: 0.15294118, g: 0.15294118, b: 0.16470589, a: 1}
+  PrimaryForeground: {r: 0.09019608, g: 0.09019608, b: 0.105882354, a: 1}
+  SecondaryForeground: {r: 0.9764706, g: 0.9764706, b: 0.9764706, a: 1}
+  AccentForeground: {r: 0.9764706, g: 0.9764706, b: 0.9764706, a: 1}
+  MutedForeground: {r: 0.6313726, g: 0.6313726, b: 0.6627451, a: 1}
+  DestructiveForeground: {r: 0.9764706, g: 0.9764706, b: 0.9764706, a: 1}
+  Accent: {r: 0.15294118, g: 0.15294118, b: 0.16470589, a: 1}
+  Muted: {r: 0.15294118, g: 0.15294118, b: 0.16470589, a: 1}
+  Destructive: {r: 0.49803922, g: 0.11372549, b: 0.11372549, a: 1}
+  Border: {r: 0.15294118, g: 0.15294118, b: 0.16470589, a: 1}
+  Ring: {r: 0.827451, g: 0.827451, b: 0.84313726, a: 1}
+  Chart1: {r: 0.14901961, g: 0.38039216, b: 0.84705883, a: 1}
+  Chart2: {r: 0.1764706, g: 0.7176471, b: 0.5372549, a: 1}
+  Chart3: {r: 0.9098039, g: 0.54901963, b: 0.1882353, a: 1}
+  Chart4: {r: 0.6862745, g: 0.3372549, b: 0.85882354, a: 1}
+  Chart5: {r: 0.8862745, g: 0.21176471, b: 0.43529412, a: 1}
+  PrimaryTransition:
+    Normal: {r: 1, g: 1, b: 1, a: 1}
+    Highlighted: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+    Pressed: {r: 0.69803923, g: 0.69803923, b: 0.69803923, a: 1}
+    Selected: {r: 1, g: 1, b: 1, a: 1}
+    Disabled: {r: 0.6313726, g: 0.6313726, b: 0.6627451, a: 1}
+  GhostTransition:
+    Normal: {r: 1, g: 1, b: 1, a: 0}
+    Highlighted: {r: 1, g: 1, b: 1, a: 0.8}
+    Pressed: {r: 1, g: 1, b: 1, a: 0.7}
+    Selected: {r: 1, g: 1, b: 1, a: 0}
+    Disabled: {r: 0.6313726, g: 0.6313726, b: 0.6627451, a: 1}
