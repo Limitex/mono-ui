@@ -87,6 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5495659401180597731}
   - component: {fileID: 7279508377621481512}
+  - component: {fileID: 2750310814528900005}
   m_Layer: 0
   m_Name: Toast Provider
   m_TagString: Untagged
@@ -135,6 +136,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2750310814528900005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2308649825949250463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf4fd317d56094695b01c71988dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentColors:
+  - component: {fileID: 482661156536631226}
+    colorType: 1
+    transitionColorType: 0
+  - component: {fileID: 7602860875823174797}
+    colorType: 13
+    transitionColorType: 0
+  colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &2793848212586120768
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,22 +850,22 @@ PrefabInstance:
     - target: {fileID: 1192198574363818096, guid: 51475af8d047a034ab764ebaf27e4705,
         type: 3}
       propertyPath: m_fontColor.b
-      value: 0.6627451
+      value: 0.9764706
       objectReference: {fileID: 0}
     - target: {fileID: 1192198574363818096, guid: 51475af8d047a034ab764ebaf27e4705,
         type: 3}
       propertyPath: m_fontColor.g
-      value: 0.6313726
+      value: 0.9764706
       objectReference: {fileID: 0}
     - target: {fileID: 1192198574363818096, guid: 51475af8d047a034ab764ebaf27e4705,
         type: 3}
       propertyPath: m_fontColor.r
-      value: 0.6313726
+      value: 0.9764706
       objectReference: {fileID: 0}
     - target: {fileID: 1192198574363818096, guid: 51475af8d047a034ab764ebaf27e4705,
         type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4289307041
+      value: 4294572537
       objectReference: {fileID: 0}
     - target: {fileID: 1192198574363818096, guid: 51475af8d047a034ab764ebaf27e4705,
         type: 3}

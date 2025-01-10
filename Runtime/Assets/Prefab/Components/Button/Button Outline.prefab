@@ -203,6 +203,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5772531534014558079, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+        type: 3}
+      propertyPath: componentColors.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5772531534014558079, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].colorType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5772531534014558079, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+        type: 3}
+      propertyPath: componentColors.Array.data[2].colorType
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5772531534014558079, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+        type: 3}
+      propertyPath: componentColors.Array.data[2].component
+      value: 
+      objectReference: {fileID: 5896912538939900392}
+    - target: {fileID: 5772531534014558079, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+        type: 3}
+      propertyPath: componentColors.Array.data[1].transitionColorType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5772531534014558079, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+        type: 3}
+      propertyPath: componentColors.Array.data[2].transitionColorType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7323587980176686251, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
         type: 3}
       propertyPath: m_text
@@ -236,7 +266,7 @@ PrefabInstance:
     - target: {fileID: 7519226363930810512, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
         type: 3}
       propertyPath: m_Colors.m_PressedColor.a
-      value: 0.69803923
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 7519226363930810512, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
         type: 3}
@@ -277,6 +307,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747910540976914153, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].colorType
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7969782315289226241, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
         type: 3}

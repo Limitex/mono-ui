@@ -1116,6 +1116,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2947931349722997259}
     m_Modifications:
+    - target: {fileID: 416230651906435162, guid: 7531dfba2a198df4987094ddd3b7eb84,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].colorType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 565790068734358489, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_Name
@@ -1129,22 +1134,22 @@ PrefabInstance:
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor.b
-      value: 0.105882354
+      value: 0.039215688
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor.g
-      value: 0.09019608
+      value: 0.03137255
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor.r
-      value: 0.09019608
+      value: 0.03137255
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4279965463
+      value: 4278847496
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
@@ -1482,6 +1487,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7849550316309019206}
     m_Modifications:
+    - target: {fileID: 416230651906435162, guid: 7531dfba2a198df4987094ddd3b7eb84,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].colorType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 565790068734358489, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_Name
@@ -1495,22 +1505,22 @@ PrefabInstance:
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor.b
-      value: 0.105882354
+      value: 0.039215688
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor.g
-      value: 0.09019608
+      value: 0.03137255
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor.r
-      value: 0.09019608
+      value: 0.03137255
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4279965463
+      value: 4278847496
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
@@ -1848,6 +1858,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2707551881974726031}
     m_Modifications:
+    - target: {fileID: 416230651906435162, guid: 7531dfba2a198df4987094ddd3b7eb84,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].colorType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 565790068734358489, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_Name
@@ -1861,22 +1876,22 @@ PrefabInstance:
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor.b
-      value: 0.105882354
+      value: 0.039215688
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor.g
-      value: 0.09019608
+      value: 0.03137255
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor.r
-      value: 0.09019608
+      value: 0.03137255
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4279965463
+      value: 4278847496
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
@@ -2014,6 +2029,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1546639358136979859}
     m_Modifications:
+    - target: {fileID: 416230651906435162, guid: 7531dfba2a198df4987094ddd3b7eb84,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].colorType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 565790068734358489, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_Name
@@ -2027,22 +2047,22 @@ PrefabInstance:
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor.b
-      value: 0.105882354
+      value: 0.039215688
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor.g
-      value: 0.09019608
+      value: 0.03137255
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor.r
-      value: 0.09019608
+      value: 0.03137255
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4279965463
+      value: 4278847496
       objectReference: {fileID: 0}
     - target: {fileID: 856308949655071256, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}

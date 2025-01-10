@@ -1417,6 +1417,56 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].colorType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].component
+      value: 
+      objectReference: {fileID: 3864085010688712929}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[1].colorType
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[1].component
+      value: 
+      objectReference: {fileID: 1308518938671639401}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[2].colorType
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[2].component
+      value: 
+      objectReference: {fileID: 1308518938671639401}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].transitionColorType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[1].transitionColorType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[2].transitionColorType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3143621096667680928, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1654,6 +1704,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 212221166027213244}
   m_SourcePrefab: {fileID: 100100000, guid: 55525cbe7c5fbf246a70a28cc00a8736, type: 3}
+--- !u!114 &1308518938671639401 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1694127474985257161, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+    type: 3}
+  m_PrefabInstance: {fileID: 408267345532625824}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2395237576898714856 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2636825826656141128, guid: 55525cbe7c5fbf246a70a28cc00a8736,
@@ -1713,6 +1775,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 0
+--- !u!114 &3864085010688712929 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3473832380012036929, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+    type: 3}
+  m_PrefabInstance: {fileID: 408267345532625824}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5173338813223800187 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4783122702224273115, guid: 55525cbe7c5fbf246a70a28cc00a8736,
@@ -5274,6 +5348,56 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].colorType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].component
+      value: 
+      objectReference: {fileID: 4680910741047701039}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[1].colorType
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[1].component
+      value: 
+      objectReference: {fileID: 7440747398987687335}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[2].colorType
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[2].component
+      value: 
+      objectReference: {fileID: 7440747398987687335}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].transitionColorType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[1].transitionColorType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+        type: 3}
+      propertyPath: componentColors.Array.data[2].transitionColorType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3143621096667680928, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -5531,6 +5655,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8124607665787333998}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4680910741047701039 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3473832380012036929, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+    type: 3}
+  m_PrefabInstance: {fileID: 8124607665787333998}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6077472174522847782 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2636825826656141128, guid: 55525cbe7c5fbf246a70a28cc00a8736,
@@ -5577,6 +5713,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 1
+--- !u!114 &7440747398987687335 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1694127474985257161, guid: 55525cbe7c5fbf246a70a28cc00a8736,
+    type: 3}
+  m_PrefabInstance: {fileID: 8124607665787333998}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8753746472597742177
 PrefabInstance:
   m_ObjectHideFlags: 0

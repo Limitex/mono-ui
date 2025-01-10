@@ -128,6 +128,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5772531534014558079, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].colorType
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7323587980176686251, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
         type: 3}
       propertyPath: m_text
@@ -152,6 +157,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294572537
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747910540976914153, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].colorType
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7969782315289226241, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
         type: 3}

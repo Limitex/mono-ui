@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5659562875896816047}
   - component: {fileID: 7229771439486196342}
   - component: {fileID: 7725786043467675545}
+  - component: {fileID: 9134624944003570586}
   m_Layer: 0
   m_Name: Loading Bar
   m_TagString: Untagged
@@ -112,6 +113,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9134624944003570586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251758125843127374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf4fd317d56094695b01c71988dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentColors:
+  - component: {fileID: 7229771439486196342}
+    colorType: 11
+    transitionColorType: 0
+  - component: {fileID: 5609124466346595852}
+    colorType: 3
+    transitionColorType: 0
+  colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &5813839308391755935
 GameObject:
   m_ObjectHideFlags: 0

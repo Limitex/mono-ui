@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 344517386083486411}
   - component: {fileID: 832133472690941842}
   - component: {fileID: 3695925436303024754}
+  - component: {fileID: 2802068014204329717}
   m_Layer: 0
   m_Name: InputField
   m_TagString: Untagged
@@ -178,7 +179,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.8}
-    m_PressedColor: {r: 1, g: 1, b: 1, a: 0.69803923}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 0.7}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 0}
     m_DisabledColor: {r: 0.6313726, g: 0.6313726, b: 0.6627451, a: 1}
     m_ColorMultiplier: 1
@@ -396,6 +397,29 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2802068014204329717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148026687904211266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf4fd317d56094695b01c71988dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentColors:
+  - component: {fileID: 6705054484822230327}
+    colorType: 4
+    transitionColorType: 0
+  - component: {fileID: 344517386083486411}
+    colorType: 0
+    transitionColorType: 2
+  - component: {fileID: 5314670643144777498}
+    colorType: 13
+    transitionColorType: 0
+  colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &8419154433856256585
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,27 +744,27 @@ PrefabInstance:
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
       propertyPath: m_fontColor.a
-      value: 0.5019608
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
       propertyPath: m_fontColor.b
-      value: 0.6627451
+      value: 0.9764706
       objectReference: {fileID: 0}
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
       propertyPath: m_fontColor.g
-      value: 0.6313726
+      value: 0.9764706
       objectReference: {fileID: 0}
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
       propertyPath: m_fontColor.r
-      value: 0.6313726
+      value: 0.9764706
       objectReference: {fileID: 0}
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 2158600609
+      value: 4294572537
       objectReference: {fileID: 0}
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
