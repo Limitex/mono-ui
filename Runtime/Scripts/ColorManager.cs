@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -16,39 +17,6 @@ namespace Limitex.MonoUI.Theme
         public Component component;
         public ColorType colorType;
         public TransitionColorType transitionColorType;
-    }
-
-    public enum ColorType
-    {
-        None,
-        Background,
-        Foreground,
-        Primary,
-        Secondary,
-        PrimaryForeground,
-        SecondaryForeground,
-        AccentForeground,
-        MutedForeground,
-        DestructiveForeground,
-        Accent,
-        Muted,
-        Destructive,
-        Border,
-        Ring,
-        Chart1,
-        Chart2,
-        Chart3,
-        Chart4,
-        Chart5,
-        MutedHoverBackground,
-    }
-
-    public enum TransitionColorType
-    {
-        None,
-        Primary,
-        Ghost,
-        Transparent,
     }
 
     public class ColorManager : MonoBehaviour
@@ -83,18 +51,21 @@ namespace Limitex.MonoUI.Theme
 
             if (componentColors == null) return;
 
+            List<int> componentError = new List<int>();
+            List<int> colorError = new List<int>();
+
             for (int i = 0; i < componentColors.Length; i++)
             {
                 if (componentColors[i].component == null)
                 {
-                    Debug.LogError($"ColorManager component is not assigned to {this.gameObject.name}");
+                    componentError.Add(i);
                     continue;
                 }
 
                 if (componentColors[i].colorType == ColorType.None &&
                     componentColors[i].transitionColorType == TransitionColorType.None)
                 {
-                    Debug.LogError($"ColorManager colorType or transitionColorType is not assigned to {this.gameObject.name}");
+                    colorError.Add(i);
                     continue;
                 }
 
@@ -110,111 +81,41 @@ namespace Limitex.MonoUI.Theme
 
                 ApplyColors(ref componentColors[i]);
             }
+
+            if (componentError.Count > 0)
+            {
+                Debug.LogWarning($"Component(s) at index(es) {string.Join(", ", componentError)} is/are not assigned. {GetLocationLog()}");
+            }
+
+            if (colorError.Count > 0)
+            {
+                Debug.LogWarning($"Color(s) at index(es) {string.Join(", ", colorError)} is/are not assigned. {GetLocationLog()}");
+            }
         }
 
         public void ApplyColors(ref ComponentColor cc)
         {
             if (cc.component == null) return;
-            Color? color = GetColorFromPreset(cc.colorType);
-            TransitionColor? transitionColor = GetTransitionColorFromPreset(cc.transitionColorType);
+            Color? color = colorPreset?.GetColorByType(cc.colorType);
+            TransitionColor? transitionColor = colorPreset?.GetTransitionColorByType(cc.transitionColorType);
 
-            if (cc.component is Image)
+            if (cc.component is Graphic graphic)
             {
-                if (color == null) return;
-                Image image = cc.component as Image;
-                image.color = (Color)color;
+                if (color.HasValue)
+                {
+                    ApplyColorToUIElement(graphic, color.Value);
+                }
             }
-            else if (cc.component is TMP_Text)
+            else if (cc.component is Selectable selectable)
             {
-                if (color == null) return;
-                TMP_Text text = cc.component as TMP_Text;
-                text.color = (Color)color;
-            }
-            else if (cc.component is RawImage)
-            {
-                if (color == null) return;
-                RawImage rawImage = cc.component as RawImage;
-                rawImage.color = (Color)color;
-            }
-            else if (cc.component is Toggle)
-            {
-                if (transitionColor == null) return;
-                Toggle toggle = cc.component as Toggle;
-                TransitionColor tc = (TransitionColor)transitionColor;
-                ColorBlock colorBlock = toggle.colors;
-                colorBlock.normalColor = tc.Normal;
-                colorBlock.highlightedColor = tc.Highlighted;
-                colorBlock.pressedColor = tc.Pressed;
-                colorBlock.selectedColor = tc.Selected;
-                colorBlock.disabledColor = tc.Disabled;
-                toggle.colors = colorBlock;
-            }
-            else if (cc.component is Slider)
-            {
-                if (transitionColor == null) return;
-                Slider slider = cc.component as Slider;
-                TransitionColor tc = (TransitionColor)transitionColor;
-                ColorBlock colorBlock = slider.colors;
-                colorBlock.normalColor = tc.Normal;
-                colorBlock.highlightedColor = tc.Highlighted;
-                colorBlock.pressedColor = tc.Pressed;
-                colorBlock.selectedColor = tc.Selected;
-                colorBlock.disabledColor = tc.Disabled;
-                slider.colors = colorBlock;
-            }
-            else if (cc.component is Scrollbar)
-            {
-                if (transitionColor == null) return;
-                Scrollbar scrollbar = cc.component as Scrollbar;
-                TransitionColor tc = (TransitionColor)transitionColor;
-                ColorBlock colorBlock = scrollbar.colors;
-                colorBlock.normalColor = tc.Normal;
-                colorBlock.highlightedColor = tc.Highlighted;
-                colorBlock.pressedColor = tc.Pressed;
-                colorBlock.selectedColor = tc.Selected;
-                colorBlock.disabledColor = tc.Disabled;
-                scrollbar.colors = colorBlock;
-            }
-            else if (cc.component is Button)
-            {
-                if (transitionColor == null) return;
-                Button button = cc.component as Button;
-                TransitionColor tc = (TransitionColor)transitionColor;
-                ColorBlock colorBlock = button.colors;
-                colorBlock.normalColor = tc.Normal;
-                colorBlock.highlightedColor = tc.Highlighted;
-                colorBlock.pressedColor = tc.Pressed;
-                colorBlock.selectedColor = tc.Selected;
-                colorBlock.disabledColor = tc.Disabled;
-                button.colors = colorBlock;
-            }
-            else if (cc.component is TMP_Dropdown)
-            {
-                if (transitionColor == null) return;
-                TMP_Dropdown dropdown = cc.component as TMP_Dropdown;
-                TransitionColor tc = (TransitionColor)transitionColor;
-                ColorBlock colorBlock = dropdown.colors;
-                colorBlock.normalColor = tc.Normal;
-                colorBlock.highlightedColor = tc.Highlighted;
-                colorBlock.pressedColor = tc.Pressed;
-                colorBlock.selectedColor = tc.Selected;
-                colorBlock.disabledColor = tc.Disabled;
-                dropdown.colors = colorBlock;
-            }
-            else if (cc.component is TMP_InputField)
-            {
-                if (transitionColor == null) return;
-                TMP_InputField inputField = cc.component as TMP_InputField;
-                TransitionColor tc = (TransitionColor)transitionColor;
-                ColorBlock colorBlock = inputField.colors;
-                colorBlock.normalColor = tc.Normal;
-                colorBlock.highlightedColor = tc.Highlighted;
-                colorBlock.pressedColor = tc.Pressed;
-                colorBlock.selectedColor = tc.Selected;
-                colorBlock.disabledColor = tc.Disabled;
-                inputField.colors = colorBlock;
+                if (transitionColor.HasValue)
+                {
+                    ApplyTransitionColors(selectable, transitionColor.Value);
+                }
             }
         }
+
+        #region Helper Methods
 
         public void SetColorPreset(ColorPresetAsset newPreset)
         {
@@ -222,60 +123,38 @@ namespace Limitex.MonoUI.Theme
             OnValidate();
         }
 
-        #region Helper Methods
-
-        private Color? GetColorFromPreset(ColorType colorType)
+        private void ApplyColorToUIElement<T>(T uiElement, Color color) where T : Graphic
         {
-            if (colorPreset == null)
+            if (uiElement != null)
             {
-                Debug.LogWarning("ColorPresetAsset is not assigned!");
-                return null;
-            }
-
-            switch (colorType)
-            {
-                case ColorType.Background: return colorPreset.Background;
-                case ColorType.Foreground: return colorPreset.Foreground;
-                case ColorType.Primary: return colorPreset.Primary;
-                case ColorType.Secondary: return colorPreset.Secondary;
-                case ColorType.PrimaryForeground: return colorPreset.PrimaryForeground;
-                case ColorType.SecondaryForeground: return colorPreset.SecondaryForeground;
-                case ColorType.AccentForeground: return colorPreset.AccentForeground;
-                case ColorType.MutedForeground: return colorPreset.MutedForeground;
-                case ColorType.DestructiveForeground: return colorPreset.DestructiveForeground;
-                case ColorType.Accent: return colorPreset.Accent;
-                case ColorType.Muted: return colorPreset.Muted;
-                case ColorType.Destructive: return colorPreset.Destructive;
-                case ColorType.Border: return colorPreset.Border;
-                case ColorType.Ring: return colorPreset.Ring;
-                case ColorType.Chart1: return colorPreset.Chart1;
-                case ColorType.Chart2: return colorPreset.Chart2;
-                case ColorType.Chart3: return colorPreset.Chart3;
-                case ColorType.Chart4: return colorPreset.Chart4;
-                case ColorType.Chart5: return colorPreset.Chart5;
-                case ColorType.MutedHoverBackground: return colorPreset.MutedHoverBackground;
-                default:
-                    return null;
+                uiElement.color = color;
             }
         }
 
-        private TransitionColor? GetTransitionColorFromPreset(TransitionColorType transitionColorType)
+        private void ApplyTransitionColors(Selectable selectable, TransitionColor transitionColor)
         {
-            if (colorPreset == null)
+            if (selectable != null)
             {
-                Debug.LogWarning("ColorPresetAsset is not assigned!");
-                return null;
-            }
-
-            switch (transitionColorType)
-            {
-                case TransitionColorType.Primary: return colorPreset.PrimaryTransition;
-                case TransitionColorType.Ghost: return colorPreset.GhostTransition;
-                case TransitionColorType.Transparent: return colorPreset.TranspanentTransition;
-                default:
-                    return null;
+                ColorBlock colorBlock = selectable.colors;
+                colorBlock.normalColor = transitionColor.Normal;
+                colorBlock.highlightedColor = transitionColor.Highlighted;
+                colorBlock.pressedColor = transitionColor.Pressed;
+                colorBlock.selectedColor = transitionColor.Selected;
+                colorBlock.disabledColor = transitionColor.Disabled;
+                selectable.colors = colorBlock;
             }
         }
+
+        private string GetHierarchyPath(Transform transform)
+        {
+            var path = new StringBuilder(transform.name);
+            for (var parent = transform.parent; parent != null; parent = parent.parent)
+                path.Insert(0, parent.name + "/");
+            return path.ToString();
+        }
+
+        private string GetLocationLog() => 
+            $"GameObject: {this.gameObject.name} at path: {GetHierarchyPath(this.transform)}";
 
         #endregion
     }
