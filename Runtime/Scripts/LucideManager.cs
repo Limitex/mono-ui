@@ -5,6 +5,8 @@
 
 using UnityEngine;
 
+#if UNITY_EDITOR
+
 namespace Limitex.MonoUI.Lucide
 {
     public class LucideManager : MonoBehaviour
@@ -13,3 +15,4 @@ namespace Limitex.MonoUI.Lucide
     }
 }
 
+#endif
