@@ -24,37 +24,39 @@ namespace Limitex.MonoUI.Theme
         }
     }
 
+    // Random IDs are assigned to ensure stability against reordering and for serialization.
     public enum ColorType
     {
-        None,
-        Background,
-        Foreground,
-        Primary,
-        PrimaryForeground,
-        Secondary,
-        SecondaryForeground,
-        Accent,
-        AccentForeground,
-        Muted,
-        MutedForeground,
-        Destructive,
-        DestructiveForeground,
-        Chart1,
-        Chart2,
-        Chart3,
-        Chart4,
-        Chart5,
-        Border,
-        Ring,
-        MutedHoverBackground,
+        None = 412340151,
+        Background = 121473958,
+        Foreground = 790920719,
+        Primary = 598842521,
+        PrimaryForeground = 711723875,
+        Secondary = 471083450,
+        SecondaryForeground = 533222481,
+        Accent = 342849487,
+        AccentForeground = 364665978,
+        Muted = 432419634,
+        MutedForeground = 952807518,
+        Destructive = 578251783,
+        DestructiveForeground = 173638956,
+        Chart1 = 406805723,
+        Chart2 = 464079137,
+        Chart3 = 534066984,
+        Chart4 = 288490277,
+        Chart5 = 876561572,
+        Border = 694730041,
+        Ring = 179126290,
+        MutedHoverBackground = 974697568,
     }
 
+    // Random IDs are assigned to ensure stability against reordering and for serialization.
     public enum TransitionColorType
     {
-        None,
-        Primary,
-        Ghost,
-        Transparent,
+        None = 897758581,
+        Primary = 607538827,
+        Ghost = 194200482,
+        Transparent = 353005088,
     }
 
     [CreateAssetMenu(fileName = "NewColorPreset", menuName = "Mono UI/Color Preset")]
