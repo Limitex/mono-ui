@@ -170,6 +170,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentColors:
   - component: {fileID: 8011022552925273493}
-    colorType: 1
-    transitionColorType: 0
+    colorType: 121473958
+    transitionColorType: 897758581
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}

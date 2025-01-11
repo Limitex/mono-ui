@@ -110,11 +110,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentColors:
   - component: {fileID: 7355374883309382047}
-    colorType: 0
-    transitionColorType: 1
+    colorType: 412340151
+    transitionColorType: 607538827
   - component: {fileID: 428850728477863479}
-    colorType: 4
-    transitionColorType: 0
+    colorType: 471083450
+    transitionColorType: 897758581
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &6378535477256484328
 GameObject:

@@ -148,8 +148,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentColors:
   - component: {fileID: 2824926065508341126}
-    colorType: 4
-    transitionColorType: 0
+    colorType: 471083450
+    transitionColorType: 897758581
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1001 &3567227826795545462
 PrefabInstance:
@@ -387,7 +387,7 @@ PrefabInstance:
     - target: {fileID: 4759486540695434728, guid: 4019de6f379abd14ea964592b8402f96,
         type: 3}
       propertyPath: componentColors.Array.data[2].colorType
-      value: 1
+      value: 121473958
       objectReference: {fileID: 0}
     - target: {fileID: 4974021608415486253, guid: 4019de6f379abd14ea964592b8402f96,
         type: 3}
@@ -661,7 +661,7 @@ PrefabInstance:
     - target: {fileID: 4759486540695434728, guid: 4019de6f379abd14ea964592b8402f96,
         type: 3}
       propertyPath: componentColors.Array.data[2].colorType
-      value: 1
+      value: 121473958
       objectReference: {fileID: 0}
     - target: {fileID: 4974021608415486253, guid: 4019de6f379abd14ea964592b8402f96,
         type: 3}
@@ -935,7 +935,7 @@ PrefabInstance:
     - target: {fileID: 4759486540695434728, guid: 4019de6f379abd14ea964592b8402f96,
         type: 3}
       propertyPath: componentColors.Array.data[2].colorType
-      value: 1
+      value: 121473958
       objectReference: {fileID: 0}
     - target: {fileID: 4974021608415486253, guid: 4019de6f379abd14ea964592b8402f96,
         type: 3}

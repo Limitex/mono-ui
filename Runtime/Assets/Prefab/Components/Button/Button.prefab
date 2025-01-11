@@ -281,11 +281,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentColors:
   - component: {fileID: 400218260865982219}
-    colorType: 3
-    transitionColorType: 0
+    colorType: 598842521
+    transitionColorType: 897758581
   - component: {fileID: 7519226363930810512}
-    colorType: 0
-    transitionColorType: 1
+    colorType: 412340151
+    transitionColorType: 607538827
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1001 &5888148581440178210
 PrefabInstance:
@@ -403,22 +403,22 @@ PrefabInstance:
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
       propertyPath: m_fontColor.b
-      value: 0.039215688
+      value: 0.105882354
       objectReference: {fileID: 0}
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
       propertyPath: m_fontColor.g
-      value: 0.03137255
+      value: 0.09019608
       objectReference: {fileID: 0}
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
       propertyPath: m_fontColor.r
-      value: 0.03137255
+      value: 0.09019608
       objectReference: {fileID: 0}
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4278847496
+      value: 4279965463
       objectReference: {fileID: 0}
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
@@ -433,7 +433,7 @@ PrefabInstance:
     - target: {fileID: 4193128768620508875, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
       propertyPath: componentColors.Array.data[0].colorType
-      value: 1
+      value: 711723875
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

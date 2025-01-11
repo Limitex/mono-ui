@@ -381,17 +381,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentColors:
   - component: {fileID: 6064092987089666844}
-    colorType: 0
-    transitionColorType: 1
+    colorType: 412340151
+    transitionColorType: 607538827
   - component: {fileID: 8253131829984021482}
-    colorType: 4
-    transitionColorType: 0
+    colorType: 471083450
+    transitionColorType: 897758581
   - component: {fileID: 3473832380012036929}
-    colorType: 0
-    transitionColorType: 1
+    colorType: 412340151
+    transitionColorType: 607538827
   - component: {fileID: 1694127474985257161}
-    colorType: 4
-    transitionColorType: 0
+    colorType: 471083450
+    transitionColorType: 897758581
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &5364130996111072961
 GameObject:

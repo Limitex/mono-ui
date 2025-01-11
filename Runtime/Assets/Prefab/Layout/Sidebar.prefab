@@ -481,7 +481,7 @@ PrefabInstance:
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[0].colorType
-      value: 0
+      value: 412340151
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
@@ -491,7 +491,7 @@ PrefabInstance:
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[1].colorType
-      value: 5
+      value: 471083450
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
@@ -511,12 +511,12 @@ PrefabInstance:
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[0].transitionColorType
-      value: 1
+      value: 607538827
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[1].transitionColorType
-      value: 0
+      value: 897758581
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
@@ -875,7 +875,7 @@ PrefabInstance:
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[0].colorType
-      value: 0
+      value: 412340151
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
@@ -885,7 +885,7 @@ PrefabInstance:
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[1].colorType
-      value: 5
+      value: 471083450
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
@@ -905,12 +905,12 @@ PrefabInstance:
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[0].transitionColorType
-      value: 1
+      value: 607538827
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[1].transitionColorType
-      value: 0
+      value: 897758581
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
@@ -1669,7 +1669,7 @@ PrefabInstance:
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[0].colorType
-      value: 0
+      value: 412340151
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
@@ -1679,7 +1679,7 @@ PrefabInstance:
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[1].colorType
-      value: 5
+      value: 471083450
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
@@ -1699,12 +1699,12 @@ PrefabInstance:
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[0].transitionColorType
-      value: 1
+      value: 607538827
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[1].transitionColorType
-      value: 0
+      value: 897758581
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
@@ -2053,13 +2053,18 @@ PrefabInstance:
     - target: {fileID: 233565090807697394, guid: c1c2e4cf3605aa644baebd986da3902e,
         type: 3}
       propertyPath: componentColors.Array.data[1].colorType
-      value: 13
+      value: 694730041
       objectReference: {fileID: 0}
     - target: {fileID: 233565090807697394, guid: c1c2e4cf3605aa644baebd986da3902e,
         type: 3}
       propertyPath: componentColors.Array.data[1].component
       value: 
       objectReference: {fileID: 7731477194105743236}
+    - target: {fileID: 233565090807697394, guid: c1c2e4cf3605aa644baebd986da3902e,
+        type: 3}
+      propertyPath: componentColors.Array.data[1].transitionColorType
+      value: 897758581
+      objectReference: {fileID: 0}
     - target: {fileID: 1432797977358093523, guid: c1c2e4cf3605aa644baebd986da3902e,
         type: 3}
       propertyPath: m_Name
@@ -2483,7 +2488,7 @@ PrefabInstance:
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[0].colorType
-      value: 0
+      value: 412340151
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
@@ -2493,7 +2498,7 @@ PrefabInstance:
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[1].colorType
-      value: 5
+      value: 471083450
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
@@ -2513,12 +2518,12 @@ PrefabInstance:
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[0].transitionColorType
-      value: 1
+      value: 607538827
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[1].transitionColorType
-      value: 0
+      value: 897758581
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}

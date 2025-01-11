@@ -131,12 +131,12 @@ PrefabInstance:
     - target: {fileID: 5772531534014558079, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
         type: 3}
       propertyPath: componentColors.Array.data[0].colorType
-      value: 4
+      value: 471083450
       objectReference: {fileID: 0}
     - target: {fileID: 5772531534014558079, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
         type: 3}
       propertyPath: componentColors.Array.data[1].transitionColorType
-      value: 2
+      value: 194200482
       objectReference: {fileID: 0}
     - target: {fileID: 7323587980176686251, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
         type: 3}
@@ -216,7 +216,7 @@ PrefabInstance:
     - target: {fileID: 7747910540976914153, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
         type: 3}
       propertyPath: componentColors.Array.data[0].colorType
-      value: 3
+      value: 533222481
       objectReference: {fileID: 0}
     - target: {fileID: 7969782315289226241, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
         type: 3}

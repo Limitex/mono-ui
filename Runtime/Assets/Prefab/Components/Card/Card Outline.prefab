@@ -126,7 +126,7 @@ PrefabInstance:
     - target: {fileID: 8713370037379924408, guid: 510a1683e01f6174ebcf01c7e48ab849,
         type: 3}
       propertyPath: componentColors.Array.data[0].colorType
-      value: 13
+      value: 694730041
       objectReference: {fileID: 0}
     - target: {fileID: 8713370037379924408, guid: 510a1683e01f6174ebcf01c7e48ab849,
         type: 3}

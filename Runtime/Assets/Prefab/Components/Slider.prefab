@@ -436,20 +436,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentColors:
   - component: {fileID: 5696527001658630151}
-    colorType: 0
-    transitionColorType: 1
+    colorType: 412340151
+    transitionColorType: 607538827
   - component: {fileID: 9119603675062543187}
-    colorType: 4
-    transitionColorType: 0
+    colorType: 471083450
+    transitionColorType: 897758581
   - component: {fileID: 7177014095257375594}
-    colorType: 3
-    transitionColorType: 0
+    colorType: 598842521
+    transitionColorType: 897758581
   - component: {fileID: 1890664019841481483}
-    colorType: 1
-    transitionColorType: 0
+    colorType: 121473958
+    transitionColorType: 897758581
   - component: {fileID: 8839734427839375502}
-    colorType: 3
-    transitionColorType: 0
+    colorType: 598842521
+    transitionColorType: 897758581
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &6234677115013473410
 GameObject:

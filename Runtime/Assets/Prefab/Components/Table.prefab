@@ -368,8 +368,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentColors:
   - component: {fileID: 3240766117169723684}
-    colorType: 4
-    transitionColorType: 0
+    colorType: 471083450
+    transitionColorType: 897758581
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &1361299913255099237
 GameObject:
@@ -4565,7 +4565,7 @@ PrefabInstance:
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[0].colorType
-      value: 0
+      value: 412340151
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
@@ -4575,7 +4575,7 @@ PrefabInstance:
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[1].colorType
-      value: 5
+      value: 471083450
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
@@ -4595,12 +4595,12 @@ PrefabInstance:
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[0].transitionColorType
-      value: 1
+      value: 607538827
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[1].transitionColorType
-      value: 0
+      value: 897758581
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}

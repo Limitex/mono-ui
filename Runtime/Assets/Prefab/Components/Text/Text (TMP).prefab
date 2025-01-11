@@ -226,9 +226,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentColors:
   - component: {fileID: 5985590223805940887}
-    colorType: 3
-    transitionColorType: 0
+    colorType: 790920719
+    transitionColorType: 897758581
   - component: {fileID: 5983323511918690145}
-    colorType: 13
-    transitionColorType: 0
+    colorType: 694730041
+    transitionColorType: 897758581
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
