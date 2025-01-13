@@ -1,15 +1,15 @@
 using UnityEngine;
 using UnityEditor;
-using Limitex.MonoUI.Theme;
 using System;
-using Limitex.MonoUI.Editor.Utils;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using System.Collections.Generic;
 using UnityEditor.SceneManagement;
+using Limitex.MonoUI.Editor.Components;
+using Limitex.MonoUI.Editor.Data;
+using Limitex.MonoUI.Editor.Utils;
 
 #if UNITY_EDITOR
-namespace Limitex.MonoUI.Editor.Theme
+namespace Limitex.MonoUI.Editor.Inspector
 {
     [CustomEditor(typeof(ColorManager))]
     public class ColorManagerEditor : UnityEditor.Editor

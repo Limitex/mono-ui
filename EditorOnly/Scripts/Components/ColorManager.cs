@@ -1,15 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using Limitex.MonoUI.Editor.Data;
 
 #if UNITY_EDITOR
-
-namespace Limitex.MonoUI.Theme
+namespace Limitex.MonoUI.Editor.Components
 {
     [Serializable]
     public struct ComponentColor
@@ -28,7 +27,7 @@ namespace Limitex.MonoUI.Theme
         {
             string[] guids = AssetDatabase.FindAssets(
                 "t:ColorPresetAsset",
-                new[] { "Packages/dev.limitex.mono-ui/Runtime/Assets/Color" });
+                new[] { "Packages/dev.limitex.mono-ui/Editor/Assets/ColorPreset/" });
 
             if (guids.Length > 0)
             {

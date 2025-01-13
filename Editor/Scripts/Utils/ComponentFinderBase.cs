@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 #if UNITY_EDITOR
 namespace Limitex.MonoUI.Editor.Utils

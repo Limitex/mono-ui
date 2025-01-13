@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Limitex.MonoUI.Theme
+#if UNITY_EDITOR
+namespace Limitex.MonoUI.Editor.Data
 {
     [Serializable]
     public struct TransitionColor
@@ -158,3 +157,4 @@ namespace Limitex.MonoUI.Theme
         }
     }
 }
+#endif

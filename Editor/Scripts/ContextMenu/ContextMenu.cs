@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 using UnityEngine.UI;
 
-namespace Limitex.MonoUI.Editor.Util
+namespace Limitex.MonoUI.Editor.ContextMenu
 {
     public class ContextMenu
     {
