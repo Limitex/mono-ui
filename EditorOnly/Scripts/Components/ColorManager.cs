@@ -42,14 +42,20 @@ namespace Limitex.MonoUI.Editor.Components
 
         public void OnValidate()
         {
+            ValidateComponentColors();
+        }
+
+        public bool ValidateComponentColors()
+        {
             if (colorPreset == null)
             {
                 Debug.LogError("ColorPresetAsset is not assigned!");
-                return;
+                return false;
             }
 
-            if (componentColors == null) return;
+            if (componentColors == null) return false;
 
+            bool success = false;
             List<int> componentError = new List<int>();
             List<int> colorError = new List<int>();
 
@@ -78,7 +84,7 @@ namespace Limitex.MonoUI.Editor.Components
                     componentColors[i].transitionColorType = TransitionColorType.None;
                 }
 
-                ApplyColors(ref componentColors[i]);
+                success = ApplyColors(ref componentColors[i]);
             }
 
             if (componentError.Count > 0)
@@ -90,11 +96,13 @@ namespace Limitex.MonoUI.Editor.Components
             {
                 Debug.LogWarning($"Color(s) at index(es) {string.Join(", ", colorError)} is/are not assigned. {GetLocationLog()}");
             }
+
+            return success;
         }
 
-        public void ApplyColors(ref ComponentColor cc)
+        public bool ApplyColors(ref ComponentColor cc)
         {
-            if (cc.component == null) return;
+            if (cc.component == null) return false;
             Color? color = colorPreset?.GetColorByType(cc.colorType);
             TransitionColor? transitionColor = colorPreset?.GetTransitionColorByType(cc.transitionColorType);
 
@@ -102,46 +110,58 @@ namespace Limitex.MonoUI.Editor.Components
             {
                 if (color.HasValue)
                 {
-                    ApplyColorToUIElement(graphic, color.Value);
+                    return ApplyColorToUIElement(graphic, color.Value);
                 }
             }
             else if (cc.component is Selectable selectable)
             {
                 if (transitionColor.HasValue)
                 {
-                    ApplyTransitionColors(selectable, transitionColor.Value);
+                    return ApplyTransitionColors(selectable, transitionColor.Value);
                 }
             }
+
+            return false;
         }
 
         #region Helper Methods
 
-        public void SetColorPreset(ColorPresetAsset newPreset)
+        public bool SetColorPreset(ColorPresetAsset newPreset)
         {
+            if (colorPreset == newPreset) return false;
             colorPreset = newPreset;
             OnValidate();
+            return true;
         }
 
-        private void ApplyColorToUIElement<T>(T uiElement, Color color) where T : Graphic
+        private bool ApplyColorToUIElement<T>(T uiElement, Color color) where T : Graphic
         {
-            if (uiElement != null)
-            {
-                uiElement.color = color;
-            }
+            if (uiElement == null) return false;
+            if (uiElement.color == color) return false;
+
+            uiElement.color = color;
+            return true;
         }
 
-        private void ApplyTransitionColors(Selectable selectable, TransitionColor transitionColor)
+        private bool ApplyTransitionColors(Selectable selectable, TransitionColor transitionColor)
         {
-            if (selectable != null)
-            {
-                ColorBlock colorBlock = selectable.colors;
-                colorBlock.normalColor = transitionColor.Normal;
-                colorBlock.highlightedColor = transitionColor.Highlighted;
-                colorBlock.pressedColor = transitionColor.Pressed;
-                colorBlock.selectedColor = transitionColor.Selected;
-                colorBlock.disabledColor = transitionColor.Disabled;
-                selectable.colors = colorBlock;
-            }
+            if (selectable == null) return false;
+            if (selectable.colors.normalColor == transitionColor.Normal &&
+                    selectable.colors.highlightedColor == transitionColor.Highlighted &&
+                    selectable.colors.pressedColor == transitionColor.Pressed &&
+                    selectable.colors.selectedColor == transitionColor.Selected &&
+                    selectable.colors.disabledColor == transitionColor.Disabled)
+                return false;
+
+            ColorBlock colorBlock = selectable.colors;
+            colorBlock.normalColor = transitionColor.Normal;
+            colorBlock.highlightedColor = transitionColor.Highlighted;
+            colorBlock.pressedColor = transitionColor.Pressed;
+            colorBlock.selectedColor = transitionColor.Selected;
+            colorBlock.disabledColor = transitionColor.Disabled;
+            selectable.colors = colorBlock;
+
+            return true;
         }
 
         private string GetHierarchyPath(Transform transform)
