@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using Limitex.MonoUI.Theme;
+using System;
 
 #if UNITY_EDITOR
 namespace Limitex.MonoUI.Editor.Theme
@@ -14,41 +15,39 @@ namespace Limitex.MonoUI.Editor.Theme
 
             EditorGUILayout.Space(10);
 
-            EditorGUILayout.LabelField("Hierarchy", EditorStyles.boldLabel);
+            DrawActionRow("Refresh All Color Managers",
+                UpdateAllColorsInHierarchy,
+                UpdateAllColorsInPrefab);
+            DrawActionRow("Apply Preset to All Managers",
+                ApplyPresetToAllManagersInHierarchy,
+                ApplyPresetToAllManagersInPrefab);
+            DrawActionRow("Remove Invalid ComponentColors",
+                RemoveInvalidComponentColorsFromHierarchy,
+                RemoveInvalidComponentColorsFromPrefabs);
+        }
 
-            if (GUILayout.Button("Refresh All Color Manager in Hierarchy"))
+        private void DrawActionRow(string label, Action hierarchiesAction, Action prefabsAction)
+        {
+            EditorGUILayout.BeginHorizontal();
+
+            try
             {
-                UpdateAllColorsInHierarchy();
+                EditorGUILayout.LabelField(label);
+
+                GUILayout.FlexibleSpace();
+
+                if (GUILayout.Button("Hierarchies", GUILayout.Width(80)))
+                    hierarchiesAction.Invoke();
+
+                if (GUILayout.Button("Prefabs", GUILayout.Width(80)))
+                    prefabsAction.Invoke();
+            }
+            finally
+            {
+                EditorGUILayout.EndHorizontal();
             }
 
-            if (GUILayout.Button("Apply Preset to All Managers in Hierarchy"))
-            {
-                ApplyPresetToAllManagers();
-            }
-
-            if (GUILayout.Button("Remove Invalid ComponentColors in Hierarchy"))
-            {
-                RemoveInvalidComponentColors();
-            }
-
-            EditorGUILayout.Space(20);
-
-            EditorGUILayout.LabelField("Prefab", EditorStyles.boldLabel);
-
-            if (GUILayout.Button("Refresh All Color Manager in Prefabs"))
-            {
-                UpdatePrefabColorManagers();
-            }
-
-            if (GUILayout.Button("Apply Preset to All Prefab Managers"))
-            {
-                ApplyPresetToAllPrefabManagers();
-            }
-
-            if (GUILayout.Button("Remove Invalid ComponentColors from Prefabs"))
-            {
-                RemoveInvalidComponentColorsFromPrefabs();
-            }
+            EditorGUILayout.Space(5);
         }
 
         private void UpdateAllColorsInHierarchy()
@@ -63,7 +62,7 @@ namespace Limitex.MonoUI.Editor.Theme
             Debug.Log($"Updated colors for {colorManagers.Length} ColorManager(s) in the hierarchy.");
         }
 
-        private void ApplyPresetToAllManagers()
+        private void ApplyPresetToAllManagersInHierarchy()
         {
             string presetPath = EditorUtility.OpenFilePanel("Select Color Preset Asset", "Assets", "asset");
             if (string.IsNullOrEmpty(presetPath))
@@ -92,7 +91,7 @@ namespace Limitex.MonoUI.Editor.Theme
             Debug.Log($"Applied new preset to {colorManagers.Length} ColorManager(s) in the hierarchy.");
         }
 
-        private void RemoveInvalidComponentColors()
+        private void RemoveInvalidComponentColorsFromHierarchy()
         {
             ColorManager[] colorManagers = FindObjectsOfType<ColorManager>();
             int totalRemoved = 0;
@@ -124,7 +123,7 @@ namespace Limitex.MonoUI.Editor.Theme
             Debug.Log($"Removed {totalRemoved} invalid ComponentColors in the hierarchy.");
         }
 
-        private void UpdatePrefabColorManagers()
+        private void UpdateAllColorsInPrefab()
         {
             string[] guids = AssetDatabase.FindAssets("t:Prefab", new[] { "Packages/dev.limitex.mono-ui/", "Assets/" });
             int updatedCount = 0;
@@ -154,7 +153,7 @@ namespace Limitex.MonoUI.Editor.Theme
             Debug.Log($"Updated {updatedCount} ColorManager(s) in prefabs.");
         }
 
-        private void ApplyPresetToAllPrefabManagers()
+        private void ApplyPresetToAllManagersInPrefab()
         {
             string presetPath = EditorUtility.OpenFilePanel("Select Color Preset Asset", "Assets", "asset");
             if (string.IsNullOrEmpty(presetPath))
@@ -202,7 +201,7 @@ namespace Limitex.MonoUI.Editor.Theme
 
         private void RemoveInvalidComponentColorsFromPrefabs()
         {
-            string[] guids = AssetDatabase.FindAssets("t:Prefab", new[] { "Packages/dev.limitex.mono-ui/", "Assets/"});
+            string[] guids = AssetDatabase.FindAssets("t:Prefab", new[] { "Packages/dev.limitex.mono-ui/", "Assets/" });
             int totalRemoved = 0;
 
             foreach (string guid in guids)
