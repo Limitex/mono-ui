@@ -10,24 +10,24 @@ using Limitex.MonoUI.Editor.Data;
 #if UNITY_EDITOR
 namespace Limitex.MonoUI.Editor.Components
 {
-    [Serializable]
-    public struct ComponentColor
-    {
-        public Component component;
-        public ColorType colorType;
-        public TransitionColorType transitionColorType;
-    }
-
     [DisallowMultipleComponent]
     public class ColorManager : MonoBehaviour
     {
+        [Serializable]
+        public struct ComponentColor
+        {
+            public Component component;
+            public ColorType colorType;
+            public TransitionColorType transitionColorType;
+        }
+
         [SerializeField] private ComponentColor[] componentColors;
         [SerializeField] private ColorPresetAsset colorPreset;
 
         private readonly string DEFAULT_COLOR_PRESET_NAME = "DefaultColorPreset";
         private readonly string[] SEATCH_DIRECTORIES = new[] { "Packages/dev.limitex.mono-ui/Editor/Assets/ColorPreset/" };
 
-        public void Reset()
+        private void Reset()
         {
             string guid = AssetDatabase.FindAssets($"t:ColorPresetAsset {DEFAULT_COLOR_PRESET_NAME}", SEATCH_DIRECTORIES)[0];
 
@@ -41,7 +41,7 @@ namespace Limitex.MonoUI.Editor.Components
             colorPreset = AssetDatabase.LoadAssetAtPath<ColorPresetAsset>(path);
         }
 
-        public void OnValidate()
+        private void OnValidate()
         {
             ValidateComponentColors();
         }
@@ -100,7 +100,17 @@ namespace Limitex.MonoUI.Editor.Components
             return success;
         }
 
-        public bool ApplyColors(ref ComponentColor cc)
+        public bool SetColorPreset(ColorPresetAsset newPreset)
+        {
+            if (colorPreset == newPreset) return false;
+            colorPreset = newPreset;
+            OnValidate();
+            return true;
+        }
+
+        #region Helper Methods
+
+        private bool ApplyColors(ref ComponentColor cc)
         {
             if (cc.component == null) return false;
             Color? color = colorPreset?.GetColorByType(cc.colorType);
@@ -122,16 +132,6 @@ namespace Limitex.MonoUI.Editor.Components
             }
 
             return false;
-        }
-
-        #region Helper Methods
-
-        public bool SetColorPreset(ColorPresetAsset newPreset)
-        {
-            if (colorPreset == newPreset) return false;
-            colorPreset = newPreset;
-            OnValidate();
-            return true;
         }
 
         private bool ApplyColorToUIElement<T>(T uiElement, Color color) where T : Graphic
