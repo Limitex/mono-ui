@@ -115,8 +115,6 @@ namespace Limitex.MonoUI.Editor.Inspector
             {
                 EditorGUILayout.EndHorizontal();
             }
-
-            EditorGUILayout.Space(5);
         }
 
         private ProcessingStats ProcessManagersIn(TargetScope targetScope, string undoRecordText, Func<ColorManager, bool> action)
