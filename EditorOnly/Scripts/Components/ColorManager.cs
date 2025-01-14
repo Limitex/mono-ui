@@ -74,8 +74,7 @@ namespace Limitex.MonoUI.Editor.Components
                     continue;
                 }
 
-                if (componentColors[i].component is
-                    Button or Toggle or Slider or Scrollbar or TMP_Dropdown or TMP_InputField)
+                if (componentColors[i].component is Selectable)
                 {
                     componentColors[i].colorType = ColorType.None;
                 }
