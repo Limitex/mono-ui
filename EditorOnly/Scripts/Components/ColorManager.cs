@@ -23,21 +23,21 @@ namespace Limitex.MonoUI.Editor.Components
         [SerializeField] private ComponentColor[] componentColors;
         [SerializeField] private ColorPresetAsset colorPreset;
 
+        private readonly string DEFAULT_COLOR_PRESET_NAME = "DefaultColorPreset";
+        private readonly string[] SEATCH_DIRECTORIES = new[] { "Packages/dev.limitex.mono-ui/Editor/Assets/ColorPreset/" };
+
         public void Reset()
         {
-            string[] guids = AssetDatabase.FindAssets(
-                "t:ColorPresetAsset",
-                new[] { "Packages/dev.limitex.mono-ui/Editor/Assets/ColorPreset/" });
+            string guid = AssetDatabase.FindAssets($"t:ColorPresetAsset {DEFAULT_COLOR_PRESET_NAME}", SEATCH_DIRECTORIES)[0];
 
-            if (guids.Length > 0)
-            {
-                string path = AssetDatabase.GUIDToAssetPath(guids[0]);
-                colorPreset = AssetDatabase.LoadAssetAtPath<ColorPresetAsset>(path);
-            }
-            else
+            if (string.IsNullOrEmpty(guid))
             {
                 Debug.LogError("Default ColorPresetAsset not found! Please assign one manually.");
+                return;
             }
+
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+            colorPreset = AssetDatabase.LoadAssetAtPath<ColorPresetAsset>(path);
         }
 
         public void OnValidate()
