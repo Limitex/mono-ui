@@ -44,11 +44,15 @@ namespace Limitex.MonoUI.Editor.Inspector
 
         private readonly string[] SEATCH_DIRECTORIES = new[] { "Packages/dev.limitex.mono-ui/", "Assets/" };
 
+        private static bool showChildColorManagers = false;
+
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
 
             EditorGUILayout.Space(10);
+
+            EditorGUILayout.LabelField("Color Manager Actions", EditorStyles.boldLabel);
 
             DrawActionRow("Refresh All Color Managers",
                 () => UpdateAllColors(TargetScope.Hierarchy),
@@ -59,7 +63,17 @@ namespace Limitex.MonoUI.Editor.Inspector
             DrawActionRow("Remove Invalid ComponentColors",
                 () => RemoveInvalidComponentColors(TargetScope.Hierarchy),
                 () => RemoveInvalidComponentColors(TargetScope.Prefab));
+
+            EditorGUILayout.Space(10);
+
+            showChildColorManagers = EditorGUILayout.Foldout(showChildColorManagers, "Child ColorManagers", true, EditorStyles.foldoutHeader);
+            if (showChildColorManagers)
+            {
+                DrawChildColorManagerPositions();
+            }
         }
+
+        #region Action Methods
 
         private void UpdateAllColors(TargetScope targetScope)
         {
@@ -87,7 +101,9 @@ namespace Limitex.MonoUI.Editor.Inspector
             Debug.Log($"Removed {processingStats} invalid ComponentColors from {logMessage}.");
         }
 
-        #region Helper Methods
+        #endregion
+
+        #region Draw Methods
 
         private void DrawActionRow(string label, Action hierarchiesAction, Action prefabsAction)
         {
@@ -116,6 +132,54 @@ namespace Limitex.MonoUI.Editor.Inspector
                 EditorGUILayout.EndHorizontal();
             }
         }
+
+        private void DrawChildColorManagerPositions()
+        {
+            ColorManager targetManager = (ColorManager)target;
+            Transform targetTransform = targetManager.transform;
+
+            int foundColorManager = DrawColorManagerPositionsRecursive(targetTransform);
+
+            if (foundColorManager != 0) return;
+
+            EditorGUILayout.LabelField("No ColorManager found in children.");
+        }
+
+        private int DrawColorManagerPositionsRecursive(Transform parentTransform)
+        {
+            int foundColorManager = 0;
+            foreach (Transform child in parentTransform)
+            {
+                ColorManager childManager = child.GetComponent<ColorManager>();
+                if (childManager != null)
+                {
+                    foundColorManager++;
+
+                    EditorGUILayout.BeginHorizontal();
+
+                    EditorGUILayout.LabelField(child.name);
+
+                    GUILayout.FlexibleSpace();
+
+                    EditorGUI.BeginChangeCheck();
+                    GameObject selectedObject = (GameObject)EditorGUILayout.ObjectField(child.gameObject, typeof(GameObject), true);
+                    if (EditorGUI.EndChangeCheck() && selectedObject != null)
+                    {
+                        Selection.activeGameObject = selectedObject;
+                        EditorGUIUtility.PingObject(selectedObject);
+                    }
+
+                    EditorGUILayout.EndHorizontal();
+                }
+                foundColorManager += DrawColorManagerPositionsRecursive(child);
+            }
+
+            return foundColorManager;
+        }
+
+        #endregion
+
+        #region Helper Methods
 
         private ProcessingStats ProcessManagersIn(TargetScope targetScope, string undoRecordText, Func<ColorManager, bool> action)
         {
