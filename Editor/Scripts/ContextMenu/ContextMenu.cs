@@ -96,9 +96,6 @@ namespace Limitex.MonoUI.Editor.ContextMenu
 
         [MenuItem(MENU_SAMPLE + "Platform Statistics", false, SAMPLE_PRIORITY + 3)]
         private static void CreatePlatformStatistics() => SpawnPrefab(PREFAB_ROOT + "Sample/Platform Statistics.prefab");
-
-        [MenuItem(MENU_SAMPLE + "Lucide Icon Sample", false, SAMPLE_PRIORITY + 4)]
-        private static void CreateLucideIconSample() => SpawnPrefab(PREFAB_ROOT + "Sample/Lucide Icon Sample.prefab");
         #endregion
 
         #region Layout Menu Items
