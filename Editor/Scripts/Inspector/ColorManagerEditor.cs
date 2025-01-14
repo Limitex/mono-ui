@@ -100,10 +100,16 @@ namespace Limitex.MonoUI.Editor.Inspector
                 GUILayout.FlexibleSpace();
 
                 if (GUILayout.Button("Hierarchies", GUILayout.Width(80)))
+                {
                     hierarchiesAction.Invoke();
+                    GUIUtility.ExitGUI();
+                }
 
                 if (GUILayout.Button("Prefabs", GUILayout.Width(80)))
+                {
                     prefabsAction.Invoke();
+                    GUIUtility.ExitGUI();
+                }
             }
             finally
             {
