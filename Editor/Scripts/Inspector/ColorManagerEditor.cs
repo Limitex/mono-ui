@@ -7,6 +7,7 @@ using UnityEditor.SceneManagement;
 using Limitex.MonoUI.Editor.Components;
 using Limitex.MonoUI.Editor.Data;
 using Limitex.MonoUI.Editor.Utils;
+using Cysharp.Threading.Tasks;
 
 #if UNITY_EDITOR
 namespace Limitex.MonoUI.Editor.Inspector
@@ -61,35 +62,35 @@ namespace Limitex.MonoUI.Editor.Inspector
                 () => RemoveInvalidComponentColors(TargetScope.Prefab));
         }
 
-        private void UpdateAllColors(TargetScope targetScope)
+        private async UniTask UpdateAllColors(TargetScope targetScope)
         {
-            ProcessingStats processingStats = ProcessManagersIn(targetScope, "Update Colors", 
-                manager => manager.ValidateComponentColors());
+            ProcessingStats processingStats = await UniTask.RunOnThreadPool(() =>
+                ProcessManagersIn(targetScope, "Update Colors", manager => manager.ValidateComponentColors()));
             string logMessage = targetScope == TargetScope.Hierarchy ? "hierarchy" : "prefabs";
             Debug.Log($"Updated {processingStats} ColorManager(s) in {logMessage}.");
         }
 
-        private void ApplyPresetToAllManagers(TargetScope targetScope)
+        private async UniTask ApplyPresetToAllManagers(TargetScope targetScope)
         {
             ColorPresetAsset newPreset = GetColorPresetAsset();
             if (newPreset == null) return;
-            ProcessingStats processingStats = ProcessManagersIn(targetScope, "Apply New Preset", 
-                manager => manager.SetColorPreset(newPreset));
+            ProcessingStats processingStats = await UniTask.RunOnThreadPool(() =>
+                ProcessManagersIn(targetScope, "Apply New Preset", manager => manager.SetColorPreset(newPreset)));
             string logMessage = targetScope == TargetScope.Hierarchy ? "hierarchy" : "prefabs";
             Debug.Log($"Applied new preset to {processingStats} ColorManager(s) in {logMessage}.");
         }
 
-        private void RemoveInvalidComponentColors(TargetScope targetScope)
+        private async UniTask RemoveInvalidComponentColors(TargetScope targetScope)
         {
-            ProcessingStats processingStats = ProcessManagersIn(targetScope, "Remove Invalid ComponentColors", 
-                manager => RemoveInvalidComponents(manager));
+            ProcessingStats processingStats = await UniTask.RunOnThreadPool(() =>
+                ProcessManagersIn(targetScope, "Remove Invalid ComponentColors", manager => RemoveInvalidComponents(manager)));
             string logMessage = targetScope == TargetScope.Hierarchy ? "hierarchy" : "prefabs";
             Debug.Log($"Removed {processingStats} invalid ComponentColors from {logMessage}.");
         }
 
         #region Helper Methods
 
-        private void DrawActionRow(string label, Action hierarchiesAction, Action prefabsAction)
+        private void DrawActionRow(string label, Func<UniTask> hierarchiesAction, Func<UniTask> prefabsAction)
         {
             EditorGUILayout.BeginHorizontal();
 
@@ -100,10 +101,16 @@ namespace Limitex.MonoUI.Editor.Inspector
                 GUILayout.FlexibleSpace();
 
                 if (GUILayout.Button("Hierarchies", GUILayout.Width(80)))
-                    hierarchiesAction.Invoke();
+                {
+                    hierarchiesAction();
+                    GUIUtility.ExitGUI();
+                }
 
                 if (GUILayout.Button("Prefabs", GUILayout.Width(80)))
-                    prefabsAction.Invoke();
+                {
+                    prefabsAction();
+                    GUIUtility.ExitGUI();
+                }
             }
             finally
             {
