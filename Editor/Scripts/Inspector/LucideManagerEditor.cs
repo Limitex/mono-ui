@@ -7,10 +7,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 using System.Linq;
-using Limitex.MonoUI.Lucide;
+using Limitex.MonoUI.Editor.Components;
 
 #if UNITY_EDITOR
-namespace Limitex.MonoUI.Editor.Lucide
+namespace Limitex.MonoUI.Editor.Inspector
 {
     [CustomEditor(typeof(LucideManager))]
     public class LucideManagerEditor : UnityEditor.Editor
@@ -31,7 +31,7 @@ namespace Limitex.MonoUI.Editor.Lucide
             public static StatusMessage None => new StatusMessage(null, MessageType.None);
         }
 
-        private const string SPRITE_SEARCH_PATH = "Packages/dev.limitex.mono-ui/Runtime/Assets/Lucide";
+        private const string SPRITE_SEARCH_PATH = "Packages/dev.limitex.mono-ui/Runtime/Assets/Lucide/";
         private const string LUCIDE_BROWSE_URL = "https://lucide.dev/icons/";
         private const string LUCIDE_REPO_URL = "https://github.com/lucide-icons/lucide";
         private const string PACKAGE_VERSION = "lucide-react@0.469.0";

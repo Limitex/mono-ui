@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 4459262184116628633}
   - component: {fileID: 1087995554783302570}
   - component: {fileID: 1146394495325497313}
+  - component: {fileID: 4759486540695434728}
   m_Layer: 0
   m_Name: Toggle
   m_TagString: Untagged
@@ -214,7 +215,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.8}
-    m_PressedColor: {r: 1, g: 1, b: 1, a: 0.69803923}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 0.7}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 0}
     m_DisabledColor: {r: 0.6313726, g: 0.6313726, b: 0.6627451, a: 1}
     m_ColorMultiplier: 1
@@ -382,6 +383,29 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &4759486540695434728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7854433910900804088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf4fd317d56094695b01c71988dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentColors:
+  - component: {fileID: 4459262184116628633}
+    colorType: 412340151
+    transitionColorType: 194200482
+  - component: {fileID: 4906733082409429301}
+    colorType: 471083450
+    transitionColorType: 897758581
+  - component: {fileID: 4974021608415486253}
+    colorType: 471083450
+    transitionColorType: 897758581
+  colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1001 &3351663464980435313
 PrefabInstance:
   m_ObjectHideFlags: 0

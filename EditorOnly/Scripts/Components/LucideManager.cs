@@ -5,11 +5,12 @@
 
 using UnityEngine;
 
-namespace Limitex.MonoUI.Lucide
+#if UNITY_EDITOR
+namespace Limitex.MonoUI.Editor.Components
 {
     public class LucideManager : MonoBehaviour
     {
         public string imageFileName;
     }
 }
-
+#endif

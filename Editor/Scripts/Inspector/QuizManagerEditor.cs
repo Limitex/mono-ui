@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEditor;
-using System.Collections.Generic;
 using Limitex.MonoUI.Udon;
 
 #if UNITY_EDITOR
-namespace Limitex.MonoUI.Editor.Udon
+namespace Limitex.MonoUI.Editor.Inspector
 {
     [CustomEditor(typeof(QuizManager))]
     public class QuizManagerEditor : UnityEditor.Editor

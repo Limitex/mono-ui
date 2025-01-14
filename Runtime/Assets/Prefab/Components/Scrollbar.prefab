@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8636326302707640908}
   - component: {fileID: 2528243075414856610}
   - component: {fileID: 7355374883309382047}
+  - component: {fileID: 3854411773725798049}
   m_Layer: 0
   m_Name: Scrollbar
   m_TagString: Untagged
@@ -69,7 +70,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-    m_PressedColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+    m_PressedColor: {r: 0.69803923, g: 0.69803923, b: 0.69803923, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.6313726, g: 0.6313726, b: 0.6627451, a: 1}
     m_ColorMultiplier: 1
@@ -95,6 +96,26 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3854411773725798049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546425659916991293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf4fd317d56094695b01c71988dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentColors:
+  - component: {fileID: 7355374883309382047}
+    colorType: 412340151
+    transitionColorType: 607538827
+  - component: {fileID: 428850728477863479}
+    colorType: 471083450
+    transitionColorType: 897758581
+  colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &6378535477256484328
 GameObject:
   m_ObjectHideFlags: 0

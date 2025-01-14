@@ -1866,7 +1866,7 @@ MonoBehaviour:
       Data: 103|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: Limitex.MonoUI.Udon.TimelineType[], dev.limitex.mono-ui
+      Data: Limitex.MonoUI.Udon.TimelineType[], dev.limitex.mono-ui.udon
     - Name: 
       Entry: 8
       Data: 
@@ -2233,7 +2233,7 @@ MonoBehaviour:
       Data: 121|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: Limitex.MonoUI.Udon.UserlineType[], dev.limitex.mono-ui
+      Data: Limitex.MonoUI.Udon.UserlineType[], dev.limitex.mono-ui.udon
     - Name: 
       Entry: 8
       Data: 

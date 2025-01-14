@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7733849167942362400}
   - component: {fileID: 8755977119669726988}
+  - component: {fileID: 9080766061851240014}
   m_Layer: 0
   m_Name: Dialog Provider
   m_TagString: Untagged
@@ -59,6 +60,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9080766061851240014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52983727754610507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf4fd317d56094695b01c71988dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentColors:
+  - component: {fileID: 7812384907583069319}
+    colorType: 974697568
+    transitionColorType: 897758581
+  - component: {fileID: 4560100197870546175}
+    colorType: 121473958
+    transitionColorType: 897758581
+  - component: {fileID: 8085798927786459430}
+    colorType: 694730041
+    transitionColorType: 897758581
+  colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &825833541988964624
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.03137255, g: 0.03137255, b: 0.039215688, a: 0.9882353}
+  m_Color: {r: 0.03137255, g: 0.03137255, b: 0.039215688, a: 0.99}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1095,17 +1119,17 @@ PrefabInstance:
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
       propertyPath: m_fontColor.b
-      value: 0.6627451
+      value: 0.9764706
       objectReference: {fileID: 0}
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
       propertyPath: m_fontColor.g
-      value: 0.6313726
+      value: 0.9764706
       objectReference: {fileID: 0}
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
       propertyPath: m_fontColor.r
-      value: 0.6313726
+      value: 0.9764706
       objectReference: {fileID: 0}
     - target: {fileID: 3752760210913375369, guid: fb4b56d72e6818042a6101bc70aec351,
         type: 3}
