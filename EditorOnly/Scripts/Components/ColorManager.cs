@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -178,5 +177,4 @@ namespace Limitex.MonoUI.Editor.Components
         #endregion
     }
 }
-
 #endif
