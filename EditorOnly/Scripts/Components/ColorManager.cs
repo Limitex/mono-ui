@@ -18,6 +18,7 @@ namespace Limitex.MonoUI.Editor.Components
         public TransitionColorType transitionColorType;
     }
 
+    [DisallowMultipleComponent]
     public class ColorManager : MonoBehaviour
     {
         [SerializeField] private ComponentColor[] componentColors;
