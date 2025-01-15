@@ -1,9 +1,10 @@
+#if UNITY_EDITOR
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-#if UNITY_EDITOR
 namespace Limitex.MonoUI.Editor.Utils
 {
     public abstract class ComponentFinderBase<T> : IEnumerable<T>, IDisposable where T : Component
@@ -27,4 +28,5 @@ namespace Limitex.MonoUI.Editor.Utils
         }
     }
 }
+
 #endif

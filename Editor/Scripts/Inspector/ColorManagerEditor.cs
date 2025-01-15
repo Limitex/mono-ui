@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEngine;
 using UnityEditor;
 using System;
@@ -8,7 +10,6 @@ using Limitex.MonoUI.Editor.Components;
 using Limitex.MonoUI.Editor.Data;
 using Limitex.MonoUI.Editor.Utils;
 
-#if UNITY_EDITOR
 namespace Limitex.MonoUI.Editor.Inspector
 {
     [CustomEditor(typeof(ColorManager))]
@@ -281,4 +282,5 @@ namespace Limitex.MonoUI.Editor.Inspector
         #endregion
     }
 }
+
 #endif

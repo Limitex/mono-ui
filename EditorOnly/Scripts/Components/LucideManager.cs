@@ -3,9 +3,10 @@
  * © 2022 Lucide Contributors - ISC License
  */
 
+#if UNITY_EDITOR
+
 using UnityEngine;
 
-#if UNITY_EDITOR
 namespace Limitex.MonoUI.Editor.Components
 {
     public class LucideManager : MonoBehaviour
@@ -13,4 +14,5 @@ namespace Limitex.MonoUI.Editor.Components
         public string imageFileName;
     }
 }
+
 #endif

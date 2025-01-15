@@ -1,8 +1,9 @@
+#if UNITY_EDITOR
+
 using UnityEngine;
 using UnityEditor;
 using Limitex.MonoUI.Udon;
 
-#if UNITY_EDITOR
 namespace Limitex.MonoUI.Editor.Inspector
 {
     [CustomEditor(typeof(QuizManager))]
@@ -335,4 +336,5 @@ namespace Limitex.MonoUI.Editor.Inspector
         }
     }
 }
+
 #endif

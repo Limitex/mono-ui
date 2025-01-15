@@ -1,7 +1,8 @@
+#if UNITY_EDITOR
+
 using System;
 using UnityEngine;
 
-#if UNITY_EDITOR
 namespace Limitex.MonoUI.Editor.Data
 {
     [Serializable]
@@ -157,4 +158,5 @@ namespace Limitex.MonoUI.Editor.Data
         }
     }
 }
+
 #endif

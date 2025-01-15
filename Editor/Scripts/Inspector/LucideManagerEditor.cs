@@ -3,13 +3,14 @@
  * © 2022 Lucide Contributors - ISC License
  */
 
+#if UNITY_EDITOR
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 using System.Linq;
 using Limitex.MonoUI.Editor.Components;
 
-#if UNITY_EDITOR
 namespace Limitex.MonoUI.Editor.Inspector
 {
     [CustomEditor(typeof(LucideManager))]
@@ -154,4 +155,5 @@ namespace Limitex.MonoUI.Editor.Inspector
         }
     }
 }
+
 #endif

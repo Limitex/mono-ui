@@ -1,9 +1,10 @@
+#if UNITY_EDITOR
+
 using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-#if UNITY_EDITOR
 namespace Limitex.MonoUI.Editor.Utils
 {
     public struct PrefabAssetData
@@ -69,4 +70,5 @@ namespace Limitex.MonoUI.Editor.Utils
         }
     }
 }
+
 #endif

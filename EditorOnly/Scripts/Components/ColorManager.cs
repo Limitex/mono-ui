@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,7 +8,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Limitex.MonoUI.Editor.Data;
 
-#if UNITY_EDITOR
 namespace Limitex.MonoUI.Editor.Components
 {
     [DisallowMultipleComponent]
@@ -177,4 +178,5 @@ namespace Limitex.MonoUI.Editor.Components
         #endregion
     }
 }
+
 #endif

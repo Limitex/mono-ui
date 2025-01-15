@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -249,3 +251,5 @@ namespace Limitex.MonoUI.Editor.ContextMenu
         #endregion
     }
 }
+
+#endif

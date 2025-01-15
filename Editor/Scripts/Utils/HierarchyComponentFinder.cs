@@ -1,6 +1,7 @@
+#if UNITY_EDITOR
+
 using UnityEngine;
 
-#if UNITY_EDITOR
 namespace Limitex.MonoUI.Editor.Utils
 {
     public class HierarchyComponentFinder<T> : ComponentFinderBase<T> where T : Component
@@ -15,4 +16,5 @@ namespace Limitex.MonoUI.Editor.Utils
         }
     }
 }
+
 #endif
