@@ -20,6 +20,7 @@ namespace Limitex.MonoUI.Udon
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class PlatformStatisticsManager : UdonSharpBehaviour
     {
+        [SerializeField] private TMP_Text totalPlayerCount;
         [SerializeField] private TMP_Text standaloneCount;
         [SerializeField] private TMP_Text androidCount;
         [SerializeField] private TMP_Text iosCount;
@@ -198,6 +199,7 @@ namespace Limitex.MonoUI.Udon
                 Debug.LogWarning("PlatformStatisticsManager: " + none + " players have an invalid platform.");
             }
 
+            totalPlayerCount.text = VRCPlayerApi.GetPlayerCount().ToString();
             standaloneCount.text = standalone.ToString();
             androidCount.text = android.ToString();
             iosCount.text = ios.ToString();
