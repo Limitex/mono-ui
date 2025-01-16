@@ -1,12 +1,14 @@
 {
   "name": "dev.limitex.mono-ui",
-  "version": "0.0.0-b.3",
+  "version": "1.0.0-rc.1",
   "displayName": "Mono UI",
-  "description": "This is an package",
+  "description": "Mono UI is a UI component package for VRChat world creation. It provides simple and customizable UI elements optimized for VRChat environments, helping creators build interactive and user-friendly interfaces in their worlds.",
   "unity": "2022.3",
   "unityRelease": "22f1",
   "dependencies": {
-    "com.unity.textmeshpro": "3.0.6"
+    "com.unity.textmeshpro": "3.0.6",
+    "com.vrchat.base" : "3.7.0",
+    "com.vrchat.worlds" : "3.7.0"
   },
   "keywords": [],
   "author": {
@@ -14,7 +16,9 @@
     "email": "76650151+Limitex@users.noreply.github.com",
     "url": "https://github.com/Limitex/mono-ui"
   },
+  "documentationUrl": "https://docs.limitex.dev/vrc/monoui",
   "vpmDependencies" : {
+    "com.vrchat.base" : ">=3.7.0",
     "com.vrchat.worlds" : ">=3.7.0"
   },
   "url": "https://github.com/Limitex/mono-ui",

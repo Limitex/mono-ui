@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6746811010327244129}
   - component: {fileID: 5696527001658630151}
+  - component: {fileID: 1332960604784980734}
   m_Layer: 0
   m_Name: Progress
   m_TagString: Untagged
@@ -163,6 +164,26 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1332960604784980734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5693882491228639924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf4fd317d56094695b01c71988dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentColors:
+  - component: {fileID: 79863642205810699}
+    colorType: 471083450
+    transitionColorType: 897758581
+  - component: {fileID: 7177014095257375594}
+    colorType: 598842521
+    transitionColorType: 897758581
+  colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &8598141952000989073
 GameObject:
   m_ObjectHideFlags: 0

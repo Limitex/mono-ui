@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 763808852023531239}
   - component: {fileID: 5235031361280382105}
   - component: {fileID: 2574521248118435217}
+  - component: {fileID: 8713370037379924408}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -112,6 +113,26 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8713370037379924408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616618245983146598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf4fd317d56094695b01c71988dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentColors:
+  - component: {fileID: 2574521248118435217}
+    colorType: 121473958
+    transitionColorType: 897758581
+  - component: {fileID: 3612462867057798240}
+    colorType: 694730041
+    transitionColorType: 897758581
+  colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &3502553219267250766
 GameObject:
   m_ObjectHideFlags: 0
