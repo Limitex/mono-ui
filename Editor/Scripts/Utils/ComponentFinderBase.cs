@@ -11,12 +11,12 @@ namespace Limitex.MonoUI.Editor.Utils
     {
         protected List<T> components = new List<T>();
 
-        public ComponentFinderBase(string guid = null)
+        public ComponentFinderBase(string guid = null, bool includeInactive = false)
         {
-            FindComponents(guid);
+            FindComponents(guid, includeInactive);
         }
 
-        protected abstract void FindComponents(string guid);
+        protected abstract void FindComponents(string guid, bool includeInactive);
 
         public IEnumerator<T> GetEnumerator() => components.GetEnumerator();
 

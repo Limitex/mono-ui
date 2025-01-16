@@ -18,9 +18,9 @@ namespace Limitex.MonoUI.Editor.Utils
     {
         private List<PrefabAssetData> prefabAssetDatas = new List<PrefabAssetData>();
 
-        public PrefabComponentFinder(string guid) : base(guid) { }
+        public PrefabComponentFinder(string guid, bool includeInactive = false) : base(guid, includeInactive) { }
 
-        protected override void FindComponents(string guid)
+        protected override void FindComponents(string guid, bool includeInactive)
         {
             if (string.IsNullOrEmpty(guid))
             {
@@ -42,7 +42,7 @@ namespace Limitex.MonoUI.Editor.Utils
                 return;
             }
 
-            components.AddRange(prefab.GetComponentsInChildren<T>(true));
+            components.AddRange(prefab.GetComponentsInChildren<T>(includeInactive));
             prefabAssetDatas.Add(new PrefabAssetData
             {
                 guid = guid,

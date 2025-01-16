@@ -189,7 +189,7 @@ namespace Limitex.MonoUI.Editor.Inspector
             switch (targetScope)
             {
                 case TargetScope.Hierarchy:
-                    processingStats = ProcessManagersIn<HierarchyComponentFinder<ColorManager>>(ProcessManagerAction, undoRecordText);
+                    processingStats = ProcessManagersIn<HierarchyComponentFinder<ColorManager>>(ProcessManagerAction, undoRecordText, includeInactive: true);
                     break;
                 case TargetScope.Prefab:
                     if (PrefabStageUtility.GetCurrentPrefabStage() != null)
@@ -199,16 +199,16 @@ namespace Limitex.MonoUI.Editor.Inspector
                     }
                     string[] guids = AssetDatabase.FindAssets("t:Prefab", SEATCH_DIRECTORIES);
                     foreach (string guid in guids)
-                        processingStats += ProcessManagersIn<PrefabComponentFinder<ColorManager>>(ProcessManagerAction, undoRecordText, guid);
+                        processingStats += ProcessManagersIn<PrefabComponentFinder<ColorManager>>(ProcessManagerAction, undoRecordText, guid, includeInactive: true);
                     break;
             }
             return processingStats;
         }
 
-        private ProcessingStats ProcessManagersIn<T>(Func<ColorManager, ProcessingStats> action, string undoRecordText, string guid = null) where T : ComponentFinderBase<ColorManager>
+        private ProcessingStats ProcessManagersIn<T>(Func<ColorManager, ProcessingStats> action, string undoRecordText, string guid = null, bool includeInactive = false) where T : ComponentFinderBase<ColorManager>
         {
             ProcessingStats processingStats = new ProcessingStats();
-            using (var finder = (T)Activator.CreateInstance(typeof(T), guid))
+            using (var finder = (T)Activator.CreateInstance(typeof(T), guid, includeInactive))
             {
                 foreach (var manager in finder)
                 {
