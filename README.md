@@ -1,3 +1,5 @@
+![Logo](./Source~/monoui.png)
+
 # Mono UI
 
 [![](https://img.shields.io/github/v/release/Limitex/mono-ui)](https://github.com/Limitex/mono-ui/releases/latest)
