@@ -2,9 +2,9 @@
 
 using UnityEditor;
 using UnityEngine;
-using Limitex.MonoUI.Editor.Components;
+using Limitex.MonoUI.Tools.Component;
 
-namespace Limitex.MonoUI.Editor.Inspector
+namespace Limitex.MonoUI.Tools.Editor
 {
     [CustomEditor(typeof(ComponentPhotoStudioManager))]
     public class ComponentPhotoStudioManagerEditor : UnityEditor.Editor

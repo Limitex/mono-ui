@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Limitex.MonoUI.Editor.Components
+namespace Limitex.MonoUI.Tools.Component
 {
     public class ComponentPhotoStudioManager : MonoBehaviour
     {

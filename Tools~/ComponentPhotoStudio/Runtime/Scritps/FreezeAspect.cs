@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Limitex.MonoUI.Editor.Components
+namespace Limitex.MonoUI.Tools.Component
 {
     [ExecuteAlways]
     public class AspectRatioController : MonoBehaviour
