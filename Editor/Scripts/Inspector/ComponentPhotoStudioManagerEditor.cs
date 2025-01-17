@@ -1,0 +1,46 @@
+#if UNITY_EDITOR
+
+using UnityEditor;
+using UnityEngine;
+using Limitex.MonoUI.Editor.Components;
+
+namespace Limitex.MonoUI.Editor.Inspector
+{
+    [CustomEditor(typeof(ComponentPhotoStudioManager))]
+    public class ComponentPhotoStudioManagerEditor : UnityEditor.Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+
+            EditorGUILayout.Space();
+
+            ComponentPhotoStudioManager controller = (ComponentPhotoStudioManager)target;
+            if (GUILayout.Button("Take Screenshot"))
+            {
+                controller.SaveScreenshot();
+            }
+
+            EditorGUILayout.Space();
+
+            if (GUILayout.Button("Reflesh Prefabs"))
+            {
+                controller.RefreshPrefabs();
+            }
+
+            EditorGUILayout.Space();
+
+            if (GUILayout.Button("Down"))
+            {
+                controller.DownPrefab();
+            }
+
+            if (GUILayout.Button("Up"))
+            {
+                controller.UpPrefab();
+            }
+        }
+    }
+}
+
+#endif
