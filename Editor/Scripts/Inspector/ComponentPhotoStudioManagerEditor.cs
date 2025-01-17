@@ -28,6 +28,11 @@ namespace Limitex.MonoUI.Editor.Inspector
                 controller.RefreshPrefabs();
             }
 
+            if (GUILayout.Button("Reload Prefabs"))
+            {
+                controller.ReloadPrefabs();
+            }
+
             EditorGUILayout.Space();
 
             if (GUILayout.Button("Down"))

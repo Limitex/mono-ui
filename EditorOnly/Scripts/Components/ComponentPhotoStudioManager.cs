@@ -80,6 +80,20 @@ namespace Limitex.MonoUI.Editor.Components
             LoadAndInstantiatePrefabs();
         }
 
+        public void ReloadPrefabs()
+        {
+            if (!ValidateCanvas()) return;
+
+            _prefabs.Clear();
+            _currentPrefabIndex = 0;
+            for (int i = 0; i < _studioSettings.Canvas.childCount; i++)
+            {
+                Transform child = _studioSettings.Canvas.GetChild(i);
+                child.gameObject.SetActive(i == 0);
+                _prefabs.Add(child);
+            }
+        }
+
         public void NavigatePrefab(bool next)
         {
             if (_prefabs.Count == 0) return;
