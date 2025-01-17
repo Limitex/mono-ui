@@ -16,50 +16,23 @@ Mono UI is a UI component package for VRChat world creation. It provides simple 
 
 ## 🌟 Features
 
-### Core Concepts
-
-- **Simple & Modern**: Clean, intuitive design
-- **VRChat Optimized**: Enhanced visibility and interaction in VR environments
-- **Customizable**: Flexible styling and component extensibility
-- **Developer Friendly**: Rapid development with prefabs and UdonSharp
-
-### Key Components
-
-Supporting TextMeshPro, we provide the following components etc:
-
-- **Layout**: Canvas, Sidebar, Scrollable View
-- **Interactive**: Button, Toggle, Switch, Input Field
-- **Content**: Text, Card, Table, Progress
-- **Feedback**: Dialog, Toast, Loading indicators
-
-### VRChat Integration
-
-Built-in features specifically designed for VRChat worlds:
-
-- Real-time user statistics
-- Platform access analytics
-- Interactive Quiz systems
-
-All components are fully compatible with UdonSharp and can be easily installed and updated through the VRChat Creator Companion.
-
-### Technical Highlights
-
-- TextMeshPro integration
-- Optimized canvas rendering
-- Efficient update system
-- Responsive design support
+- Add UI prefabs easily from **GameObject Context Menu**
+- Change themes instantly in the editor with **Color Manager**
+- Includes **sample prefabs** for quick setup and testing
+- Add icons effortlessly with **Lucide React** integration
+- Easy installation via **VCC (VRChat Creator Companion)**
+- Lightweight and optimized for performance
+- Comprehensive documentation available at [docs.limitex.dev](https://docs.limitex.dev/vrc/monoui)
+- Tested with Unity 2022.3.22f1 and VRChat SDK 3.7.0
+- Modular components for custom UI creation
 
 ## 🚀 Get Started
 
 ### 1. Install Mono UI
 
 1. Open VRChat Creator Companion
-2. Click [Add VCC Repository](https://docs.limitex.dev/vrc/monoui/installation)
-3. Click "I Understand, Add Repository" to confirm
-4. Navigate to "Projects" tab
-5. Select your VRChat world project
-6. Click "Manage Project"
-7. Find and install "Mono UI" package
+2. Add Mono UI as a [VCC Repository](https://docs.limitex.dev/vrc/monoui/installation)
+3. Select your VRChat world project and install Mono UI
 
 ### 2. Import Text Mesh Pro
 
