@@ -3574,6 +3574,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 7414028733725299646, guid: 163158ebd2cc1ac48884c41b5f0552f5,
         type: 3}
+      propertyPath: _syncMethod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414028733725299646, guid: 163158ebd2cc1ac48884c41b5f0552f5,
+        type: 3}
       propertyPath: serializedProgramAsset
       value: 
       objectReference: {fileID: 11400000, guid: f21a462bf9e9513418e61206b58476e2,
@@ -6007,6 +6012,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8777817104557167848, guid: 4cb24f8942a235b4c8c522bbcb3dd5d2,
         type: 3}
+      propertyPath: _syncMethod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8777817104557167848, guid: 4cb24f8942a235b4c8c522bbcb3dd5d2,
+        type: 3}
       propertyPath: serializedProgramAsset
       value: 
       objectReference: {fileID: 11400000, guid: 10801be8672785e43ab459a312727d33,
@@ -6768,6 +6778,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -736
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769829585304266056, guid: 702af1c4c0b15df41ba88c0eb8d821ea,
+        type: 3}
+      propertyPath: _syncMethod
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6769829585304266056, guid: 702af1c4c0b15df41ba88c0eb8d821ea,
         type: 3}
