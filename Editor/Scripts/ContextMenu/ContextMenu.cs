@@ -19,6 +19,7 @@ namespace Limitex.MonoUI.Editor.ContextMenu
         private const string MENU_TOGGLE = MENU_ROOT + "Toggle/";
         private const string MENU_CARD = MENU_ROOT + "Card/";
         private const string MENU_SWITCH = MENU_ROOT + "Switch/";
+        private const string MENU_CHECKBOX = MENU_ROOT + "Checkbox/";
         private const string MENU_INPUT = MENU_ROOT + "Input Controls/";
         private const string MENU_NAVIGATION = MENU_ROOT + "Navigation/";
         private const string MENU_UTILITY = MENU_ROOT + "Utility/";
@@ -33,7 +34,8 @@ namespace Limitex.MonoUI.Editor.ContextMenu
         private const int TOGGLE_PRIORITY = MENU_PRIORITY + 220;
         private const int CARD_PRIORITY = MENU_PRIORITY + 230;
         private const int SWITCH_PRIORITY = MENU_PRIORITY + 240;
-        private const int ICON_PRIORITY = MENU_PRIORITY + 250;
+        private const int CHECKBOX_PRIORITY = MENU_PRIORITY + 250;
+        private const int ICON_PRIORITY = MENU_PRIORITY + 260;
         private const int INPUT_PRIORITY = MENU_PRIORITY + 300;
         private const int NAVIGATION_PRIORITY = MENU_PRIORITY + 310;
         private const int UTILITY_PRIORITY = MENU_PRIORITY + 320;
@@ -185,6 +187,11 @@ namespace Limitex.MonoUI.Editor.ContextMenu
 
         [MenuItem(MENU_SWITCH + "Switch with Text (Right)", false, SWITCH_PRIORITY + 2)]
         private static void CreateSwitchWithTextRight() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Switch/Switch with Text (Right).prefab");
+        #endregion
+
+        #region Checkbox Menu Items
+        [MenuItem(MENU_CHECKBOX + "Checkbox", false, CHECKBOX_PRIORITY)]
+        private static void CreateCheckbox() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Checkbox.prefab");
         #endregion
 
         #region Icon Menu Items
