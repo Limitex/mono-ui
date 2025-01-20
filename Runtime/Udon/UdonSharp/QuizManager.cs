@@ -19,6 +19,7 @@ namespace Limitex.MonoUI.Udon
         [SerializeField] private AudioClip successClip;
         [SerializeField] private AudioClip failureClip;
 
+        [SerializeField] private bool randomizeQuestions = true;
         [SerializeField] private int requiredSuccesses = 3;
         [SerializeField] private string successMessage = "Success!";
         [SerializeField] private string failureMessage = "Failure!";
@@ -147,15 +148,21 @@ namespace Limitex.MonoUI.Udon
                 historyCount = 0;
             }
 
+            int newIndex = randomizeQuestions ? GetRandomQuestionIndex() : currentQuestionIndex + 1;
+
+            questionHistory[historyCount++] = newIndex;
+            currentQuestionIndex = newIndex;
+            DisplayQuestion(newIndex);
+        }
+
+        int GetRandomQuestionIndex()
+        {
             int newIndex;
             do
             {
                 newIndex = Random.Range(0, questions.Length);
             } while (IsInHistory(newIndex));
-
-            questionHistory[historyCount++] = newIndex;
-            currentQuestionIndex = newIndex;
-            DisplayQuestion(newIndex);
+            return newIndex;
         }
 
         void DisplayQuestion(int index)
