@@ -19,6 +19,7 @@ namespace Limitex.MonoUI.Udon
         [SerializeField] private AudioClip successClip;
         [SerializeField] private AudioClip failureClip;
 
+        [SerializeField] private int retryCount = 0;
         [SerializeField] private bool randomizeQuestions = true;
         [SerializeField] private int requiredSuccesses = 3;
         [SerializeField] private string successMessage = "Success!";
@@ -40,6 +41,7 @@ namespace Limitex.MonoUI.Udon
 
         private int[] questionHistory;
         private int historyCount = 0;
+        private int retryCounter = 0;
         private int currentQuestionIndex = -1;
         private int correctAnswerCount = 0;
         private bool isGameOver = false;
@@ -51,6 +53,7 @@ namespace Limitex.MonoUI.Udon
             if (correctAnswers[currentQuestionIndex] == index)
             {
                 correctAnswerCount++;
+
                 if (correctAnswerCount >= requiredSuccesses)
                 {
                     ShowSuccess();
@@ -59,10 +62,18 @@ namespace Limitex.MonoUI.Udon
                 {
                     NextQuestion();
                 }
+                return;
+            }
+
+            retryCounter++;
+            if (retryCounter >= retryCount)
+            {
+                ShowFailure();
             }
             else
             {
-                ShowFailure();
+                PlayOnShot(failureClip);
+                ResetGame();
             }
         }
 
@@ -71,10 +82,7 @@ namespace Limitex.MonoUI.Udon
             isGameOver = true;
             questionText.text = successMessage;
             ToggleObjects(successfulObjects);
-            if (successClip != null && audioSource != null)
-            {
-                audioSource.PlayOneShot(successClip);
-            }
+            PlayOnShot(successClip);
         }
 
         private void ShowFailure()
@@ -82,10 +90,7 @@ namespace Limitex.MonoUI.Udon
             isGameOver = true;
             questionText.text = failureMessage;
             ToggleObjects(failureObjects);
-            if (failureClip != null && audioSource != null)
-            {
-                audioSource.PlayOneShot(failureClip);
-            }
+            PlayOnShot(failureClip);
         }
 
         private void ToggleObjects(Transform[] objects)
@@ -110,6 +115,11 @@ namespace Limitex.MonoUI.Udon
                 return;
             }
 
+            ResetGame();
+        }
+
+        private void ResetGame()
+        {
             InitializeQuiz();
             NextQuestion();
         }
@@ -131,17 +141,7 @@ namespace Limitex.MonoUI.Udon
             isGameOver = false;
         }
 
-        private bool ValidateArrays()
-        {
-            int length = questions.Length;
-            return answers0.Length == length &&
-                   answers1.Length == length &&
-                   answers2.Length == length &&
-                   answers3.Length == length &&
-                   correctAnswers.Length == length;
-        }
-
-        void NextQuestion()
+        private void NextQuestion()
         {
             if (historyCount >= maxHistorySize)
             {
@@ -155,7 +155,17 @@ namespace Limitex.MonoUI.Udon
             DisplayQuestion(newIndex);
         }
 
-        int GetRandomQuestionIndex()
+        private bool ValidateArrays()
+        {
+            int length = questions.Length;
+            return answers0.Length == length &&
+                   answers1.Length == length &&
+                   answers2.Length == length &&
+                   answers3.Length == length &&
+                   correctAnswers.Length == length;
+        }
+
+        private int GetRandomQuestionIndex()
         {
             int newIndex;
             do
@@ -165,7 +175,7 @@ namespace Limitex.MonoUI.Udon
             return newIndex;
         }
 
-        void DisplayQuestion(int index)
+        private void DisplayQuestion(int index)
         {
             if (index < 0 || index >= questions.Length) return;
 
@@ -183,6 +193,14 @@ namespace Limitex.MonoUI.Udon
                 if (questionHistory[i] == number) return true;
             }
             return false;
+        }
+
+        private void PlayOnShot(AudioClip clip)
+        {
+            if (clip != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(clip);
+            }
         }
     }
 }
