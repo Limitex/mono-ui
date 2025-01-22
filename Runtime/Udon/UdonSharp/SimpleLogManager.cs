@@ -4,7 +4,6 @@ using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Limitex.MonoUI.Udon
 {
@@ -21,8 +20,11 @@ namespace Limitex.MonoUI.Udon
         [SerializeField] private Transform parentTransfrom;
         [SerializeField] private GameObject textTransform;
 
-        private const int INT_SIZE = 4, LONG_SIZE = 8, ENUM_SIZE = 1;
-        private const int ENTRY_SIZE = INT_SIZE + LONG_SIZE + ENUM_SIZE;
+        private const string ENTER_TEXT = "Enter";
+        private const string LEAVE_TEXT = "Leave";
+        private const int UINT_SIZE = 4, BYTE_SIZE = 1;
+        private const int ENTRY_SIZE = UINT_SIZE + BYTE_SIZE + BYTE_SIZE; // timestamp + logType + nameLength
+        private readonly DateTime EPOCH = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc); // 2025-01-01 00:00:00 UTC as reference point
 
         #region Serialized Data
 
@@ -33,16 +35,16 @@ namespace Limitex.MonoUI.Udon
         private void AddData(DateTime utc_timestamp, LogType log_type, string player_name)
         {
             byte[] player_name_bytes = Encoding.UTF8.GetBytes(player_name);
-            int player_bytes_length = player_name_bytes.Length;
+            byte player_bytes_length = (byte)Mathf.Min(player_name_bytes.Length, 255);
             byte[] newSerializedData = new byte[serializedData.Length + ENTRY_SIZE + player_bytes_length];
             Buffer.BlockCopy(serializedData, 0, newSerializedData, 0, serializedData.Length);
             int offset = serializedData.Length;
-            Buffer.BlockCopy(BitConverter.GetBytes(utc_timestamp.Ticks), 0, newSerializedData, offset, LONG_SIZE);
-            offset += LONG_SIZE;
+            Buffer.BlockCopy(BitConverter.GetBytes((uint)(utc_timestamp - EPOCH).TotalSeconds), 0, newSerializedData, offset, UINT_SIZE);
+            offset += UINT_SIZE;
             newSerializedData[offset] = (byte)log_type;
-            offset += ENUM_SIZE;
-            Buffer.BlockCopy(BitConverter.GetBytes(player_bytes_length), 0, newSerializedData, offset, INT_SIZE);
-            offset += INT_SIZE;
+            offset += BYTE_SIZE;
+            newSerializedData[offset] = player_bytes_length;
+            offset += BYTE_SIZE;
             Buffer.BlockCopy(player_name_bytes, 0, newSerializedData, offset, player_bytes_length);
             serializedData = newSerializedData;
             serializedDataBytes = serializedData.Length;
@@ -50,12 +52,12 @@ namespace Limitex.MonoUI.Udon
 
         private void GetData(int offset, out DateTime utc_timestamp, out LogType logType, out string player_name, out int data_length)
         {
-            utc_timestamp = new DateTime(BitConverter.ToInt64(serializedData, offset));
-            offset += LONG_SIZE;
+            utc_timestamp = EPOCH.AddSeconds(BitConverter.ToUInt32(serializedData, offset));
+            offset += UINT_SIZE;
             logType = (LogType)serializedData[offset];
-            offset += ENUM_SIZE;
-            int player_bytes_length = BitConverter.ToInt32(serializedData, offset);
-            offset += INT_SIZE;
+            offset += BYTE_SIZE;
+            byte player_bytes_length = serializedData[offset];
+            offset += BYTE_SIZE;
             player_name = Encoding.UTF8.GetString(serializedData, offset, player_bytes_length);
             data_length = ENTRY_SIZE + player_bytes_length;
         }
@@ -104,7 +106,7 @@ namespace Limitex.MonoUI.Udon
         {
             GameObject item = Instantiate(textTransform, parentTransfrom);
             Text text = item.GetComponent<Text>();
-            text.text = $"{utc_timestamp:HH:mm:ss} {GetLogTypeString(log_type)} ({player_name})";
+            text.text = $"{utc_timestamp.ToLocalTime():HH:mm:ss} {GetLogTypeString(log_type)} {player_name}";
             item.SetActive(true);
             ScrollToBottom();
         }
@@ -117,15 +119,9 @@ namespace Limitex.MonoUI.Udon
 
         private string GetLogTypeString(LogType logType)
         {
-            switch (logType)
-            {
-                case LogType.Enter:
-                    return "Enter";
-                case LogType.Leave:
-                    return "Leave";
-                default:
-                    return "Unknown";
-            }
+            if (logType == LogType.Enter) return ENTER_TEXT;
+            if (logType == LogType.Leave) return LEAVE_TEXT;
+            return string.Empty;
         }
 
         #endregion
