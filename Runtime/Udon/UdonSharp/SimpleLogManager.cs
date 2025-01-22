@@ -16,6 +16,12 @@ namespace Limitex.MonoUI.Udon
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class SimpleLogManager : UdonSharpBehaviour
     {
+        [Header("Header")]
+        [SerializeField] private Text _headerPlayerText;
+        [SerializeField] private Text _headerByteText;
+        [SerializeField] private string _headerPlayerTextFormat;
+
+        [Header("Log")]
         [SerializeField] private ScrollRect _scrollRect;
         [SerializeField] private Transform _parentTransform;
         [SerializeField] private GameObject _textPrefab;
@@ -75,6 +81,7 @@ namespace Limitex.MonoUI.Udon
             string logText = player.displayName;
             AddData(timestamp, logType, logText);
             AddLine(timestamp, logType, logText);
+            UpdateHeader();
             RequestSerialization();
         }
 
@@ -85,6 +92,7 @@ namespace Limitex.MonoUI.Udon
             string logText = player.displayName;
             AddData(timestamp, logType, logText);
             AddLine(timestamp, logType, logText);
+            UpdateHeader();
             RequestSerialization();
         }
 
@@ -97,6 +105,7 @@ namespace Limitex.MonoUI.Udon
                 i += dataLength;
             }
             _serializedDataBytes = _serializedData.Length;
+            UpdateHeader();
         }
 
         #endregion
@@ -112,6 +121,12 @@ namespace Limitex.MonoUI.Udon
             ScrollToBottom();
         }
 
+        private void UpdateHeader()
+        {
+            _headerPlayerText.text = string.Format(_headerPlayerTextFormat, VRCPlayerApi.GetPlayerCount());
+            _headerByteText.text = FormatByteSize(_serializedData.Length);
+        }
+
         private void ScrollToBottom()
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)_scrollRect.transform);
@@ -123,6 +138,21 @@ namespace Limitex.MonoUI.Udon
             if (logType == LogType.Enter) return ENTER_TEXT;
             if (logType == LogType.Leave) return LEAVE_TEXT;
             return string.Empty;
+        }
+
+        private string FormatByteSize(int bytes)
+        {
+            string[] units = { "byte", "KB", "MB", "GB" };
+            int unitIndex = 0;
+            double size = bytes;
+
+            while (size >= 1024 && unitIndex < units.Length - 1)
+            {
+                size /= 1024;
+                unitIndex++;
+            }
+
+            return string.Format("{0:0.##} {1}", size, units[unitIndex]);
         }
 
         #endregion
