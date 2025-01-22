@@ -21,10 +21,19 @@ namespace Limitex.MonoUI.Udon
         [SerializeField] private Text _headerByteText;
         [SerializeField] private string _headerPlayerTextFormat;
 
+        [Header("Color")]
+        [SerializeField] private Color _timestampColor;
+        [SerializeField] private Color _enterColor;
+        [SerializeField] private Color _leaveColor;
+        [SerializeField] private Color _defaultColor;
+
         [Header("Log")]
         [SerializeField] private ScrollRect _scrollRect;
         [SerializeField] private Transform _parentTransform;
         [SerializeField] private GameObject _textPrefab;
+
+        [Header("Settings")]
+        [SerializeField] private int _dateFontSize;
 
         private const string ENTER_TEXT = "Enter";
         private const string LEAVE_TEXT = "Leave";
@@ -116,7 +125,8 @@ namespace Limitex.MonoUI.Udon
         {
             GameObject item = Instantiate(_textPrefab, _parentTransform);
             Text text = item.GetComponent<Text>();
-            text.text = $"{timestamp.ToLocalTime():HH:mm:ss} {GetLogTypeString(logType)} {logText}";
+            DateTime local = timestamp.ToLocalTime();
+            text.text = $"{Colorize($"{Resize($"{local:yyyy/MM/dd}", _dateFontSize)} {local:HH:mm:ss}", _timestampColor)} {GetLogTypeString(logType)} {Colorize(logText, _defaultColor)}";
             item.SetActive(true);
             ScrollToBottom();
         }
@@ -135,8 +145,8 @@ namespace Limitex.MonoUI.Udon
 
         private string GetLogTypeString(LogType logType)
         {
-            if (logType == LogType.Enter) return ENTER_TEXT;
-            if (logType == LogType.Leave) return LEAVE_TEXT;
+            if (logType == LogType.Enter) return Colorize(ENTER_TEXT, _enterColor);
+            if (logType == LogType.Leave) return Colorize(LEAVE_TEXT, _leaveColor);
             return string.Empty;
         }
 
@@ -153,6 +163,25 @@ namespace Limitex.MonoUI.Udon
             }
 
             return string.Format("{0:0.##} {1}", size, units[unitIndex]);
+        }
+
+        private string Colorize(string text, Color color)
+        {
+            return $"<color=#{ColorToHexRGB(color)}>{text}</color>";
+        }
+
+        private string Resize(string text, int size)
+        {
+            return $"<size={size}>{text}</size>";
+        }
+
+        private string ColorToHexRGB(Color color)
+        {
+            int r = (int)(color.r * 255);
+            int g = (int)(color.g * 255);
+            int b = (int)(color.b * 255);
+
+            return string.Format("{0:X2}{1:X2}{2:X2}", r, g, b);
         }
 
         #endregion

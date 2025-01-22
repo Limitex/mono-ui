@@ -138,9 +138,14 @@ MonoBehaviour:
   _headerPlayerText: {fileID: 8581127297404677576}
   _headerByteText: {fileID: 5719183234671936301}
   _headerPlayerTextFormat: '{0} Players'
+  _timestampColor: {r: 0.6313726, g: 0.6313726, b: 0.6627451, a: 1}
+  _enterColor: {r: 0.1764706, g: 0.7176471, b: 0.5372549, a: 1}
+  _leaveColor: {r: 0.8862745, g: 0.21176471, b: 0.43529412, a: 1}
+  _defaultColor: {r: 0.9764706, g: 0.9764706, b: 0.9764706, a: 1}
   _scrollRect: {fileID: 8916206325328686313}
   _parentTransform: {fileID: 7326688896295906491}
   _textPrefab: {fileID: 5950864104189183541}
+  _dateFontSize: 20
 --- !u!114 &7744021891181753937
 MonoBehaviour:
   m_ObjectHideFlags: 0
