@@ -16,50 +16,51 @@ namespace Limitex.MonoUI.Udon
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class SimpleLogManager : UdonSharpBehaviour
     {
-        [SerializeField] private ScrollRect scrollRect;
-        [SerializeField] private Transform parentTransfrom;
-        [SerializeField] private GameObject textTransform;
+        [SerializeField] private ScrollRect _scrollRect;
+        [SerializeField] private Transform _parentTransform;
+        [SerializeField] private GameObject _textPrefab;
 
         private const string ENTER_TEXT = "Enter";
         private const string LEAVE_TEXT = "Leave";
-        private const int UINT_SIZE = 4, BYTE_SIZE = 1;
+        private const int UINT_SIZE = 4;
+        private const int BYTE_SIZE = 1;
         private const int ENTRY_SIZE = UINT_SIZE + BYTE_SIZE + BYTE_SIZE; // timestamp + logType + nameLength
         private readonly DateTime EPOCH = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc); // 2025-01-01 00:00:00 UTC as reference point
 
         #region Serialized Data
 
-        private int serializedDataBytes = 0;
+        private int _serializedDataBytes = 0;
 
-        [UdonSynced(UdonSyncMode.None)] private byte[] serializedData = new byte[0];
+        [UdonSynced(UdonSyncMode.None)] private byte[] _serializedData = new byte[0];
 
-        private void AddData(DateTime utc_timestamp, LogType log_type, string player_name)
+        private void AddData(DateTime timestamp, LogType logType, string logText)
         {
-            byte[] player_name_bytes = Encoding.UTF8.GetBytes(player_name);
-            byte player_bytes_length = (byte)Mathf.Min(player_name_bytes.Length, 255);
-            byte[] newSerializedData = new byte[serializedData.Length + ENTRY_SIZE + player_bytes_length];
-            Buffer.BlockCopy(serializedData, 0, newSerializedData, 0, serializedData.Length);
-            int offset = serializedData.Length;
-            Buffer.BlockCopy(BitConverter.GetBytes((uint)(utc_timestamp - EPOCH).TotalSeconds), 0, newSerializedData, offset, UINT_SIZE);
+            byte[] logTextBytes = Encoding.UTF8.GetBytes(logText);
+            byte playerBytesLength = (byte)Mathf.Min(logTextBytes.Length, 255);
+            byte[] newSerializedData = new byte[_serializedData.Length + ENTRY_SIZE + playerBytesLength];
+            Buffer.BlockCopy(_serializedData, 0, newSerializedData, 0, _serializedData.Length);
+            int offset = _serializedData.Length;
+            Buffer.BlockCopy(BitConverter.GetBytes((uint)(timestamp - EPOCH).TotalSeconds), 0, newSerializedData, offset, UINT_SIZE);
             offset += UINT_SIZE;
-            newSerializedData[offset] = (byte)log_type;
+            newSerializedData[offset] = (byte)logType;
             offset += BYTE_SIZE;
-            newSerializedData[offset] = player_bytes_length;
+            newSerializedData[offset] = playerBytesLength;
             offset += BYTE_SIZE;
-            Buffer.BlockCopy(player_name_bytes, 0, newSerializedData, offset, player_bytes_length);
-            serializedData = newSerializedData;
-            serializedDataBytes = serializedData.Length;
+            Buffer.BlockCopy(logTextBytes, 0, newSerializedData, offset, playerBytesLength);
+            _serializedData = newSerializedData;
+            _serializedDataBytes = _serializedData.Length;
         }
 
-        private void GetData(int offset, out DateTime utc_timestamp, out LogType logType, out string player_name, out int data_length)
+        private void GetData(int offset, out DateTime timestamp, out LogType logType, out string logText, out int dataLength)
         {
-            utc_timestamp = EPOCH.AddSeconds(BitConverter.ToUInt32(serializedData, offset));
+            timestamp = EPOCH.AddSeconds(BitConverter.ToUInt32(_serializedData, offset));
             offset += UINT_SIZE;
-            logType = (LogType)serializedData[offset];
+            logType = (LogType)_serializedData[offset];
             offset += BYTE_SIZE;
-            byte player_bytes_length = serializedData[offset];
+            byte playerBytesLength = _serializedData[offset];
             offset += BYTE_SIZE;
-            player_name = Encoding.UTF8.GetString(serializedData, offset, player_bytes_length);
-            data_length = ENTRY_SIZE + player_bytes_length;
+            logText = Encoding.UTF8.GetString(_serializedData, offset, playerBytesLength);
+            dataLength = ENTRY_SIZE + playerBytesLength;
         }
 
         #endregion
@@ -69,52 +70,52 @@ namespace Limitex.MonoUI.Udon
         public override void OnPlayerJoined(VRCPlayerApi player)
         {
             if (!Networking.IsOwner(gameObject)) return;
-            DateTime utc_timestamp = DateTime.UtcNow;
+            DateTime timestamp = DateTime.UtcNow;
             LogType logType = LogType.Enter;
-            string player_name = player.displayName;
-            AddData(utc_timestamp, logType, player_name);
-            AddLine(utc_timestamp, logType, player_name);
+            string logText = player.displayName;
+            AddData(timestamp, logType, logText);
+            AddLine(timestamp, logType, logText);
             RequestSerialization();
         }
 
         public override void OnPlayerLeft(VRCPlayerApi player)
         {
-            DateTime utc_timestamp = DateTime.UtcNow;
+            DateTime timestamp = DateTime.UtcNow;
             LogType logType = LogType.Leave;
-            string player_name = player.displayName;
-            AddData(utc_timestamp, logType, player_name);
-            AddLine(utc_timestamp, logType, player_name);
+            string logText = player.displayName;
+            AddData(timestamp, logType, logText);
+            AddLine(timestamp, logType, logText);
             RequestSerialization();
         }
 
         public override void OnDeserialization()
         {
-            for (int i = serializedDataBytes; i < serializedData.Length;)
+            for (int i = _serializedDataBytes; i < _serializedData.Length;)
             {
-                GetData(i, out DateTime timestamp, out LogType logType, out string playerName, out int data_length);
-                AddLine(timestamp, logType, playerName);
-                i += data_length;
+                GetData(i, out DateTime timestamp, out LogType logType, out string logText, out int dataLength);
+                AddLine(timestamp, logType, logText);
+                i += dataLength;
             }
-            serializedDataBytes = serializedData.Length;
+            _serializedDataBytes = _serializedData.Length;
         }
 
         #endregion
 
         #region Helper Methods
 
-        private void AddLine(DateTime utc_timestamp, LogType log_type, string player_name)
+        private void AddLine(DateTime timestamp, LogType logType, string logText)
         {
-            GameObject item = Instantiate(textTransform, parentTransfrom);
+            GameObject item = Instantiate(_textPrefab, _parentTransform);
             Text text = item.GetComponent<Text>();
-            text.text = $"{utc_timestamp.ToLocalTime():HH:mm:ss} {GetLogTypeString(log_type)} {player_name}";
+            text.text = $"{timestamp.ToLocalTime():HH:mm:ss} {GetLogTypeString(logType)} {logText}";
             item.SetActive(true);
             ScrollToBottom();
         }
 
         private void ScrollToBottom()
         {
-            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)scrollRect.transform);
-            scrollRect.normalizedPosition = new Vector2(scrollRect.normalizedPosition.x, 0f);
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)_scrollRect.transform);
+            _scrollRect.normalizedPosition = new Vector2(_scrollRect.normalizedPosition.x, 0f);
         }
 
         private string GetLogTypeString(LogType logType)
