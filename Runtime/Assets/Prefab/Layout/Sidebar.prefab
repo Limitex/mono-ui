@@ -74,7 +74,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 2
 --- !u!1 &6884078749414999562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,7 +1110,7 @@ PrefabInstance:
     - target: {fileID: 6660834926975626889, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00046371747
+      value: -0.0014914377
       objectReference: {fileID: 0}
     - target: {fileID: 8340891078254095723, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
@@ -2548,7 +2548,7 @@ PrefabInstance:
     - target: {fileID: 3473832380012036929, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4387431495335142919, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
@@ -2718,7 +2718,7 @@ PrefabInstance:
     - target: {fileID: 6660834926975626889, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0018862551
+      value: -0.00071869086
       objectReference: {fileID: 0}
     - target: {fileID: 8340891078254095723, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
