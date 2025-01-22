@@ -1291,6 +1291,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2802068014204329717, guid: 31b18557a33835345bec38b7707b1a8d,
         type: 3}
+      propertyPath: componentColors.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2802068014204329717, guid: 31b18557a33835345bec38b7707b1a8d,
+        type: 3}
       propertyPath: componentColors.Array.data[2].component
       value: 
       objectReference: {fileID: 0}
@@ -1755,6 +1760,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ReadOnly
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2802068014204329717, guid: 31b18557a33835345bec38b7707b1a8d,
+        type: 3}
+      propertyPath: componentColors.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2802068014204329717, guid: 31b18557a33835345bec38b7707b1a8d,
         type: 3}
