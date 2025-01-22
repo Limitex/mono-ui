@@ -22,6 +22,7 @@ namespace Limitex.MonoUI.Editor.Inspector
         private SerializedProperty answers2;
         private SerializedProperty answers3;
         private SerializedProperty correctAnswers;
+        private SerializedProperty retryCount;
         private SerializedProperty randomizeQuestions;
         private SerializedProperty requiredSuccesses;
         private SerializedProperty successMessage;
@@ -57,6 +58,7 @@ namespace Limitex.MonoUI.Editor.Inspector
             answers2 = serializedObject.FindProperty("answers2");
             answers3 = serializedObject.FindProperty("answers3");
             correctAnswers = serializedObject.FindProperty("correctAnswers");
+            retryCount = serializedObject.FindProperty("retryCount");
             randomizeQuestions = serializedObject.FindProperty("randomizeQuestions");
             requiredSuccesses = serializedObject.FindProperty("requiredSuccesses");
             successMessage = serializedObject.FindProperty("successMessage");
@@ -172,6 +174,7 @@ namespace Limitex.MonoUI.Editor.Inspector
             if (showSettings)
             {
                 EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(retryCount, new GUIContent("Retry Count"));
                 EditorGUILayout.PropertyField(randomizeQuestions, new GUIContent("Randomize Questions"));
                 EditorGUILayout.PropertyField(requiredSuccesses, new GUIContent("Required Correct Answers"));
                 EditorGUILayout.PropertyField(successMessage, new GUIContent("Success Message"));
