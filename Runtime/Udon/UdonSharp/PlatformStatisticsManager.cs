@@ -146,7 +146,7 @@ namespace Limitex.MonoUI.Udon
         public override void OnDeserialization()
         {
             Deserialize();
-            UpdatePlatformCounts();
+            UpdatePlatformCounts(VRCPlayerApi.GetPlayerCount());
         }
 
         public override void OnPlayerJoined(VRCPlayerApi player)
@@ -157,20 +157,20 @@ namespace Limitex.MonoUI.Udon
                 return;
 
             AddDataItem(player.displayName, PLATFORM);
-            UpdatePlatformCounts();
+            UpdatePlatformCounts(VRCPlayerApi.GetPlayerCount());
             RequestSerialization();
         }
 
         public override void OnPlayerLeft(VRCPlayerApi player)
         {
             RemoveDataItem(player.displayName);
-            UpdatePlatformCounts();
+            UpdatePlatformCounts(VRCPlayerApi.GetPlayerCount() - 1);
             RequestSerialization();
         }
 
         #endregion
 
-        public void UpdatePlatformCounts()
+        public void UpdatePlatformCounts(int plyaerCount)
         {
             int standalone = 0, android = 0, ios = 0, none = 0;
 
@@ -199,7 +199,7 @@ namespace Limitex.MonoUI.Udon
                 Debug.LogWarning("PlatformStatisticsManager: " + none + " players have an invalid platform.");
             }
 
-            totalPlayerCount.text = VRCPlayerApi.GetPlayerCount().ToString();
+            totalPlayerCount.text = plyaerCount.ToString();
             standaloneCount.text = standalone.ToString();
             androidCount.text = android.ToString();
             iosCount.text = ios.ToString();

@@ -98,7 +98,7 @@ namespace Limitex.MonoUI.Udon
             string logText = player.displayName;
             AddData(timestamp, logType, logText);
             AddLine(timestamp, logType, logText);
-            UpdateHeader();
+            UpdateHeader(_serializedData.Length, VRCPlayerApi.GetPlayerCount());
             RequestSerialization();
         }
 
@@ -109,7 +109,7 @@ namespace Limitex.MonoUI.Udon
             string logText = player.displayName;
             AddData(timestamp, logType, logText);
             AddLine(timestamp, logType, logText);
-            UpdateHeader();
+            UpdateHeader(_serializedData.Length, VRCPlayerApi.GetPlayerCount() - 1);
             RequestSerialization();
         }
 
@@ -122,7 +122,7 @@ namespace Limitex.MonoUI.Udon
                 i += dataLength;
             }
             _serializedDataBytes = _serializedData.Length;
-            UpdateHeader();
+            UpdateHeader(_serializedData.Length, VRCPlayerApi.GetPlayerCount());
         }
 
         #endregion
@@ -153,10 +153,10 @@ namespace Limitex.MonoUI.Udon
             ScrollToBottom();
         }
 
-        private void UpdateHeader()
+        private void UpdateHeader(int byteLength, int plyaerCount)
         {
-            _headerPlayerText.text = string.Format(_headerPlayerTextFormat, VRCPlayerApi.GetPlayerCount());
-            _headerByteText.text = FormatByteSize(_serializedData.Length);
+            _headerPlayerText.text = string.Format(_headerPlayerTextFormat, plyaerCount);
+            _headerByteText.text = FormatByteSize(byteLength);
         }
 
         private void ScrollToBottom()
