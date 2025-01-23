@@ -257,6 +257,7 @@ namespace Limitex.MonoUI.Editor.Inspector
                 var component = element.FindPropertyRelative("component").objectReferenceValue;
                 var colorType = (ColorType)element.FindPropertyRelative("colorType").intValue;
                 var transitionColorType = (TransitionColorType)element.FindPropertyRelative("transitionColorType").intValue;
+                var colorFields = element.FindPropertyRelative("colorFields");
 
                 if (component != null && !seenComponents.Add(component))
                 {
@@ -264,7 +265,27 @@ namespace Limitex.MonoUI.Editor.Inspector
                     continue;
                 }
 
-                if (component == null || (colorType == ColorType.None && transitionColorType == TransitionColorType.None))
+                bool hasValidColorFields = false;
+                if (colorFields != null && colorFields.isArray)
+                {
+                    for (int j = 0; j < colorFields.arraySize; j++)
+                    {
+                        var fieldElement = colorFields.GetArrayElementAtIndex(j);
+                        var fieldName = fieldElement.FindPropertyRelative("fieldName").stringValue;
+                        var fieldColorType = (ColorType)fieldElement.FindPropertyRelative("colorType").intValue;
+
+                        if (!string.IsNullOrEmpty(fieldName) && fieldColorType != ColorType.None)
+                        {
+                            hasValidColorFields = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (component == null ||
+                    (colorType == ColorType.None &&
+                     transitionColorType == TransitionColorType.None &&
+                     !hasValidColorFields))
                 {
                     indicesToRemove.Add(i);
                 }
