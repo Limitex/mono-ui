@@ -126,7 +126,21 @@ namespace Limitex.MonoUI.Udon
             GameObject item = Instantiate(_textPrefab, _parentTransform);
             Text text = item.GetComponent<Text>();
             DateTime local = timestamp.ToLocalTime();
-            text.text = $"{Colorize($"{Resize($"{local:yyyy/MM/dd}", _dateFontSize)} {local:HH:mm:ss}", _timestampColor)} {GetLogTypeString(logType)} {Colorize(logText, _defaultColor)}";
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(Colorize(
+                string.Format("{0} {1:HH:mm:ss}",
+                    Resize(local.ToString("yyyy/MM/dd"), _dateFontSize),
+                    local
+                ),
+                _timestampColor
+            ));
+            sb.Append(' ');
+            sb.Append(GetLogTypeString(logType));
+            sb.Append(' ');
+            sb.Append(Colorize(logText, _defaultColor));
+
+            text.text = sb.ToString();
             item.SetActive(true);
             ScrollToBottom();
         }
