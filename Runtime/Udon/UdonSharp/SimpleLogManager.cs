@@ -7,11 +7,15 @@ using VRC.SDKBase;
 
 namespace Limitex.MonoUI.Udon
 {
+    #region Enums
+
     enum LogType : byte
     {
         Enter = 0,
         Leave = 1
     }
+
+    #endregion
 
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class SimpleLogManager : UdonSharpBehaviour
@@ -35,12 +39,16 @@ namespace Limitex.MonoUI.Udon
         [Header("Settings")]
         [SerializeField] private int _dateFontSize;
 
+        #region Constant Fields
+
         private const string ENTER_TEXT = "Enter";
         private const string LEAVE_TEXT = "Leave";
         private const int UINT_SIZE = 4;
         private const int BYTE_SIZE = 1;
         private const int ENTRY_SIZE = UINT_SIZE + BYTE_SIZE + BYTE_SIZE; // timestamp + logType + nameLength
         private readonly DateTime EPOCH = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc); // 2025-01-01 00:00:00 UTC as reference point
+
+        #endregion
 
         #region Serialized Data
 
@@ -119,7 +127,7 @@ namespace Limitex.MonoUI.Udon
 
         #endregion
 
-        #region Helper Methods
+        #region UI Helper
 
         private void AddLine(DateTime timestamp, LogType logType, string logText)
         {
@@ -156,6 +164,10 @@ namespace Limitex.MonoUI.Udon
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)_scrollRect.transform);
             _scrollRect.normalizedPosition = new Vector2(_scrollRect.normalizedPosition.x, 0f);
         }
+
+        #endregion
+
+        #region Helper Methods
 
         private string GetLogTypeString(LogType logType)
         {
