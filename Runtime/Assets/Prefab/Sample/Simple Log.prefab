@@ -845,11 +845,6 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 525324958599733258, guid: 74e4b4dd49ce4b44b97914b2f308b3a5,
-        type: 3}
-      propertyPath: m_DynamicPixelsPerUnit
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 1703828338229513072, guid: 74e4b4dd49ce4b44b97914b2f308b3a5,
         type: 3}
       propertyPath: m_Name
