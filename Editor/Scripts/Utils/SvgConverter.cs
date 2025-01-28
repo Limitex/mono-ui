@@ -14,17 +14,28 @@ namespace Limitex.MonoUI.Editor.Utils
     {
         private SKBitmap _bitmap;
         private SKCanvas _canvas;
+        private SKPaint _paint;
 
         public SvgConverter(int width, int height)
         {
             _bitmap = new SKBitmap(width, height);
             _canvas = new SKCanvas(_bitmap);
+            _paint = new SKPaint
+            {
+                ColorFilter = SKColorFilter.CreateBlendMode(SKColors.White, SKBlendMode.SrcIn)
+            };
         }
 
         public void Dispose()
         {
             _bitmap?.Dispose();
             _canvas?.Dispose();
+            _paint?.Dispose();
+        }
+
+        public void SetPaintColor(string hexString)
+        {
+            _paint.ColorFilter = SKColorFilter.CreateBlendMode(SKColor.Parse(hexString), SKBlendMode.SrcIn);
         }
 
         public void LoadSvg(string svgPath, float scaleX = 1.0f, float scaleY = 1.0f)
@@ -42,13 +53,8 @@ namespace Limitex.MonoUI.Editor.Utils
             scaleY *= _bitmap.Height / loader.Picture.CullRect.Height;
             var matrix = SKMatrix.CreateScale(scaleX, scaleY);
 
-            using var paint = new SKPaint
-            {
-                ColorFilter = SKColorFilter.CreateBlendMode(SKColors.White, SKBlendMode.SrcIn)
-            };
-
             _canvas.Clear(SKColors.Transparent);
-            _canvas.DrawPicture(loader.Picture, matrix, paint);
+            _canvas.DrawPicture(loader.Picture, matrix, _paint);
             _canvas.Flush();
         }
 
@@ -63,6 +69,11 @@ namespace Limitex.MonoUI.Editor.Utils
         {
             var bytes = GetBytes(quality);
             File.WriteAllBytes(filePath, bytes);
+        }
+
+        public static string ColorToHexString(Color color)
+        {
+            return $"#{Mathf.RoundToInt(color.r * 255):X2}{Mathf.RoundToInt(color.g * 255):X2}{Mathf.RoundToInt(color.b * 255):X2}{Mathf.RoundToInt(color.a * 255):X2}";
         }
     }
 }
