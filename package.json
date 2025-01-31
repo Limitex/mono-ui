@@ -1,6 +1,6 @@
 {
   "name": "dev.limitex.mono-ui",
-  "version": "1.0.0-rc.5",
+  "version": "1.0.0-rc.6",
   "displayName": "Mono UI",
   "description": "Mono UI is a UI component package for VRChat world creation. It provides simple and customizable UI elements optimized for VRChat environments, helping creators build interactive and user-friendly interfaces in their worlds.",
   "unity": "2022.3",

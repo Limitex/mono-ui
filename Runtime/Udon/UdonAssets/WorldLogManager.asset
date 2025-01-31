@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: WorldLogManager
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 5e3362999fbf61640b36138a63a70e4f,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: aba5ef9eb2f55f541a803f625eeb8c3a,
     type: 2}
   udonAssembly: 
   assemblyError: 

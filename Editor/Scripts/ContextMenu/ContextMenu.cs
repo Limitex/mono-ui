@@ -95,10 +95,13 @@ namespace Limitex.MonoUI.Editor.ContextMenu
         [MenuItem(MENU_SAMPLE + "Quiz Menu", false, SAMPLE_PRIORITY + 1)]
         private static void CreateQuizMenu() => SpawnPrefab(PREFAB_ROOT + "Sample/Quiz Menu.prefab");
 
-        [MenuItem(MENU_SAMPLE + "World Log", false, SAMPLE_PRIORITY + 2)]
+        [MenuItem(MENU_SAMPLE + "Simple Log", false, SAMPLE_PRIORITY + 2)]
+        private static void CreateSimpleLog() => SpawnPrefab(PREFAB_ROOT + "Sample/Simple Log.prefab");
+
+        [MenuItem(MENU_SAMPLE + "World Log", false, SAMPLE_PRIORITY + 3)]
         private static void CreateWorldLog() => SpawnPrefab(PREFAB_ROOT + "Sample/World Log.prefab");
 
-        [MenuItem(MENU_SAMPLE + "Platform Statistics", false, SAMPLE_PRIORITY + 3)]
+        [MenuItem(MENU_SAMPLE + "Platform Statistics", false, SAMPLE_PRIORITY + 4)]
         private static void CreatePlatformStatistics() => SpawnPrefab(PREFAB_ROOT + "Sample/Platform Statistics.prefab");
         #endregion
 
@@ -151,6 +154,9 @@ namespace Limitex.MonoUI.Editor.ContextMenu
 
         [MenuItem(MENU_TEXT + "Text h6 (TMP)", false, TEXT_PRIORITY + 6)]
         private static void CreateTextH6() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Text/Text h6 (TMP).prefab");
+
+        [MenuItem(MENU_TEXT + "Text (Legacy)", false, TEXT_PRIORITY + 7)]
+        private static void CreateLegacyText() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Components/Text/Text (Legacy).prefab");
         #endregion
 
         #region Toggle Menu Items

@@ -79,7 +79,7 @@ namespace Limitex.MonoUI.Udon
         private readonly int[] TIMELINE_LEFT_ICON_PATH = new int[] { 0, 1, 1, 0, 2 };
         private readonly int[] USERLINE_NAME_PATH = new int[] { 1, 0 };
         private readonly int[] USERLINE_TYPE_PATH = new int[] { 1, 1 };
-        private readonly int[] USERLINE_ICON_PATH = new int[] { 0, 0, 0 };
+        private readonly int[] USERLINE_ICON_PATH = new int[] { 0, 1, 0 };
 
         #endregion
 
