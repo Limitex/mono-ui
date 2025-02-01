@@ -64,6 +64,15 @@ namespace Limitex.MonoUI.Udon
             SetProgress(0);
         }
 
+        public void Progress()
+        {
+            if (!isPlaying) return;
+            float duration = videoPlayer.GetDuration();
+            float value = progress.value;
+            videoPlayer.SetTime(value);
+            SetTimeText(value, duration);
+        }
+
         #region Repeat
 
         public void RepeatNone() => currentRepeatMode = RepeatMode.None;
