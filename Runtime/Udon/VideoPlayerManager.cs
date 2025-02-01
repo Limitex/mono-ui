@@ -40,6 +40,7 @@ namespace Limitex.MonoUI.Udon
 
         #region Fields
 
+        private bool isPlaying = false;
         private float refreshTimeCash = 0f;
         private RepeatMode currentRepeatMode = RepeatMode.None;
 
@@ -50,13 +51,11 @@ namespace Limitex.MonoUI.Udon
         public void Play()
         {
             videoPlayer.Play();
-            SetProgress(0);
         }
 
         public void Pause()
         {
             videoPlayer.Pause();
-            SetProgress(0);
         }
 
         public void Stop()
@@ -107,7 +106,7 @@ namespace Limitex.MonoUI.Udon
 
         public override void OnVideoReady()
         {
-            videoPlayer.Play();
+            VideoReady();
             animator.SetTrigger("VideoOnPlay");
         }
 
@@ -119,12 +118,6 @@ namespace Limitex.MonoUI.Udon
         public override void OnVideoPause()
         {
 
-        }
-
-        public override void OnVideoEnd()
-        {
-            videoPlayer.Stop();
-            animator.SetTrigger("VideoOnStop");
         }
 
         public override void OnVideoLoop()
@@ -150,6 +143,7 @@ namespace Limitex.MonoUI.Udon
 
         private void Update()
         {
+            if (!isPlaying) return;
             refreshTimeCash += Time.deltaTime;
             if (refreshTimeCash <= refreshTime) return;
             else refreshTimeCash = 0f;
@@ -160,6 +154,33 @@ namespace Limitex.MonoUI.Udon
 
             SetProgress(normalizedTime);
             SetTimeText(currentTime, duration);
+
+            if (currentTime == duration)
+            {
+                isPlaying = false;
+                _OnVideoEnd();
+            }
+        }
+
+        #endregion
+
+        #region Update Callbacks
+
+        private void _OnVideoEnd()
+        {
+            SetProgress(0);
+
+            switch (currentRepeatMode)
+            {
+                case RepeatMode.None:
+                    videoPlayer.Stop();
+                    animator.SetTrigger("VideoOnStop");
+                    break;
+                case RepeatMode.Repeat:
+                case RepeatMode.RepeatOnce:
+                    VideoReady();
+                    break;
+            }
         }
 
         #endregion
@@ -187,6 +208,13 @@ namespace Limitex.MonoUI.Udon
                 return string.Format("{0:D2}:{1:D2}:{2:D2}", hours, minutes, seconds);
             else
                 return string.Format("{0:D2}:{1:D2}", minutes, seconds);
+        }
+
+        private void VideoReady()
+        {
+            videoPlayer.SetTime(0);
+            videoPlayer.Play();
+            isPlaying = true;
         }
 
         #endregion
