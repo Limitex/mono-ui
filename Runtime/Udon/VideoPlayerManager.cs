@@ -108,6 +108,10 @@ namespace Limitex.MonoUI.Udon
         {
             VideoReady();
             animator.SetTrigger("VideoOnPlay");
+            progress.minValue = 0;
+            progress.maxValue = videoPlayer.GetDuration();
+            underProgress.minValue = 0;
+            underProgress.maxValue = videoPlayer.GetDuration();
         }
 
         public override void OnVideoStart()
@@ -150,9 +154,8 @@ namespace Limitex.MonoUI.Udon
 
             float currentTime = videoPlayer.GetTime();
             float duration = videoPlayer.GetDuration();
-            float normalizedTime = duration == 0 ? 0 : currentTime / duration;
 
-            SetProgress(normalizedTime);
+            SetProgress(currentTime);
             SetTimeText(currentTime, duration);
 
             if (currentTime == duration)
