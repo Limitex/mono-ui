@@ -11,6 +11,13 @@ using VRC.Udon;
 
 namespace Limitex.MonoUI.Udon
 {
+    enum RepeatMode
+    {
+        None,
+        Repeat,
+        RepeatOnce
+    }
+
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class VideoPlayerManager : UdonSharpBehaviour
     {
@@ -34,6 +41,7 @@ namespace Limitex.MonoUI.Udon
         #region Fields
 
         private float refreshTimeCash = 0f;
+        private RepeatMode currentRepeatMode = RepeatMode.None;
 
         #endregion
 
@@ -56,6 +64,16 @@ namespace Limitex.MonoUI.Udon
             videoPlayer.Stop();
             SetProgress(0);
         }
+
+        #region Repeat
+
+        public void RepeatNone() => currentRepeatMode = RepeatMode.None;
+
+        public void Repeat() => currentRepeatMode = RepeatMode.Repeat;
+
+        public void RepeatOnce() => currentRepeatMode = RepeatMode.RepeatOnce;
+
+        #endregion
 
         #endregion
 
