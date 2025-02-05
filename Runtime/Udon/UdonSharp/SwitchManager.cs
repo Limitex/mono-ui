@@ -14,9 +14,13 @@ namespace Limitex.MonoUI.Udon
         [SerializeField] private Toggle toggle;
         [SerializeField] private string switchParameterName;
 
-        void Start() => animator.SetBool(switchParameterName, toggle.isOn);
+        void Start() => SetBool();
 
-        public void ToggleSwitch() => animator.SetBool(switchParameterName, toggle.isOn);
+        void OnEnable() => SetBool();
+
+        public void ToggleSwitch() => SetBool();
+
+        private void SetBool() => animator.SetBool(switchParameterName, toggle.isOn);
     }
 }
 
