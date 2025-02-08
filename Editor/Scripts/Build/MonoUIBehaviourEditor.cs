@@ -1,13 +1,15 @@
 #if UNITY_EDITOR
 
-using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEditor.Events;
+using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Events;
 using TMPro;
 using VRC.Udon;
 using UdonSharpEditor;
@@ -21,8 +23,8 @@ namespace Limitex.MonoUI.Editor.Build
 
         public void OnProcessScene(Scene scene, BuildReport report)
         {
-            MonoUIBehaviour[] behaviours = Object.FindObjectsOfType<MonoUIBehaviour>(true);
-            foreach (MonoUIBehaviour behaviour in behaviours)
+            var behaviours = Object.FindObjectsOfType<MonoUIBehaviour>(true);
+            foreach (var behaviour in behaviours)
             {
                 SetupUIEventHandlers(behaviour);
                 EditorUtility.SetDirty(behaviour);
@@ -31,70 +33,78 @@ namespace Limitex.MonoUI.Editor.Build
 
         private void SetupUIEventHandlers(MonoUIBehaviour behaviour)
         {
-            RegisterEventHandler<Button>(
-                behaviour,
-                nameof(MonoUIBehaviour.button),
-                nameof(MonoUIBehaviour.OnButtonClick),
-                SetEvent);
-            RegisterEventHandler<Toggle>(
-                behaviour,
-                nameof(MonoUIBehaviour.toggle),
-                nameof(MonoUIBehaviour.OnToggleValueChanged),
-                SetEvent);
-            RegisterEventHandler<ToggleGroup>(
-                behaviour,
-                nameof(MonoUIBehaviour.toggleGroup),
-                nameof(MonoUIBehaviour.OnToggleGroupValueChanged),
-                SetToggleGroupEvent);
-            RegisterEventHandler<Slider>(
-                behaviour,
-                nameof(MonoUIBehaviour.slider),
-                nameof(MonoUIBehaviour.OnSliderValueChanged),
-                SetEvent);
-            RegisterEventHandler<Scrollbar>(
-                behaviour,
-                nameof(MonoUIBehaviour.scrollbar),
-                nameof(MonoUIBehaviour.OnScrollbarValueChanged),
-                SetEvent);
-            RegisterEventHandler<ScrollRect>(
-                behaviour,
-                nameof(MonoUIBehaviour.scrollRect),
-                nameof(MonoUIBehaviour.OnScrollRectValueChanged),
-                SetEvent);
-            RegisterEventHandler<TMP_Dropdown>(
-                behaviour,
-                nameof(MonoUIBehaviour.tmpDropdown),
-                nameof(MonoUIBehaviour.OnDropdownValueChanged),
-                SetEvent);
-            RegisterEventHandler<TMP_InputField>(
-                behaviour,
-                nameof(MonoUIBehaviour.tmpInputField),
-                nameof(MonoUIBehaviour.OnInputFieldValueChanged),
-                SetEvent);
-            RegisterEventHandler<TMP_InputField>(
-                behaviour,
-                nameof(MonoUIBehaviour.tmpInputField),
-                nameof(MonoUIBehaviour.OnInputFieldEndEdit),
-                SetEvent);
-            RegisterEventHandler<TMP_InputField>(
-                behaviour,
-                nameof(MonoUIBehaviour.tmpInputField),
-                nameof(MonoUIBehaviour.OnInputFieldSelect),
-                SetEvent);
-            RegisterEventHandler<TMP_InputField>(
-                behaviour,
-                nameof(MonoUIBehaviour.tmpInputField),
-                nameof(MonoUIBehaviour.OnInputFieldDeselect),
-                SetEvent);
+            var components = behaviour.GetComponents<Component>();
+            if (components == null || components.Length == 0) return;
+            var componentTypes = new HashSet<System.Type>(components.Where(c => c != null).Select(c => c.GetType()));
+            var serializedObject = new SerializedObject(behaviour);
+
+            if (componentTypes.Contains(typeof(Button)))
+                RegisterEventHandler<Button>(
+                    behaviour, serializedObject,
+                    nameof(MonoUIBehaviour.button),
+                    nameof(MonoUIBehaviour.OnButtonClick),
+                    SetEvent);
+            if (componentTypes.Contains(typeof(Toggle)))
+                RegisterEventHandler<Toggle>(
+                    behaviour, serializedObject,
+                    nameof(MonoUIBehaviour.toggle),
+                    nameof(MonoUIBehaviour.OnToggleValueChanged),
+                    SetEvent);
+            if (componentTypes.Contains(typeof(ToggleGroup)))
+                RegisterEventHandler<ToggleGroup>(
+                    behaviour, serializedObject,
+                    nameof(MonoUIBehaviour.toggleGroup),
+                    nameof(MonoUIBehaviour.OnToggleGroupValueChanged),
+                    SetToggleGroupEvent);
+            if (componentTypes.Contains(typeof(Slider)))
+                RegisterEventHandler<Slider>(
+                    behaviour, serializedObject,
+                    nameof(MonoUIBehaviour.slider),
+                    nameof(MonoUIBehaviour.OnSliderValueChanged),
+                    SetEvent);
+            if (componentTypes.Contains(typeof(Scrollbar)))
+                RegisterEventHandler<Scrollbar>(
+                    behaviour, serializedObject,
+                    nameof(MonoUIBehaviour.scrollbar),
+                    nameof(MonoUIBehaviour.OnScrollbarValueChanged),
+                    SetEvent);
+            if (componentTypes.Contains(typeof(ScrollRect)))
+                RegisterEventHandler<ScrollRect>(
+                    behaviour, serializedObject,
+                    nameof(MonoUIBehaviour.scrollRect),
+                    nameof(MonoUIBehaviour.OnScrollRectValueChanged),
+                    SetEvent);
+            if (componentTypes.Contains(typeof(TMP_Dropdown)))
+                RegisterEventHandler<TMP_Dropdown>(
+                    behaviour, serializedObject,
+                    nameof(MonoUIBehaviour.tmpDropdown),
+                    nameof(MonoUIBehaviour.OnDropdownValueChanged),
+                    SetEvent);
+            if (componentTypes.Contains(typeof(TMP_InputField)))
+            {
+                var fieldName = nameof(MonoUIBehaviour.tmpInputField);
+                var inputFieldEvents = new string[]
+                {
+                    nameof(MonoUIBehaviour.OnInputFieldValueChanged),
+                    nameof(MonoUIBehaviour.OnInputFieldEndEdit),
+                    nameof(MonoUIBehaviour.OnInputFieldSelect),
+                    nameof(MonoUIBehaviour.OnInputFieldDeselect)
+                };
+
+                foreach (var eventName in inputFieldEvents)
+                {
+                    RegisterEventHandler<TMP_InputField>(
+                        behaviour, serializedObject, fieldName, eventName, SetEvent);
+                }
+            }
         }
 
-        private void RegisterEventHandler<T>(MonoUIBehaviour behaviour, string fieldName, string eventName, System.Action<T, MonoUIBehaviour, string> action) where T : Component
+        private void RegisterEventHandler<T>(MonoUIBehaviour behaviour, SerializedObject serializedObject, 
+            string fieldName, string eventName, System.Action<T, MonoUIBehaviour, string> action) where T : Component
         {
-            T component = behaviour.GetComponent<T>();
+            var component = behaviour.GetComponent<T>();
             if (component == null) return;
-
-            SerializedObject serializedObject = new SerializedObject(behaviour);
-            SerializedProperty property = serializedObject.FindProperty(fieldName);
+            var property = serializedObject.FindProperty(fieldName);
             if (property != null)
             {
                 property.objectReferenceValue = component;
@@ -110,7 +120,7 @@ namespace Limitex.MonoUI.Editor.Build
 
         private void SetEvent<T>(T component, MonoUIBehaviour behaviour, string eventName) where T : Component
         {
-            UdonUIEventSetter eventSetter = new UdonUIEventSetter(component, behaviour);
+            var eventSetter = new UdonUIEventSetter(component, behaviour);
             if (eventSetter.IsValid)
             {
                 eventSetter.SetEvent(eventName);
@@ -123,8 +133,8 @@ namespace Limitex.MonoUI.Editor.Build
 
         private void SetToggleGroupEvent(ToggleGroup toggleGroup, MonoUIBehaviour behaviour, string eventName)
         {
-            Toggle[] toggle = toggleGroup.GetComponentsInChildren<Toggle>();
-            foreach (Toggle t in toggle)
+            var toggles = toggleGroup.GetComponentsInChildren<Toggle>();
+            foreach (var t in toggles)
             {
                 SetEvent(t, behaviour, eventName);
             }
@@ -146,46 +156,32 @@ namespace Limitex.MonoUI.Editor.Build
             public void SetEvent(string eventName)
             {
                 if (!IsValid) return;
-
-                UnityEventBase eventBase = GetEventBase(eventName);
+                var eventBase = GetEventBase(eventName);
                 if (eventBase == null) return;
-
-                UnityEventTools.AddStringPersistentListener(
-                    eventBase,
-                    udonBehaviour.SendCustomEvent,
-                    eventName
-                );
-
+                UnityEventTools.AddStringPersistentListener(eventBase, udonBehaviour.SendCustomEvent, eventName);
                 EditorUtility.SetDirty(uiComponent);
             }
 
             private UnityEventBase GetEventBase(string eventName = "")
             {
-                if (uiComponent is Button button)
-                    return button.onClick;
-                if (uiComponent is Toggle toggle)
-                    return toggle.onValueChanged;
-                if (uiComponent is Slider slider)
-                    return slider.onValueChanged;
-                if (uiComponent is Scrollbar scrollbar)
-                    return scrollbar.onValueChanged;
-                if (uiComponent is ScrollRect scrollRect)
-                    return scrollRect.onValueChanged;
-                if (uiComponent is TMP_Dropdown dropdown)
-                    return dropdown.onValueChanged;
-                if (uiComponent is TMP_InputField inputField)
+                return uiComponent switch
                 {
-                    if (string.IsNullOrEmpty(eventName)) return null;
-                    if (eventName == nameof(MonoUIBehaviour.OnInputFieldValueChanged))
-                        return inputField.onValueChanged;
-                    if (eventName == nameof(MonoUIBehaviour.OnInputFieldEndEdit))
-                        return inputField.onEndEdit;
-                    if (eventName == nameof(MonoUIBehaviour.OnInputFieldSelect))
-                        return inputField.onSelect;
-                    if (eventName == nameof(MonoUIBehaviour.OnInputFieldDeselect))
-                        return inputField.onDeselect;
-                }
-                return null;
+                    Button button => button.onClick,
+                    Toggle toggle => toggle.onValueChanged,
+                    Slider slider => slider.onValueChanged,
+                    Scrollbar scrollbar => scrollbar.onValueChanged,
+                    ScrollRect scrollRect => scrollRect.onValueChanged,
+                    TMP_Dropdown dropdown => dropdown.onValueChanged,
+                    TMP_InputField inputField => eventName switch
+                    {
+                        nameof(MonoUIBehaviour.OnInputFieldValueChanged) => inputField.onValueChanged,
+                        nameof(MonoUIBehaviour.OnInputFieldEndEdit) => inputField.onEndEdit,
+                        nameof(MonoUIBehaviour.OnInputFieldSelect) => inputField.onSelect,
+                        nameof(MonoUIBehaviour.OnInputFieldDeselect) => inputField.onDeselect,
+                        _ => null
+                    },
+                    _ => null
+                };
             }
         }
     }
