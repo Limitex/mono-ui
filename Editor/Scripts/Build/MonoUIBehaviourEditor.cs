@@ -102,6 +102,8 @@ namespace Limitex.MonoUI.Editor.Build
         private void RegisterEventHandler<T>(MonoUIBehaviour behaviour, SerializedObject serializedObject, 
             string fieldName, string eventName, System.Action<T, MonoUIBehaviour, string> action) where T : Component
         {
+            if (!IsMethodOverridden(behaviour, eventName)) return;
+
             var component = behaviour.GetComponent<T>();
             if (component == null) return;
             var property = serializedObject.FindProperty(fieldName);
@@ -138,6 +140,17 @@ namespace Limitex.MonoUI.Editor.Build
             {
                 SetEvent(t, behaviour, eventName);
             }
+        }
+
+        private bool IsMethodOverridden(MonoUIBehaviour behaviour, string methodName)
+        {
+            var methodInfo = behaviour.GetType().GetMethod(
+                methodName,
+                System.Reflection.BindingFlags.Public |
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.DeclaredOnly
+            );
+            return methodInfo != null;
         }
 
         private class UdonUIEventSetter
