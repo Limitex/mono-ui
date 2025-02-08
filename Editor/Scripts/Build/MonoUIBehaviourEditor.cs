@@ -31,15 +31,39 @@ namespace Limitex.MonoUI.Editor.Build
 
         private void SetupUIEventHandlers(MonoUIBehaviour behaviour)
         {
-            RegisterEventHandler<Button>(behaviour, nameof(MonoUIBehaviour.button), nameof(MonoUIBehaviour.OnButtonClick));
-            RegisterEventHandler<Toggle>(behaviour, nameof(MonoUIBehaviour.toggle), nameof(MonoUIBehaviour.OnToggleValueChanged));
-            RegisterEventHandler<Slider>(behaviour, nameof(MonoUIBehaviour.slider), nameof(MonoUIBehaviour.OnSliderValueChanged));
-            RegisterEventHandler<Scrollbar>(behaviour, nameof(MonoUIBehaviour.scrollbar), nameof(MonoUIBehaviour.OnScrollbarValueChanged));
-            RegisterEventHandler<ScrollRect>(behaviour, nameof(MonoUIBehaviour.scrollRect), nameof(MonoUIBehaviour.OnScrollRectValueChanged));
-            RegisterEventHandler<TMP_Dropdown>(behaviour, nameof(MonoUIBehaviour.tmpDropdown), nameof(MonoUIBehaviour.OnDropdownValueChanged));
+            RegisterEventHandler<Button>(
+                behaviour,
+                nameof(MonoUIBehaviour.button),
+                nameof(MonoUIBehaviour.OnButtonClick),
+                SetEvent);
+            RegisterEventHandler<Toggle>(
+                behaviour,
+                nameof(MonoUIBehaviour.toggle),
+                nameof(MonoUIBehaviour.OnToggleValueChanged),
+                SetEvent);
+            RegisterEventHandler<Slider>(
+                behaviour,
+                nameof(MonoUIBehaviour.slider),
+                nameof(MonoUIBehaviour.OnSliderValueChanged),
+                SetEvent);
+            RegisterEventHandler<Scrollbar>(
+                behaviour,
+                nameof(MonoUIBehaviour.scrollbar),
+                nameof(MonoUIBehaviour.OnScrollbarValueChanged),
+                SetEvent);
+            RegisterEventHandler<ScrollRect>(
+                behaviour,
+                nameof(MonoUIBehaviour.scrollRect),
+                nameof(MonoUIBehaviour.OnScrollRectValueChanged),
+                SetEvent);
+            RegisterEventHandler<TMP_Dropdown>(
+                behaviour,
+                nameof(MonoUIBehaviour.tmpDropdown),
+                nameof(MonoUIBehaviour.OnDropdownValueChanged),
+                SetEvent);
         }
 
-        private void RegisterEventHandler<T>(MonoUIBehaviour behaviour, string fieldName, string eventName) where T : Component
+        private void RegisterEventHandler<T>(MonoUIBehaviour behaviour, string fieldName, string eventName, System.Action<T, MonoUIBehaviour, string> action) where T : Component
         {
             T component = behaviour.GetComponent<T>();
             if (component == null) return;
@@ -56,6 +80,11 @@ namespace Limitex.MonoUI.Editor.Build
                 Debug.LogError($"Field {fieldName} not found on {behaviour.name}");
             }
 
+            action(component, behaviour, eventName);
+        }
+
+        private void SetEvent<T>(T component, MonoUIBehaviour behaviour, string eventName) where T : Component
+        {
             UdonUIEventSetter eventSetter = new UdonUIEventSetter(component, behaviour);
             if (eventSetter.IsValid)
             {
