@@ -41,6 +41,11 @@ namespace Limitex.MonoUI.Editor.Build
                 nameof(MonoUIBehaviour.toggle),
                 nameof(MonoUIBehaviour.OnToggleValueChanged),
                 SetEvent);
+            RegisterEventHandler<ToggleGroup>(
+                behaviour,
+                nameof(MonoUIBehaviour.toggleGroup),
+                nameof(MonoUIBehaviour.OnToggleGroupValueChanged),
+                SetToggleGroupEvent);
             RegisterEventHandler<Slider>(
                 behaviour,
                 nameof(MonoUIBehaviour.slider),
@@ -93,6 +98,15 @@ namespace Limitex.MonoUI.Editor.Build
             else
             {
                 Debug.LogError($"UdonBehaviour not found on {behaviour.name}");
+            }
+        }
+
+        private void SetToggleGroupEvent(ToggleGroup toggleGroup, MonoUIBehaviour behaviour, string eventName)
+        {
+            Toggle[] toggle = toggleGroup.GetComponentsInChildren<Toggle>();
+            foreach (Toggle t in toggle)
+            {
+                SetEvent(t, behaviour, eventName);
             }
         }
 

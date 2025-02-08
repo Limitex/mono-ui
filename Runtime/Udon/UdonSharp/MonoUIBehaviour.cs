@@ -10,6 +10,7 @@ namespace Limitex.MonoUI.Udon
     {
         [HideInInspector] public Button button;
         [HideInInspector] public Toggle toggle;
+        [HideInInspector] public ToggleGroup toggleGroup;
         [HideInInspector] public Slider slider;
         [HideInInspector] public Scrollbar scrollbar;
         [HideInInspector] public ScrollRect scrollRect;
@@ -26,6 +27,12 @@ namespace Limitex.MonoUI.Udon
         {
             if (toggle != null) OnToggleValueChanged(toggle);
             else Debug.LogWarning("Toggle reference is null");
+        }
+
+        public void OnToggleGroupValueChanged()
+        {
+            if (toggleGroup != null) OnToggleGroupValueChanged(toggleGroup);
+            else Debug.LogWarning("ToggleGroup reference is null");
         }
 
         public void OnSliderValueChanged()
@@ -56,6 +63,8 @@ namespace Limitex.MonoUI.Udon
         public virtual void OnButtonClick(Button button) { }
 
         public virtual void OnToggleValueChanged(Toggle toggle) { }
+
+        public virtual void OnToggleGroupValueChanged(ToggleGroup toggleGroup) { }
 
         public virtual void OnSliderValueChanged(Slider slider) { }
 
