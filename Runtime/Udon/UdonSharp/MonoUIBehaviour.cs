@@ -5,7 +5,6 @@ using UdonSharp;
 
 namespace Limitex.MonoUI.Udon
 {
-    [DisallowMultipleComponent]
     public class MonoUIBehaviour : UdonSharpBehaviour
     {
         [HideInInspector] public Button button;
