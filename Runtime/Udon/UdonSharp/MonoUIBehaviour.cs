@@ -15,6 +15,7 @@ namespace Limitex.MonoUI.Udon
         [HideInInspector] public Scrollbar scrollbar;
         [HideInInspector] public ScrollRect scrollRect;
         [HideInInspector] public TMP_Dropdown tmpDropdown;
+        [HideInInspector] public TMP_InputField tmpInputField;
 
 
         public void OnButtonClick()
@@ -59,6 +60,30 @@ namespace Limitex.MonoUI.Udon
             else Debug.LogWarning("Dropdown reference is null");
         }
 
+        public void OnInputFieldValueChanged()
+        {
+            if (tmpInputField != null) OnInputFieldValueChanged(tmpInputField);
+            else Debug.LogWarning("InputField reference is null");
+        }
+
+        public void OnInputFieldEndEdit()
+        {
+            if (tmpInputField != null) OnInputFieldEndEdit(tmpInputField);
+            else Debug.LogWarning("InputField reference is null");
+        }
+
+        public void OnInputFieldSelect()
+        {
+            if (tmpInputField != null) OnInputFieldSelect(tmpInputField);
+            else Debug.LogWarning("InputField reference is null");
+        }
+
+        public void OnInputFieldDeselect()
+        {
+            if (tmpInputField != null) OnInputFieldDeselect(tmpInputField);
+            else Debug.LogWarning("InputField reference is null");
+        }
+
 
         public virtual void OnButtonClick(Button button) { }
 
@@ -73,5 +98,13 @@ namespace Limitex.MonoUI.Udon
         public virtual void OnScrollRectValueChanged(ScrollRect scrollRect) { }
 
         public virtual void OnDropdownValueChanged(TMP_Dropdown dropdown) { }
+
+        public virtual void OnInputFieldValueChanged(TMP_InputField inputField) { }
+
+        public virtual void OnInputFieldEndEdit(TMP_InputField inputField) { }
+
+        public virtual void OnInputFieldSelect(TMP_InputField inputField) { }
+
+        public virtual void OnInputFieldDeselect(TMP_InputField inputField) { }
     }
 }

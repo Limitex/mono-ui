@@ -66,6 +66,26 @@ namespace Limitex.MonoUI.Editor.Build
                 nameof(MonoUIBehaviour.tmpDropdown),
                 nameof(MonoUIBehaviour.OnDropdownValueChanged),
                 SetEvent);
+            RegisterEventHandler<TMP_InputField>(
+                behaviour,
+                nameof(MonoUIBehaviour.tmpInputField),
+                nameof(MonoUIBehaviour.OnInputFieldValueChanged),
+                SetEvent);
+            RegisterEventHandler<TMP_InputField>(
+                behaviour,
+                nameof(MonoUIBehaviour.tmpInputField),
+                nameof(MonoUIBehaviour.OnInputFieldEndEdit),
+                SetEvent);
+            RegisterEventHandler<TMP_InputField>(
+                behaviour,
+                nameof(MonoUIBehaviour.tmpInputField),
+                nameof(MonoUIBehaviour.OnInputFieldSelect),
+                SetEvent);
+            RegisterEventHandler<TMP_InputField>(
+                behaviour,
+                nameof(MonoUIBehaviour.tmpInputField),
+                nameof(MonoUIBehaviour.OnInputFieldDeselect),
+                SetEvent);
         }
 
         private void RegisterEventHandler<T>(MonoUIBehaviour behaviour, string fieldName, string eventName, System.Action<T, MonoUIBehaviour, string> action) where T : Component
@@ -127,7 +147,7 @@ namespace Limitex.MonoUI.Editor.Build
             {
                 if (!IsValid) return;
 
-                UnityEventBase eventBase = GetEventBase();
+                UnityEventBase eventBase = GetEventBase(eventName);
                 if (eventBase == null) return;
 
                 UnityEventTools.AddStringPersistentListener(
@@ -139,18 +159,33 @@ namespace Limitex.MonoUI.Editor.Build
                 EditorUtility.SetDirty(uiComponent);
             }
 
-            private UnityEventBase GetEventBase()
+            private UnityEventBase GetEventBase(string eventName = "")
             {
-                return uiComponent switch
+                if (uiComponent is Button button)
+                    return button.onClick;
+                if (uiComponent is Toggle toggle)
+                    return toggle.onValueChanged;
+                if (uiComponent is Slider slider)
+                    return slider.onValueChanged;
+                if (uiComponent is Scrollbar scrollbar)
+                    return scrollbar.onValueChanged;
+                if (uiComponent is ScrollRect scrollRect)
+                    return scrollRect.onValueChanged;
+                if (uiComponent is TMP_Dropdown dropdown)
+                    return dropdown.onValueChanged;
+                if (uiComponent is TMP_InputField inputField)
                 {
-                    Button button => button.onClick,
-                    Toggle toggle => toggle.onValueChanged,
-                    Slider slider => slider.onValueChanged,
-                    Scrollbar scrollbar => scrollbar.onValueChanged,
-                    ScrollRect scrollRect => scrollRect.onValueChanged,
-                    TMP_Dropdown dropdown => dropdown.onValueChanged,
-                    _ => null
-                };
+                    if (string.IsNullOrEmpty(eventName)) return null;
+                    if (eventName == nameof(MonoUIBehaviour.OnInputFieldValueChanged))
+                        return inputField.onValueChanged;
+                    if (eventName == nameof(MonoUIBehaviour.OnInputFieldEndEdit))
+                        return inputField.onEndEdit;
+                    if (eventName == nameof(MonoUIBehaviour.OnInputFieldSelect))
+                        return inputField.onSelect;
+                    if (eventName == nameof(MonoUIBehaviour.OnInputFieldDeselect))
+                        return inputField.onDeselect;
+                }
+                return null;
             }
         }
     }
