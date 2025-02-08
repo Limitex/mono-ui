@@ -1,7 +1,12 @@
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using UdonSharp;
+using UnityEngine;
+using UnityEngine.UI;
+
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
+using System;
+using System.Linq;
+#endif
 
 namespace Limitex.MonoUI.Udon
 {
@@ -16,6 +21,27 @@ namespace Limitex.MonoUI.Udon
         [HideInInspector] public TMP_Dropdown tmpDropdown;
         [HideInInspector] public TMP_InputField tmpInputField;
 
+#if !COMPILER_UDONSHARP && UNITY_EDITOR
+        private void OnValidate()
+        {
+            var requiredTypes = new Type[]
+            {
+                typeof(Button),
+                typeof(Toggle),
+                typeof(ToggleGroup),
+                typeof(Slider),
+                typeof(Scrollbar),
+                typeof(ScrollRect),
+                typeof(TMP_Dropdown),
+                typeof(TMP_InputField)
+            };
+
+            if (!requiredTypes.Any(t => GetComponent(t) != null))
+            {
+                Debug.LogError("This component requires either Button, Toggle, ToggleGroup, Slider, Scrollbar, ScrollRect, Dropdown, or InputField!", this);
+            }
+        }
+#endif
 
         public void OnButtonClick()
         {
