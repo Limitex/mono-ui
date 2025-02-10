@@ -1185,6 +1185,7 @@ GameObject:
   - component: {fileID: 27334604869066928}
   - component: {fileID: 2394891483849369652}
   - component: {fileID: 5391759487069088339}
+  - component: {fileID: 4582923186396903314}
   m_Layer: 0
   m_Name: Outline
   m_TagString: Untagged
@@ -1233,7 +1234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.09019608, g: 0.09019608, b: 0.105882354, a: 1}
+  m_Color: {r: 0.03137255, g: 0.03137255, b: 0.039215688, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1250,6 +1251,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4582923186396903314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8466367494453540034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf4fd317d56094695b01c71988dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentColors:
+  - component: {fileID: 5391759487069088339}
+    colorType: 121473958
+    transitionColorType: 897758581
+    colorFields: []
+  colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &8495484088131673883
 GameObject:
   m_ObjectHideFlags: 0
