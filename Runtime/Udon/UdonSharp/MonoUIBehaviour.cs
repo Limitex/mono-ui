@@ -43,6 +43,24 @@ namespace Limitex.MonoUI.Udon
         }
 #endif
 
+        protected void InvokeAllHandlers()
+        {
+            if (button != null) OnButtonClick();
+            if (toggle != null) OnToggleValueChanged();
+            if (toggleGroup != null) OnToggleGroupValueChanged();
+            if (slider != null) OnSliderValueChanged();
+            if (scrollbar != null) OnScrollbarValueChanged();
+            if (scrollRect != null) OnScrollRectValueChanged();
+            if (tmpDropdown != null) OnDropdownValueChanged();
+            if (tmpInputField != null)
+            {
+                OnInputFieldValueChanged();
+                OnInputFieldEndEdit();
+                OnInputFieldSelect();
+                OnInputFieldDeselect();
+            }
+        }
+
         public void OnButtonClick()
         {
             if (button != null) OnButtonClick(button);
