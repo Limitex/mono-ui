@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 5644954059281353047}
   - component: {fileID: 7836181348039132655}
   - component: {fileID: 1575733788015989737}
+  - component: {fileID: 7612977578020312620}
   m_Layer: 0
   m_Name: Avatar
   m_TagString: Untagged
@@ -282,6 +283,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.5
+--- !u!114 &7612977578020312620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700176764967547979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf4fd317d56094695b01c71988dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentColors:
+  - component: {fileID: 1575733788015989737}
+    colorType: 432419634
+    transitionColorType: 897758581
+    colorFields: []
+  colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &1703673897978674857
 GameObject:
   m_ObjectHideFlags: 0
