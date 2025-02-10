@@ -130,6 +130,7 @@ MonoBehaviour:
   - component: {fileID: 4265957618300456681}
     colorType: 694730041
     transitionColorType: 897758581
+    colorFields: []
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &883866793851467518
 GameObject:
@@ -401,6 +402,7 @@ GameObject:
   - component: {fileID: 6673695652487271263}
   - component: {fileID: 3180796133905755040}
   - component: {fileID: 8031698950841188415}
+  - component: {fileID: 7150974250067880227}
   m_Layer: 0
   m_Name: Avatar
   m_TagString: Untagged
@@ -467,6 +469,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.5
+--- !u!114 &7150974250067880227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5120322158930899704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf4fd317d56094695b01c71988dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentColors:
+  - component: {fileID: 8031698950841188415}
+    colorType: 432419634
+    transitionColorType: 897758581
+    colorFields: []
+  colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &5123759220614557435
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,6 +615,7 @@ MonoBehaviour:
   - component: {fileID: 8596036123963446967}
     colorType: 694730041
     transitionColorType: 897758581
+    colorFields: []
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &5921189209309178095
 GameObject:
@@ -607,6 +628,7 @@ GameObject:
   - component: {fileID: 4588881524019015683}
   - component: {fileID: 6038249303494318521}
   - component: {fileID: 2934864114324150240}
+  - component: {fileID: 6510435653827268285}
   m_Layer: 0
   m_Name: Underline
   m_TagString: Untagged
@@ -671,6 +693,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 15
+--- !u!114 &6510435653827268285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5921189209309178095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf4fd317d56094695b01c71988dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentColors:
+  - component: {fileID: 2934864114324150240}
+    colorType: 694730041
+    transitionColorType: 897758581
+    colorFields: []
+  colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &6462392199477874402
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,6 +786,7 @@ GameObject:
   - component: {fileID: 5146347187830717680}
   - component: {fileID: 4610103929258920742}
   - component: {fileID: 3595975811396130903}
+  - component: {fileID: 3983270919829774699}
   m_Layer: 0
   m_Name: World Log
   m_TagString: Untagged
@@ -806,6 +847,10 @@ MonoBehaviour:
   toastDescriptionText: {fileID: 7855543621298405202}
   Animator: {fileID: 4894454459482014301}
   toastTriggerName: MonoUI_Toast_isTrigger
+  _onlineColor: {r: 0.1764706, g: 0.7176471, b: 0.5372549, a: 1}
+  _offlineColor: {r: 0.8862745, g: 0.21176471, b: 0.43529412, a: 1}
+  _foregroundColor: {r: 0.9764706, g: 0.9764706, b: 0.9764706, a: 1}
+  _mutedColor: {r: 0.15294118, g: 0.15294118, b: 0.16470589, a: 1}
 --- !u!114 &3595975811396130903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -832,6 +877,32 @@ MonoBehaviour:
   serializedPublicVariablesBytesString: Ai8AAAAAATIAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAFQAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAAAAAAYBAAAAAAAAACcBBAAAAHQAeQBwAGUAAWgAAABTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAGUAcgBpAGMALgBMAGkAcwB0AGAAMQBbAFsAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4ALgBJAG4AdABlAHIAZgBhAGMAZQBzAC4ASQBVAGQAbwBuAFYAYQByAGkAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AXQBdACwAIABtAHMAYwBvAHIAbABpAGIAAQEJAAAAVgBhAHIAaQBhAGIAbABlAHMALwEAAAABaAAAAFMAeQBzAHQAZQBtAC4AQwBvAGwAbABlAGMAdABpAG8AbgBzAC4ARwBlAG4AZQByAGkAYwAuAEwAaQBzAHQAYAAxAFsAWwBWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAEkAbgB0AGUAcgBmAGEAYwBlAHMALgBJAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlACwAIABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgBdAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgABAAAABgEAAAAAAAAAAi8CAAAAAUkAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAUwB5AHMAdABlAG0ALgBJAG4AdAAzADIALAAgAG0AcwBjAG8AcgBsAGkAYgBdAF0ALAAgAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAAIAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAR8AAABfAF8AXwBVAGQAbwBuAFMAaABhAHIAcABCAGUAaABhAHYAaQBvAHUAcgBWAGUAcgBzAGkAbwBuAF8AXwBfACcBBAAAAHQAeQBwAGUAARYAAABTAHkAcwB0AGUAbQAuAEkAbgB0ADMAMgAsACAAbQBzAGMAbwByAGwAaQBiABcBBQAAAFYAYQBsAHUAZQACAAAABwUHBQcF
   publicVariablesUnityEngineObjects: []
   publicVariablesSerializationDataFormat: 0
+--- !u!114 &3983270919829774699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475573267752097799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf4fd317d56094695b01c71988dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentColors:
+  - component: {fileID: 4610103929258920742}
+    colorType: 412340151
+    transitionColorType: 897758581
+    colorFields:
+    - fieldName: _onlineColor
+      colorType: 464079137
+    - fieldName: _offlineColor
+      colorType: 876561572
+    - fieldName: _foregroundColor
+      colorType: 790920719
+    - fieldName: _mutedColor
+      colorType: 432419634
+  colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &6708579138408465273
 GameObject:
   m_ObjectHideFlags: 0

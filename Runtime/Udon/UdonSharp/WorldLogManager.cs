@@ -55,6 +55,12 @@ namespace Limitex.MonoUI.Udon
         [SerializeField] private Animator Animator;
         [SerializeField] private string toastTriggerName = "MonoUI_Toast_isTrigger";
 
+        [Header("Color Settings")]
+        [SerializeField] private Color _onlineColor;
+        [SerializeField] private Color _offlineColor;
+        [SerializeField] private Color _foregroundColor;
+        [SerializeField] private Color _mutedColor;
+
         #region Constant Fields
 
         private const string ENTER_TEXT = "Entered the room";
@@ -65,11 +71,6 @@ namespace Limitex.MonoUI.Udon
         private const string DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
         private readonly Encoding DATA_ENCODING = Encoding.UTF8;
-
-        private readonly Color ONLINE_COLOR = new Color(r: 0x2D / 255f, g: 0xB7 / 255f, b: 0x89 / 255f);
-        private readonly Color OFFLINE_COLOR = new Color(r: 0xE2 / 255f, g: 0x36 / 255f, b: 0x6F / 255f);
-        private readonly Color FOREGROUND_COLOR = new Color(r: 0xF9 / 255f, g: 0xF9 / 255f, b: 0xF9 / 255f);
-        private readonly Color MUTED_COLOR = new Color(r: 0xA1 / 255f, g: 0xA1 / 255f, b: 0xA9 / 255f);
 
         private readonly int[] TIMELINE_NAME_PATH = new int[] { 0, 1, 0, 0 };
         private readonly int[] TIMELINE_TIME_PATH = new int[] { 0, 1, 0, 1 };
@@ -278,9 +279,9 @@ namespace Limitex.MonoUI.Udon
             switch (timelineType)
             {
                 case TimelineType.Enter:
-                    return ONLINE_COLOR;
+                    return _onlineColor;
                 case TimelineType.Leave:
-                    return OFFLINE_COLOR;
+                    return _offlineColor;
                 default:
                     return Color.white;
             }
@@ -304,9 +305,9 @@ namespace Limitex.MonoUI.Udon
             switch (userlineType)
             {
                 case UserlineType.Online:
-                    return ONLINE_COLOR;
+                    return _onlineColor;
                 case UserlineType.Offline:
-                    return OFFLINE_COLOR;
+                    return _offlineColor;
                 default:
                     return Color.white;
             }
@@ -317,9 +318,9 @@ namespace Limitex.MonoUI.Udon
             switch (userlineType)
             {
                 case UserlineType.Online:
-                    return FOREGROUND_COLOR;
+                    return _foregroundColor;
                 case UserlineType.Offline:
-                    return MUTED_COLOR;
+                    return _mutedColor;
                 default:
                     return Color.white;
             }
