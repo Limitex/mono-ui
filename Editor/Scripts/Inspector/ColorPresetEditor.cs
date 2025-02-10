@@ -11,7 +11,7 @@ namespace Limitex.MonoUI.Editor.Inspector
     {
         private string textareaInput = "";
         private bool showInput = false;
-        private Vector2 _scrollPosition = Vector2.zero;
+        private Vector2 scrollPosition = Vector2.zero;
 
         public override void OnInspectorGUI()
         {
@@ -25,7 +25,7 @@ namespace Limitex.MonoUI.Editor.Inspector
 
             if (showInput)
             {
-                _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition, GUILayout.Height(200f));
+                scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Height(200f));
                 var style = new GUIStyle(EditorStyles.textArea) { wordWrap = true };
                 textareaInput = EditorGUILayout.TextArea(textareaInput, style, GUILayout.ExpandHeight(true));
                 EditorGUILayout.EndScrollView();
@@ -50,6 +50,9 @@ namespace Limitex.MonoUI.Editor.Inspector
             Undo.RecordObject(target, "Apply Color Preset");
             ColorPresetAsset.ParseJson(ref target, textareaInput);
             serializedObject.Update();
+            serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(target);
+            AssetDatabase.SaveAssets();
             Debug.Log("Color preset has been applied!");
         }
 
