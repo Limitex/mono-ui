@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using UnityEditor;
 using UnityEngine;
@@ -243,58 +244,58 @@ namespace Limitex.MonoUI.Editor.Data
         {
             try
             {
-                var preset = JsonConvert.DeserializeObject<dynamic>(json);
+                JObject preset = JsonConvert.DeserializeObject<JObject>(json);
 
-                target.Background = ParseHexColor(preset.baseColors.background.ToString());
-                target.Foreground = ParseHexColor(preset.baseColors.foreground.ToString());
+                target.Background = ParseHexColor(preset["baseColors"]["background"].ToString());
+                target.Foreground = ParseHexColor(preset["baseColors"]["foreground"].ToString());
 
-                target.Primary = ParseHexColor(preset.primary.@base.ToString());
-                target.PrimaryForeground = ParseHexColor(preset.primary.foreground.ToString());
+                target.Primary = ParseHexColor(preset["primary"]["base"].ToString());
+                target.PrimaryForeground = ParseHexColor(preset["primary"]["foreground"].ToString());
 
-                target.Secondary = ParseHexColor(preset.secondary.@base.ToString());
-                target.SecondaryForeground = ParseHexColor(preset.secondary.foreground.ToString());
+                target.Secondary = ParseHexColor(preset["secondary"]["base"].ToString());
+                target.SecondaryForeground = ParseHexColor(preset["secondary"]["foreground"].ToString());
 
-                target.Accent = ParseHexColor(preset.accent.@base.ToString());
-                target.AccentForeground = ParseHexColor(preset.accent.foreground.ToString());
+                target.Accent = ParseHexColor(preset["accent"]["base"].ToString());
+                target.AccentForeground = ParseHexColor(preset["accent"]["foreground"].ToString());
 
-                target.Muted = ParseHexColor(preset.muted.@base.ToString());
-                target.MutedForeground = ParseHexColor(preset.muted.foreground.ToString());
+                target.Muted = ParseHexColor(preset["muted"]["base"].ToString());
+                target.MutedForeground = ParseHexColor(preset["muted"]["foreground"].ToString());
 
-                target.Destructive = ParseHexColor(preset.destructive.@base.ToString());
-                target.DestructiveForeground = ParseHexColor(preset.destructive.foreground.ToString());
+                target.Destructive = ParseHexColor(preset["destructive"]["base"].ToString());
+                target.DestructiveForeground = ParseHexColor(preset["destructive"]["foreground"].ToString());
 
-                target.Chart1 = ParseHexColor(preset.chart.color1.ToString());
-                target.Chart2 = ParseHexColor(preset.chart.color2.ToString());
-                target.Chart3 = ParseHexColor(preset.chart.color3.ToString());
-                target.Chart4 = ParseHexColor(preset.chart.color4.ToString());
-                target.Chart5 = ParseHexColor(preset.chart.color5.ToString());
+                target.Chart1 = ParseHexColor(preset["chart"]["color1"].ToString());
+                target.Chart2 = ParseHexColor(preset["chart"]["color2"].ToString());
+                target.Chart3 = ParseHexColor(preset["chart"]["color3"].ToString());
+                target.Chart4 = ParseHexColor(preset["chart"]["color4"].ToString());
+                target.Chart5 = ParseHexColor(preset["chart"]["color5"].ToString());
 
-                target.Border = ParseHexColor(preset.others.border.ToString());
-                target.Ring = ParseHexColor(preset.others.ring.ToString());
-                target.MutedHoverBackground = ParseHexColor(preset.others.mutedHoverBackground.ToString());
+                target.Border = ParseHexColor(preset["others"]["border"].ToString());
+                target.Ring = ParseHexColor(preset["others"]["ring"].ToString());
+                target.MutedHoverBackground = ParseHexColor(preset["others"]["mutedHoverBackground"].ToString());
 
                 target.PrimaryTransition = new TransitionColor(
-                    ParseHexColor(preset.transitions.primary.normal.ToString()),
-                    ParseHexColor(preset.transitions.primary.highlighted.ToString()),
-                    ParseHexColor(preset.transitions.primary.pressed.ToString()),
-                    ParseHexColor(preset.transitions.primary.selected.ToString()),
-                    ParseHexColor(preset.transitions.primary.disabled.ToString())
+                    ParseHexColor(preset["transitions"]["primary"]["normal"].ToString()),
+                    ParseHexColor(preset["transitions"]["primary"]["highlighted"].ToString()),
+                    ParseHexColor(preset["transitions"]["primary"]["pressed"].ToString()),
+                    ParseHexColor(preset["transitions"]["primary"]["selected"].ToString()),
+                    ParseHexColor(preset["transitions"]["primary"]["disabled"].ToString())
                 );
 
                 target.GhostTransition = new TransitionColor(
-                    ParseHexColor(preset.transitions.ghost.normal.ToString()),
-                    ParseHexColor(preset.transitions.ghost.highlighted.ToString()),
-                    ParseHexColor(preset.transitions.ghost.pressed.ToString()),
-                    ParseHexColor(preset.transitions.ghost.selected.ToString()),
-                    ParseHexColor(preset.transitions.ghost.disabled.ToString())
+                    ParseHexColor(preset["transitions"]["ghost"]["normal"].ToString()),
+                    ParseHexColor(preset["transitions"]["ghost"]["highlighted"].ToString()),
+                    ParseHexColor(preset["transitions"]["ghost"]["pressed"].ToString()),
+                    ParseHexColor(preset["transitions"]["ghost"]["selected"].ToString()),
+                    ParseHexColor(preset["transitions"]["ghost"]["disabled"].ToString())
                 );
 
                 target.TranspanentTransition = new TransitionColor(
-                    ParseHexColor(preset.transitions.transparent.normal.ToString()),
-                    ParseHexColor(preset.transitions.transparent.highlighted.ToString()),
-                    ParseHexColor(preset.transitions.transparent.pressed.ToString()),
-                    ParseHexColor(preset.transitions.transparent.selected.ToString()),
-                    ParseHexColor(preset.transitions.transparent.disabled.ToString())
+                    ParseHexColor(preset["transitions"]["transparent"]["normal"].ToString()),
+                    ParseHexColor(preset["transitions"]["transparent"]["highlighted"].ToString()),
+                    ParseHexColor(preset["transitions"]["transparent"]["pressed"].ToString()),
+                    ParseHexColor(preset["transitions"]["transparent"]["selected"].ToString()),
+                    ParseHexColor(preset["transitions"]["transparent"]["disabled"].ToString())
                 );
             }
             catch (Exception ex)
