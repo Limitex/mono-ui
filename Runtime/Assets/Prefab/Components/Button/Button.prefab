@@ -138,9 +138,11 @@ MonoBehaviour:
   - component: {fileID: 400218260865982219}
     colorType: 598842521
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 7519226363930810512}
     colorType: 412340151
     transitionColorType: 607538827
+    colorFields: []
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1001 &5888148581440178210
 PrefabInstance:

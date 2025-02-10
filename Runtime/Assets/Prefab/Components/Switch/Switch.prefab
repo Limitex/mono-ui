@@ -559,10 +559,13 @@ MonoBehaviour:
   - component: {fileID: 4317178899873093162}
     colorType: 432419634
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 9090937451976390251}
     colorType: 598842521
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 3262854178820295099}
     colorType: 121473958
     transitionColorType: 897758581
+    colorFields: []
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}

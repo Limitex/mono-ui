@@ -92,4 +92,5 @@ MonoBehaviour:
   - component: {fileID: 386484352321572330}
     colorType: 471083450
     transitionColorType: 897758581
+    colorFields: []
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}

@@ -156,39 +156,51 @@ MonoBehaviour:
   - component: {fileID: 6003959928211490031}
     colorType: 711723875
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 3881850544116146397}
     colorType: 412340151
     transitionColorType: 194200482
+    colorFields: []
   - component: {fileID: 428229755229567611}
     colorType: 694730041
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 4716540127007501076}
     colorType: 121473958
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 507083093793055858}
     colorType: 694730041
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 8756160448151515194}
     colorType: 121473958
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 6014798079248520204}
     colorType: 412340151
     transitionColorType: 353005088
+    colorFields: []
   - component: {fileID: 2522681077492123169}
     colorType: 471083450
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 7013986230019361684}
     colorType: 598842521
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 5291176601768298343}
     colorType: 598842521
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 3517849093026542471}
     colorType: 412340151
     transitionColorType: 607538827
+    colorFields: []
   - component: {fileID: 8390189086522648770}
     colorType: 471083450
     transitionColorType: 897758581
+    colorFields: []
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &1282201168421789561
 GameObject:
