@@ -56,17 +56,17 @@ namespace Limitex.MonoUI.Editor.Components
             ValidateComponentColors();
         }
 
-        public bool ValidateComponentColors()
+        public int ValidateComponentColors()
         {
             if (colorPreset == null)
             {
                 Debug.LogError("ColorPresetAsset is not assigned!");
-                return false;
+                return 0;
             }
 
-            if (componentColors == null) return false;
+            if (componentColors == null) return 0;
 
-            bool success = false;
+            int success = 0;
             List<int> componentError = new List<int>();
             List<int> colorError = new List<int>();
 
@@ -117,7 +117,7 @@ namespace Limitex.MonoUI.Editor.Components
                     }
                 }
 
-                success = ApplyColors(ref componentColors[i]);
+                success += ApplyColors(ref componentColors[i]);
             }
 
             if (componentError.Count > 0)
@@ -133,19 +133,19 @@ namespace Limitex.MonoUI.Editor.Components
             return success;
         }
 
-        public bool SetColorPreset(ColorPresetAsset newPreset)
+        public int SetColorPreset(ColorPresetAsset newPreset)
         {
-            if (colorPreset == newPreset) return false;
+            if (colorPreset == newPreset) return 0;
             colorPreset = newPreset;
             OnValidate();
-            return true;
+            return 1;
         }
 
         #region Helper Methods
 
-        private bool ApplyColors(ref ComponentColor cc)
+        private int ApplyColors(ref ComponentColor cc)
         {
-            if (cc.component == null) return false;
+            if (cc.component == null) return 0;
 
             if (cc.component is Graphic graphic)
             {
@@ -165,7 +165,7 @@ namespace Limitex.MonoUI.Editor.Components
             }
             else if (cc.component is MonoBehaviour mono)
             {
-                bool changed = false;
+                int changed = 0;
                 foreach (var fieldInfo in cc.colorFields)
                 {
                     var field = mono.GetType().GetField(fieldInfo.fieldName,
@@ -178,32 +178,32 @@ namespace Limitex.MonoUI.Editor.Components
                     if ((Color)field.GetValue(mono) == color.Value) continue;
 
                     field.SetValue(mono, color.Value);
-                    changed = true;
+                    changed++;
                 }
                 return changed;
             }
 
-            return false;
+            return 0;
         }
 
-        private bool ApplyColorToUIElement<T>(T uiElement, Color color) where T : Graphic
+        private int ApplyColorToUIElement<T>(T uiElement, Color color) where T : Graphic
         {
-            if (uiElement == null) return false;
-            if (uiElement.color == color) return false;
+            if (uiElement == null) return 0;
+            if (uiElement.color == color) return 0;
 
             uiElement.color = color;
-            return true;
+            return 1;
         }
 
-        private bool ApplyTransitionColors(Selectable selectable, TransitionColor transitionColor)
+        private int ApplyTransitionColors(Selectable selectable, TransitionColor transitionColor)
         {
-            if (selectable == null) return false;
+            if (selectable == null) return 0;
             if (selectable.colors.normalColor == transitionColor.Normal &&
                     selectable.colors.highlightedColor == transitionColor.Highlighted &&
                     selectable.colors.pressedColor == transitionColor.Pressed &&
                     selectable.colors.selectedColor == transitionColor.Selected &&
                     selectable.colors.disabledColor == transitionColor.Disabled)
-                return false;
+                return 0;
 
             ColorBlock colorBlock = selectable.colors;
             colorBlock.normalColor = transitionColor.Normal;
@@ -213,7 +213,7 @@ namespace Limitex.MonoUI.Editor.Components
             colorBlock.disabledColor = transitionColor.Disabled;
             selectable.colors = colorBlock;
 
-            return true;
+            return 1;
         }
 
         private string GetHierarchyPath(Transform transform)
