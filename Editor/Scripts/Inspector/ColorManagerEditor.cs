@@ -23,28 +23,6 @@ namespace Limitex.MonoUI.Editor.Inspector
             Prefab
         }
 
-        private struct ProcessingStats
-        {
-            public int Total;
-            public int Processed;
-
-            public ProcessingStats(int total = 0, int processed = 0)
-            {
-                Total = total;
-                Processed = processed;
-            }
-
-            public float Progress => Total > 0 ? (float)Processed / Total : 0f;
-
-            public override string ToString() => $"Processed {Processed}/{Total} ({Progress * 100:F2}%)";
-
-            public static ProcessingStats operator +(ProcessingStats a, ProcessingStats b) => new ProcessingStats
-            {
-                Total = a.Total + b.Total,
-                Processed = a.Processed + b.Processed
-            };
-        }
-
         private readonly string[] SEATCH_DIRECTORIES = new[] { "Packages/dev.limitex.mono-ui/", "Assets/" };
 
         private static bool showChildColorManagers = false;
