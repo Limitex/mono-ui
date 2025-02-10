@@ -9,6 +9,7 @@ using UnityEditor.SceneManagement;
 using Limitex.MonoUI.Editor.Components;
 using Limitex.MonoUI.Editor.Data;
 using Limitex.MonoUI.Editor.Utils;
+using System.Reflection;
 
 namespace Limitex.MonoUI.Editor.Inspector
 {
@@ -265,29 +266,36 @@ namespace Limitex.MonoUI.Editor.Inspector
                     continue;
                 }
 
-                bool hasValidColorFields = false;
                 if (colorFields != null && colorFields.isArray)
                 {
+                    var fields = component.GetType().GetFields(
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.NonPublic | BindingFlags.Instance)
+                        .Select(field => field.Name).ToList();
+
+                    List<int> colorFieldsIndicesToRemove = new List<int>();
+
                     for (int j = 0; j < colorFields.arraySize; j++)
                     {
                         var fieldElement = colorFields.GetArrayElementAtIndex(j);
                         var fieldName = fieldElement.FindPropertyRelative("fieldName").stringValue;
                         var fieldColorType = (ColorType)fieldElement.FindPropertyRelative("colorType").intValue;
 
-                        if (!string.IsNullOrEmpty(fieldName) && fieldColorType != ColorType.None)
+                        if (string.IsNullOrEmpty(fieldName) || fieldColorType == ColorType.None)
                         {
-                            hasValidColorFields = true;
-                            break;
+                            colorFieldsIndicesToRemove.Add(j);
+                            continue;
+                        }
+                        else if (!fields.Contains(fieldName))
+                        {
+                            colorFieldsIndicesToRemove.Add(j);
+                            continue;
                         }
                     }
-                }
 
-                if (component == null ||
-                    (colorType == ColorType.None &&
-                     transitionColorType == TransitionColorType.None &&
-                     !hasValidColorFields))
-                {
-                    indicesToRemove.Add(i);
+                    foreach (int index in colorFieldsIndicesToRemove.OrderByDescending(i => i))
+                    {
+                        colorFields.DeleteArrayElementAtIndex(index);
+                    }
                 }
             }
 
