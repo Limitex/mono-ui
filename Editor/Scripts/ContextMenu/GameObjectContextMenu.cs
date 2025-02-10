@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace Limitex.MonoUI.Editor.ContextMenu
 {
-    public class ContextMenu
+    public class GameObjectContextMenu
     {
         #region Constants
         private const string PREFAB_ROOT = "Packages/dev.limitex.mono-ui/Runtime/Assets/Prefab/";
