@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 3878765601885268551}
   - component: {fileID: 1569634024326263503}
   - component: {fileID: 4265957618300456681}
+  - component: {fileID: 6230321072569863307}
   m_Layer: 0
   m_Name: Underline
   m_TagString: Untagged
@@ -113,6 +114,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 20
+--- !u!114 &6230321072569863307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51725576007037584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf4fd317d56094695b01c71988dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentColors:
+  - component: {fileID: 4265957618300456681}
+    colorType: 694730041
+    transitionColorType: 897758581
+  colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &883866793851467518
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,6 +514,7 @@ GameObject:
   - component: {fileID: 7277387756236989629}
   - component: {fileID: 7046638015474424639}
   - component: {fileID: 8596036123963446967}
+  - component: {fileID: 7667815989072390489}
   m_Layer: 0
   m_Name: Underline
   m_TagString: Untagged
@@ -560,6 +579,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 20
+--- !u!114 &7667815989072390489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5166617501443406661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf4fd317d56094695b01c71988dbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentColors:
+  - component: {fileID: 8596036123963446967}
+    colorType: 694730041
+    transitionColorType: 897758581
+  colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &5921189209309178095
 GameObject:
   m_ObjectHideFlags: 0
@@ -1426,19 +1462,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
-      propertyPath: componentColors.Array.data[0].colorType
-      value: 412340151
-      objectReference: {fileID: 0}
-    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
-        type: 3}
       propertyPath: componentColors.Array.data[0].component
       value: 
       objectReference: {fileID: 3864085010688712929}
-    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
-        type: 3}
-      propertyPath: componentColors.Array.data[1].colorType
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[1].component
@@ -1454,16 +1480,6 @@ PrefabInstance:
       propertyPath: componentColors.Array.data[2].component
       value: 
       objectReference: {fileID: 1308518938671639401}
-    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
-        type: 3}
-      propertyPath: componentColors.Array.data[0].transitionColorType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
-        type: 3}
-      propertyPath: componentColors.Array.data[1].transitionColorType
-      value: 897758581
-      objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[2].transitionColorType
@@ -5667,19 +5683,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
-      propertyPath: componentColors.Array.data[0].colorType
-      value: 412340151
-      objectReference: {fileID: 0}
-    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
-        type: 3}
       propertyPath: componentColors.Array.data[0].component
       value: 
       objectReference: {fileID: 4680910741047701039}
-    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
-        type: 3}
-      propertyPath: componentColors.Array.data[1].colorType
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[1].component
@@ -5695,16 +5701,6 @@ PrefabInstance:
       propertyPath: componentColors.Array.data[2].component
       value: 
       objectReference: {fileID: 7440747398987687335}
-    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
-        type: 3}
-      propertyPath: componentColors.Array.data[0].transitionColorType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
-        type: 3}
-      propertyPath: componentColors.Array.data[1].transitionColorType
-      value: 897758581
-      objectReference: {fileID: 0}
     - target: {fileID: 2243928401810589516, guid: 55525cbe7c5fbf246a70a28cc00a8736,
         type: 3}
       propertyPath: componentColors.Array.data[2].transitionColorType
