@@ -128,26 +128,26 @@ namespace Limitex.MonoUI.Udon
         }
 
 
-        public virtual void OnButtonClick(Button button) { }
+        protected virtual void OnButtonClick(Button button) { }
 
-        public virtual void OnToggleValueChanged(Toggle toggle) { }
+        protected virtual void OnToggleValueChanged(Toggle toggle) { }
 
-        public virtual void OnToggleGroupValueChanged(ToggleGroup toggleGroup) { }
+        protected virtual void OnToggleGroupValueChanged(ToggleGroup toggleGroup) { }
 
-        public virtual void OnSliderValueChanged(Slider slider) { }
+        protected virtual void OnSliderValueChanged(Slider slider) { }
 
-        public virtual void OnScrollbarValueChanged(Scrollbar scrollbar) { }
+        protected virtual void OnScrollbarValueChanged(Scrollbar scrollbar) { }
 
-        public virtual void OnScrollRectValueChanged(ScrollRect scrollRect) { }
+        protected virtual void OnScrollRectValueChanged(ScrollRect scrollRect) { }
 
-        public virtual void OnDropdownValueChanged(TMP_Dropdown dropdown) { }
+        protected virtual void OnDropdownValueChanged(TMP_Dropdown dropdown) { }
 
-        public virtual void OnInputFieldValueChanged(TMP_InputField inputField) { }
+        protected virtual void OnInputFieldValueChanged(TMP_InputField inputField) { }
 
-        public virtual void OnInputFieldEndEdit(TMP_InputField inputField) { }
+        protected virtual void OnInputFieldEndEdit(TMP_InputField inputField) { }
 
-        public virtual void OnInputFieldSelect(TMP_InputField inputField) { }
+        protected virtual void OnInputFieldSelect(TMP_InputField inputField) { }
 
-        public virtual void OnInputFieldDeselect(TMP_InputField inputField) { }
+        protected virtual void OnInputFieldDeselect(TMP_InputField inputField) { }
     }
 }

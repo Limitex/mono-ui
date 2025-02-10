@@ -147,6 +147,7 @@ namespace Limitex.MonoUI.Editor.Build
             var methodInfo = behaviour.GetType().GetMethod(
                 methodName,
                 System.Reflection.BindingFlags.Public |
+                System.Reflection.BindingFlags.NonPublic |
                 System.Reflection.BindingFlags.Instance |
                 System.Reflection.BindingFlags.DeclaredOnly
             );
