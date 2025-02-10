@@ -57,20 +57,16 @@ namespace Limitex.MonoUI.Editor.Inspector
 
             EditorGUILayout.LabelField("Color Manager Actions", EditorStyles.boldLabel);
 
-            DrawActionRow("Refresh All Color Managers",
-                () => UpdateAllColors(TargetScope.Hierarchy),
-                () => UpdateAllColors(TargetScope.Prefab));
-            DrawActionRow("Apply Preset to All Managers",
-                () => ApplyPresetToAllManagers(TargetScope.Hierarchy),
-                () => ApplyPresetToAllManagers(TargetScope.Prefab));
-            DrawActionRow("Remove Invalid ComponentColors",
-                () => RemoveInvalidComponentColors(TargetScope.Hierarchy),
-                () => RemoveInvalidComponentColors(TargetScope.Prefab));
-
-            if (GUILayout.Button("Apply Preset to Children"))
-            {
-                ApplyPresetToAllManagers(TargetScope.Hierarchy, ((ColorManager)target).transform);
-            }
+            DrawActionRow("Refresh All Color Managers", new() {
+                { "Hierarchies", () => UpdateAllColors(TargetScope.Hierarchy) },
+                { "Prefabs", () => UpdateAllColors(TargetScope.Prefab) }});
+            DrawActionRow("Apply Preset to All Managers", new() {
+                { "Children", () => ApplyPresetToAllManagers(TargetScope.Hierarchy, ((ColorManager)target).transform) },
+                { "Hierarchies", () => ApplyPresetToAllManagers(TargetScope.Hierarchy) },
+                { "Prefabs", () => ApplyPresetToAllManagers(TargetScope.Prefab) }});
+            DrawActionRow("Remove Invalid ComponentColors", new() {
+                { "Hierarchies", () => RemoveInvalidComponentColors(TargetScope.Hierarchy) },
+                { "Prefabs",() => RemoveInvalidComponentColors(TargetScope.Prefab) }});
 
             EditorGUILayout.Space(10);
 
@@ -113,32 +109,20 @@ namespace Limitex.MonoUI.Editor.Inspector
 
         #region Draw Methods
 
-        private void DrawActionRow(string label, Action hierarchiesAction, Action prefabsAction)
+        private void DrawActionRow(string label, Dictionary<string, Action> actions)
         {
+            EditorGUILayout.Space(5);
+            EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
             EditorGUILayout.BeginHorizontal();
-
-            try
+            foreach (var action in actions)
             {
-                EditorGUILayout.LabelField(label);
-
-                GUILayout.FlexibleSpace();
-
-                if (GUILayout.Button("Hierarchies", GUILayout.Width(80)))
+                if (GUILayout.Button(action.Key))
                 {
-                    hierarchiesAction.Invoke();
-                    GUIUtility.ExitGUI();
-                }
-
-                if (GUILayout.Button("Prefabs", GUILayout.Width(80)))
-                {
-                    prefabsAction.Invoke();
+                    action.Value.Invoke();
                     GUIUtility.ExitGUI();
                 }
             }
-            finally
-            {
-                EditorGUILayout.EndHorizontal();
-            }
+            EditorGUILayout.EndHorizontal();
         }
 
         private void DrawChildColorManagerPositions()
