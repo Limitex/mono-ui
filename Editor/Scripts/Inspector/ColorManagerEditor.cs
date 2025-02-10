@@ -51,6 +51,8 @@ namespace Limitex.MonoUI.Editor.Inspector
 
         public override void OnInspectorGUI()
         {
+            var colorManager = ((ColorManager)target).transform;
+
             DrawDefaultInspector();
 
             EditorGUILayout.Space(10);
@@ -58,13 +60,15 @@ namespace Limitex.MonoUI.Editor.Inspector
             EditorGUILayout.LabelField("Color Manager Actions", EditorStyles.boldLabel);
 
             DrawActionRow("Refresh All Color Managers", new() {
+                { "Children", () => UpdateAllColors(TargetScope.Hierarchy, colorManager) },
                 { "Hierarchies", () => UpdateAllColors(TargetScope.Hierarchy) },
                 { "Prefabs", () => UpdateAllColors(TargetScope.Prefab) }});
             DrawActionRow("Apply Preset to All Managers", new() {
-                { "Children", () => ApplyPresetToAllManagers(TargetScope.Hierarchy, ((ColorManager)target).transform) },
+                { "Children", () => ApplyPresetToAllManagers(TargetScope.Hierarchy, colorManager) },
                 { "Hierarchies", () => ApplyPresetToAllManagers(TargetScope.Hierarchy) },
                 { "Prefabs", () => ApplyPresetToAllManagers(TargetScope.Prefab) }});
             DrawActionRow("Remove Invalid ComponentColors", new() {
+                { "Children", () => RemoveInvalidComponentColors(TargetScope.Hierarchy, colorManager) },
                 { "Hierarchies", () => RemoveInvalidComponentColors(TargetScope.Hierarchy) },
                 { "Prefabs",() => RemoveInvalidComponentColors(TargetScope.Prefab) }});
 
@@ -79,10 +83,10 @@ namespace Limitex.MonoUI.Editor.Inspector
 
         #region Action Methods
 
-        private void UpdateAllColors(TargetScope targetScope)
+        private void UpdateAllColors(TargetScope targetScope, Transform parent = null)
         {
             ProcessingStats processingStats = ProcessManagersIn(targetScope, "Update Colors", 
-                manager => manager.ValidateComponentColors());
+                manager => manager.ValidateComponentColors(), parent);
             string logMessage = targetScope == TargetScope.Hierarchy ? "hierarchy" : "prefabs";
             Debug.Log($"Updated {processingStats} ColorManager(s) in {logMessage}.");
         }
@@ -97,10 +101,10 @@ namespace Limitex.MonoUI.Editor.Inspector
             Debug.Log($"Applied new preset to {processingStats} ColorManager(s) in {logMessage}.");
         }
 
-        private void RemoveInvalidComponentColors(TargetScope targetScope)
+        private void RemoveInvalidComponentColors(TargetScope targetScope, Transform parent = null)
         {
             ProcessingStats processingStats = ProcessManagersIn(targetScope, "Remove Invalid ComponentColors", 
-                manager => RemoveInvalidComponents(manager));
+                manager => RemoveInvalidComponents(manager), parent);
             string logMessage = targetScope == TargetScope.Hierarchy ? "hierarchy" : "prefabs";
             Debug.Log($"Removed {processingStats} invalid ComponentColors from {logMessage}.");
         }
@@ -173,7 +177,7 @@ namespace Limitex.MonoUI.Editor.Inspector
 
         #region Helper Methods
 
-        private ProcessingStats ProcessManagersIn(TargetScope targetScope, string undoRecordText, Func<ColorManager, bool> action, Transform parent = null)
+        private ProcessingStats ProcessManagersIn(TargetScope targetScope, string undoRecordText, Func<ColorManager, bool> action, Transform parent)
         {
             ProcessingStats ProcessManagerAction(ColorManager manager) => new ProcessingStats(1, action(manager) ? 1 : 0);
             ProcessingStats processingStats = new ProcessingStats();
