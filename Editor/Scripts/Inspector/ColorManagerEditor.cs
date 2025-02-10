@@ -67,6 +67,11 @@ namespace Limitex.MonoUI.Editor.Inspector
                 () => RemoveInvalidComponentColors(TargetScope.Hierarchy),
                 () => RemoveInvalidComponentColors(TargetScope.Prefab));
 
+            if (GUILayout.Button("Apply Preset to Children"))
+            {
+                ApplyPresetToAllManagers(TargetScope.Hierarchy, ((ColorManager)target).transform);
+            }
+
             EditorGUILayout.Space(10);
 
             showChildColorManagers = EditorGUILayout.Foldout(showChildColorManagers, "Child ColorManagers", true, EditorStyles.foldoutHeader);
@@ -86,12 +91,12 @@ namespace Limitex.MonoUI.Editor.Inspector
             Debug.Log($"Updated {processingStats} ColorManager(s) in {logMessage}.");
         }
 
-        private void ApplyPresetToAllManagers(TargetScope targetScope)
+        private void ApplyPresetToAllManagers(TargetScope targetScope, Transform parent = null)
         {
             ColorPresetAsset newPreset = GetColorPresetAsset();
             if (newPreset == null) return;
             ProcessingStats processingStats = ProcessManagersIn(targetScope, "Apply New Preset", 
-                manager => manager.SetColorPreset(newPreset));
+                manager => manager.SetColorPreset(newPreset), parent);
             string logMessage = targetScope == TargetScope.Hierarchy ? "hierarchy" : "prefabs";
             Debug.Log($"Applied new preset to {processingStats} ColorManager(s) in {logMessage}.");
         }
@@ -184,14 +189,14 @@ namespace Limitex.MonoUI.Editor.Inspector
 
         #region Helper Methods
 
-        private ProcessingStats ProcessManagersIn(TargetScope targetScope, string undoRecordText, Func<ColorManager, bool> action)
+        private ProcessingStats ProcessManagersIn(TargetScope targetScope, string undoRecordText, Func<ColorManager, bool> action, Transform parent = null)
         {
             ProcessingStats ProcessManagerAction(ColorManager manager) => new ProcessingStats(1, action(manager) ? 1 : 0);
             ProcessingStats processingStats = new ProcessingStats();
             switch (targetScope)
             {
                 case TargetScope.Hierarchy:
-                    processingStats = ProcessManagersIn<HierarchyComponentFinder<ColorManager>>(ProcessManagerAction, undoRecordText, includeInactive: true);
+                    processingStats = ProcessManagersIn<HierarchyComponentFinder<ColorManager>>(ProcessManagerAction, undoRecordText, includeInactive: true, parent: parent);
                     break;
                 case TargetScope.Prefab:
                     if (PrefabStageUtility.GetCurrentPrefabStage() != null)
@@ -207,10 +212,10 @@ namespace Limitex.MonoUI.Editor.Inspector
             return processingStats;
         }
 
-        private ProcessingStats ProcessManagersIn<T>(Func<ColorManager, ProcessingStats> action, string undoRecordText, string guid = null, bool includeInactive = false) where T : ComponentFinderBase<ColorManager>
+        private ProcessingStats ProcessManagersIn<T>(Func<ColorManager, ProcessingStats> action, string undoRecordText, string guid = null, bool includeInactive = false, Transform parent = null) where T : ComponentFinderBase<ColorManager>
         {
             ProcessingStats processingStats = new ProcessingStats();
-            using (var finder = (T)Activator.CreateInstance(typeof(T), guid, includeInactive))
+            using (var finder = (T)Activator.CreateInstance(typeof(T), guid, includeInactive, parent))
             {
                 foreach (var manager in finder)
                 {
