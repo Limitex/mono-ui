@@ -9,6 +9,8 @@ using UnityEditor.SceneManagement;
 using Limitex.MonoUI.Editor.Components;
 using Limitex.MonoUI.Editor.Data;
 using Limitex.MonoUI.Editor.Utils;
+using System.Reflection;
+using UnityEngine.UI;
 
 namespace Limitex.MonoUI.Editor.Inspector
 {
@@ -248,8 +250,8 @@ namespace Limitex.MonoUI.Editor.Inspector
 
             if (componentColorsProperty == null || !componentColorsProperty.isArray) return false;
 
-            HashSet<UnityEngine.Object> seenComponents = new HashSet<UnityEngine.Object>();
-            List<int> indicesToRemove = new List<int>();
+            var components = new Dictionary<UnityEngine.Object, SerializedProperty>();
+            var invalidIndices = new List<int>();
 
             for (int i = 0; i < componentColorsProperty.arraySize; i++)
             {
@@ -258,25 +260,58 @@ namespace Limitex.MonoUI.Editor.Inspector
                 var colorType = (ColorType)element.FindPropertyRelative("colorType").intValue;
                 var transitionColorType = (TransitionColorType)element.FindPropertyRelative("transitionColorType").intValue;
 
-                if (component != null && !seenComponents.Add(component))
+                if (component == null ||
+                    ((component is Graphic or Selectable) && colorType == ColorType.None && transitionColorType == TransitionColorType.None) ||
+                    components.ContainsKey(component))
                 {
-                    indicesToRemove.Add(i);
+                    invalidIndices.Add(i);
                     continue;
                 }
 
-                if (component == null || (colorType == ColorType.None && transitionColorType == TransitionColorType.None))
-                {
-                    indicesToRemove.Add(i);
-                }
+                components.Add(component, element);
+
+                var colorFields = element.FindPropertyRelative("colorFields");
+                if (colorFields == null || !colorFields.isArray) continue;
+
+                CleanupInvalidColorFields(component, colorFields);
             }
 
-            foreach (int index in indicesToRemove.OrderByDescending(i => i))
+            foreach (int index in invalidIndices.OrderByDescending(i => i))
             {
                 componentColorsProperty.DeleteArrayElementAtIndex(index);
             }
 
             serializedObject.ApplyModifiedProperties();
-            return indicesToRemove.Count > 0;
+            return invalidIndices.Count > 0;
+        }
+
+        private void CleanupInvalidColorFields(UnityEngine.Object component, SerializedProperty colorFields)
+        {
+            var validFields = new HashSet<string>(
+                component.GetType()
+                    .GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                    .Select(field => field.Name));
+
+            var validColorFields = new Dictionary<string, SerializedProperty>();
+            var invalidFieldIndices = new List<int>();
+            for (int j = 0; j < colorFields.arraySize; j++)
+            {
+                var fieldElement = colorFields.GetArrayElementAtIndex(j);
+                var fieldName = fieldElement.FindPropertyRelative("fieldName").stringValue;
+                var fieldColorType = (ColorType)fieldElement.FindPropertyRelative("colorType").intValue;
+                if (string.IsNullOrEmpty(fieldName) || fieldColorType == ColorType.None || 
+                    !validFields.Contains(fieldName) || validColorFields.ContainsKey(fieldName))
+                {
+                    invalidFieldIndices.Add(j);
+                    continue;
+                }
+                validColorFields.Add(fieldName, fieldElement);
+            }
+
+            foreach (int index in invalidFieldIndices.OrderByDescending(i => i))
+            {
+                colorFields.DeleteArrayElementAtIndex(index);
+            }
         }
 
         #endregion

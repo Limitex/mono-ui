@@ -7,6 +7,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using Limitex.MonoUI.Editor.Data;
+using System.Reflection;
+using System.Linq;
 
 namespace Limitex.MonoUI.Editor.Components
 {
@@ -14,11 +16,19 @@ namespace Limitex.MonoUI.Editor.Components
     public class ColorManager : MonoBehaviour
     {
         [Serializable]
+        public struct ComponentColorFieldInfo
+        {
+            public string fieldName;
+            public ColorType colorType;
+        }
+
+        [Serializable]
         public struct ComponentColor
         {
             public Component component;
             public ColorType colorType;
             public TransitionColorType transitionColorType;
+            public ComponentColorFieldInfo[] colorFields;
         }
 
         [SerializeField] private ComponentColor[] componentColors;
@@ -69,19 +79,42 @@ namespace Limitex.MonoUI.Editor.Components
                 }
 
                 if (componentColors[i].colorType == ColorType.None &&
-                    componentColors[i].transitionColorType == TransitionColorType.None)
+                    componentColors[i].transitionColorType == TransitionColorType.None && 
+                    componentColors[i].colorFields.Length == 0)
                 {
                     colorError.Add(i);
                     continue;
                 }
 
-                if (componentColors[i].component is Selectable)
+                if (componentColors[i].colorFields.Any(item =>
+                    string.IsNullOrEmpty(item.fieldName) || item.colorType == ColorType.None))
+                {
+                    colorError.Add(i);
+                }
+
+                if (componentColors[i].component is Graphic)
+                {
+                    componentColors[i].transitionColorType = TransitionColorType.None;
+                    if (componentColors[i].colorType == 0)
+                        componentColors[i].colorType = ColorType.None;
+                    componentColors[i].colorFields = new ComponentColorFieldInfo[0];
+                }
+                else if (componentColors[i].component is Selectable)
                 {
                     componentColors[i].colorType = ColorType.None;
+                    if (componentColors[i].transitionColorType == 0)
+                        componentColors[i].transitionColorType = TransitionColorType.None;
+                    componentColors[i].colorFields = new ComponentColorFieldInfo[0];
                 }
                 else
                 {
+                    componentColors[i].colorType = ColorType.None;
                     componentColors[i].transitionColorType = TransitionColorType.None;
+                    for (int j = 0; j < componentColors[i].colorFields.Length; j++)
+                    {
+                        if (componentColors[i].colorFields[j].colorType == 0)
+                            componentColors[i].colorFields[j].colorType = ColorType.None;
+                    }
                 }
 
                 success = ApplyColors(ref componentColors[i]);
@@ -113,11 +146,10 @@ namespace Limitex.MonoUI.Editor.Components
         private bool ApplyColors(ref ComponentColor cc)
         {
             if (cc.component == null) return false;
-            Color? color = colorPreset?.GetColorByType(cc.colorType);
-            TransitionColor? transitionColor = colorPreset?.GetTransitionColorByType(cc.transitionColorType);
 
             if (cc.component is Graphic graphic)
             {
+                Color? color = colorPreset?.GetColorByType(cc.colorType);
                 if (color.HasValue)
                 {
                     return ApplyColorToUIElement(graphic, color.Value);
@@ -125,10 +157,30 @@ namespace Limitex.MonoUI.Editor.Components
             }
             else if (cc.component is Selectable selectable)
             {
+                TransitionColor? transitionColor = colorPreset?.GetTransitionColorByType(cc.transitionColorType);
                 if (transitionColor.HasValue)
                 {
                     return ApplyTransitionColors(selectable, transitionColor.Value);
                 }
+            }
+            else if (cc.component is MonoBehaviour mono)
+            {
+                bool changed = false;
+                foreach (var fieldInfo in cc.colorFields)
+                {
+                    var field = mono.GetType().GetField(fieldInfo.fieldName,
+                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    if (field == null) continue;
+
+                    Color? color = colorPreset?.GetColorByType(fieldInfo.colorType);
+                    if (!color.HasValue) continue;
+
+                    if ((Color)field.GetValue(mono) == color.Value) continue;
+
+                    field.SetValue(mono, color.Value);
+                    changed = true;
+                }
+                return changed;
             }
 
             return false;
