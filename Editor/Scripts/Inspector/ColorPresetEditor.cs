@@ -23,7 +23,8 @@ namespace Limitex.MonoUI.Editor.Inspector
             if (showInput)
             {
                 _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition, GUILayout.Height(200f));
-                textareaInput = EditorGUILayout.TextArea(textareaInput, GUILayout.ExpandHeight(true));
+                var style = new GUIStyle(EditorStyles.textArea) { wordWrap = true };
+                textareaInput = EditorGUILayout.TextArea(textareaInput, style, GUILayout.ExpandHeight(true));
                 EditorGUILayout.EndScrollView();
 
                 if (GUILayout.Button("Apply"))
