@@ -18,6 +18,9 @@ namespace Limitex.MonoUI.Editor.Inspector
             DrawDefaultInspector();
 
             EditorGUILayout.Space(10);
+
+            EditorGUILayout.LabelField("Color Preset Editor", EditorStyles.boldLabel);
+
             showInput = EditorGUILayout.Foldout(showInput, "Import Presets");
 
             if (showInput)
