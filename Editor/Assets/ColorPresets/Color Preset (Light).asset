@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af6f72c5e23b8fc46a8963a033110387, type: 3}
-  m_Name: DefaultColorPresetLight
+  m_Name: Color Preset (Light)
   m_EditorClassIdentifier: 
   Background: {r: 1, g: 1, b: 1, a: 1}
   Foreground: {r: 0.03529412, g: 0.03529412, b: 0.043137256, a: 1}
