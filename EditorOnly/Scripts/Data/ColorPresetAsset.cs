@@ -8,6 +8,8 @@ using UnityEngine;
 
 namespace Limitex.MonoUI.Editor.Data
 {
+    #region Type Definitions
+
     [Serializable]
     public struct TransitionColor
     {
@@ -61,6 +63,8 @@ namespace Limitex.MonoUI.Editor.Data
         Ghost = 194200482,
         Transparent = 353005088,
     }
+
+    #endregion
 
     [CreateAssetMenu(fileName = "NewColorPreset", menuName = "Mono UI/Color Preset")]
     public class ColorPresetAsset : ScriptableObject
@@ -121,6 +125,8 @@ namespace Limitex.MonoUI.Editor.Data
             new Color(1.0f, 1.0f, 1.0f, 0.8f),
             new Color(0.6313725490196078f, 0.6313725490196078f, 0.6627450980392157f));
 
+        #region Purse Methods
+
         public Color? GetColorByType(ColorType colorType)
         {
             return colorType switch
@@ -159,6 +165,10 @@ namespace Limitex.MonoUI.Editor.Data
                 _ => null
             };
         }
+
+        #endregion
+
+        #region Json Serialization
 
         public static string ConvertToJson(ColorPresetAsset target, Formatting formatting)
         {
@@ -317,6 +327,8 @@ namespace Limitex.MonoUI.Editor.Data
             Debug.LogWarning($"Failed to parse color: {hexColor}");
             return Color.white;
         }
+
+        #endregion
 
         #endregion
     }
