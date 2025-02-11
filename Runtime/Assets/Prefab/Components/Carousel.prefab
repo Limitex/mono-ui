@@ -354,12 +354,27 @@ MonoBehaviour:
   - component: {fileID: 846150720092573907}
     colorType: 598842521
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 5477745479549944269}
     colorType: 598842521
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 4087303548068328953}
     colorType: 598842521
     transitionColorType: 897758581
+    colorFields: []
+  - component: {fileID: 6969872628138280044}
+    colorType: 432419634
+    transitionColorType: 897758581
+    colorFields: []
+  - component: {fileID: 3155670882094141748}
+    colorType: 432419634
+    transitionColorType: 897758581
+    colorFields: []
+  - component: {fileID: 4403008795260304080}
+    colorType: 432419634
+    transitionColorType: 897758581
+    colorFields: []
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!95 &9067106107756845107
 Animator:
@@ -886,12 +901,15 @@ MonoBehaviour:
   - component: {fileID: 7419177092524148053}
     colorType: 471083450
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 802276975192146638}
     colorType: 412340151
     transitionColorType: 194200482
+    colorFields: []
   - component: {fileID: 8611701290539318935}
     colorType: 694730041
     transitionColorType: 897758581
+    colorFields: []
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &5375000660745153784
 GameObject:
@@ -1298,12 +1316,15 @@ MonoBehaviour:
   - component: {fileID: 8986009141871610990}
     colorType: 471083450
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 1252215501446712309}
     colorType: 412340151
     transitionColorType: 194200482
+    colorFields: []
   - component: {fileID: 7908436702990694316}
     colorType: 694730041
     transitionColorType: 897758581
+    colorFields: []
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &7474977791494213969
 GameObject:

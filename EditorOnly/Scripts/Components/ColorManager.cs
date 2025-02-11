@@ -7,6 +7,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using Limitex.MonoUI.Editor.Data;
+using System.Reflection;
+using System.Linq;
 
 namespace Limitex.MonoUI.Editor.Components
 {
@@ -14,11 +16,19 @@ namespace Limitex.MonoUI.Editor.Components
     public class ColorManager : MonoBehaviour
     {
         [Serializable]
+        public struct ComponentColorFieldInfo
+        {
+            public string fieldName;
+            public ColorType colorType;
+        }
+
+        [Serializable]
         public struct ComponentColor
         {
             public Component component;
             public ColorType colorType;
             public TransitionColorType transitionColorType;
+            public ComponentColorFieldInfo[] colorFields;
         }
 
         [SerializeField] private ComponentColor[] componentColors;
@@ -46,17 +56,17 @@ namespace Limitex.MonoUI.Editor.Components
             ValidateComponentColors();
         }
 
-        public bool ValidateComponentColors()
+        public int ValidateComponentColors()
         {
             if (colorPreset == null)
             {
                 Debug.LogError("ColorPresetAsset is not assigned!");
-                return false;
+                return 0;
             }
 
-            if (componentColors == null) return false;
+            if (componentColors == null) return 0;
 
-            bool success = false;
+            int success = 0;
             List<int> componentError = new List<int>();
             List<int> colorError = new List<int>();
 
@@ -69,22 +79,45 @@ namespace Limitex.MonoUI.Editor.Components
                 }
 
                 if (componentColors[i].colorType == ColorType.None &&
-                    componentColors[i].transitionColorType == TransitionColorType.None)
+                    componentColors[i].transitionColorType == TransitionColorType.None && 
+                    componentColors[i].colorFields.Length == 0)
                 {
                     colorError.Add(i);
                     continue;
                 }
 
-                if (componentColors[i].component is Selectable)
+                if (componentColors[i].colorFields.Any(item =>
+                    string.IsNullOrEmpty(item.fieldName) || item.colorType == ColorType.None))
+                {
+                    colorError.Add(i);
+                }
+
+                if (componentColors[i].component is Graphic)
+                {
+                    componentColors[i].transitionColorType = TransitionColorType.None;
+                    if (componentColors[i].colorType == 0)
+                        componentColors[i].colorType = ColorType.None;
+                    componentColors[i].colorFields = new ComponentColorFieldInfo[0];
+                }
+                else if (componentColors[i].component is Selectable)
                 {
                     componentColors[i].colorType = ColorType.None;
+                    if (componentColors[i].transitionColorType == 0)
+                        componentColors[i].transitionColorType = TransitionColorType.None;
+                    componentColors[i].colorFields = new ComponentColorFieldInfo[0];
                 }
                 else
                 {
+                    componentColors[i].colorType = ColorType.None;
                     componentColors[i].transitionColorType = TransitionColorType.None;
+                    for (int j = 0; j < componentColors[i].colorFields.Length; j++)
+                    {
+                        if (componentColors[i].colorFields[j].colorType == 0)
+                            componentColors[i].colorFields[j].colorType = ColorType.None;
+                    }
                 }
 
-                success = ApplyColors(ref componentColors[i]);
+                success += ApplyColors(ref componentColors[i]);
             }
 
             if (componentError.Count > 0)
@@ -100,24 +133,23 @@ namespace Limitex.MonoUI.Editor.Components
             return success;
         }
 
-        public bool SetColorPreset(ColorPresetAsset newPreset)
+        public int SetColorPreset(ColorPresetAsset newPreset)
         {
-            if (colorPreset == newPreset) return false;
+            if (colorPreset == newPreset) return 0;
             colorPreset = newPreset;
             OnValidate();
-            return true;
+            return 1;
         }
 
         #region Helper Methods
 
-        private bool ApplyColors(ref ComponentColor cc)
+        private int ApplyColors(ref ComponentColor cc)
         {
-            if (cc.component == null) return false;
-            Color? color = colorPreset?.GetColorByType(cc.colorType);
-            TransitionColor? transitionColor = colorPreset?.GetTransitionColorByType(cc.transitionColorType);
+            if (cc.component == null) return 0;
 
             if (cc.component is Graphic graphic)
             {
+                Color? color = colorPreset?.GetColorByType(cc.colorType);
                 if (color.HasValue)
                 {
                     return ApplyColorToUIElement(graphic, color.Value);
@@ -125,33 +157,53 @@ namespace Limitex.MonoUI.Editor.Components
             }
             else if (cc.component is Selectable selectable)
             {
+                TransitionColor? transitionColor = colorPreset?.GetTransitionColorByType(cc.transitionColorType);
                 if (transitionColor.HasValue)
                 {
                     return ApplyTransitionColors(selectable, transitionColor.Value);
                 }
             }
+            else if (cc.component is MonoBehaviour mono)
+            {
+                int changed = 0;
+                foreach (var fieldInfo in cc.colorFields)
+                {
+                    var field = mono.GetType().GetField(fieldInfo.fieldName,
+                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    if (field == null) continue;
 
-            return false;
+                    Color? color = colorPreset?.GetColorByType(fieldInfo.colorType);
+                    if (!color.HasValue) continue;
+
+                    if ((Color)field.GetValue(mono) == color.Value) continue;
+
+                    field.SetValue(mono, color.Value);
+                    changed++;
+                }
+                return changed;
+            }
+
+            return 0;
         }
 
-        private bool ApplyColorToUIElement<T>(T uiElement, Color color) where T : Graphic
+        private int ApplyColorToUIElement<T>(T uiElement, Color color) where T : Graphic
         {
-            if (uiElement == null) return false;
-            if (uiElement.color == color) return false;
+            if (uiElement == null) return 0;
+            if (uiElement.color == color) return 0;
 
             uiElement.color = color;
-            return true;
+            return 1;
         }
 
-        private bool ApplyTransitionColors(Selectable selectable, TransitionColor transitionColor)
+        private int ApplyTransitionColors(Selectable selectable, TransitionColor transitionColor)
         {
-            if (selectable == null) return false;
+            if (selectable == null) return 0;
             if (selectable.colors.normalColor == transitionColor.Normal &&
                     selectable.colors.highlightedColor == transitionColor.Highlighted &&
                     selectable.colors.pressedColor == transitionColor.Pressed &&
                     selectable.colors.selectedColor == transitionColor.Selected &&
                     selectable.colors.disabledColor == transitionColor.Disabled)
-                return false;
+                return 0;
 
             ColorBlock colorBlock = selectable.colors;
             colorBlock.normalColor = transitionColor.Normal;
@@ -161,7 +213,7 @@ namespace Limitex.MonoUI.Editor.Components
             colorBlock.disabledColor = transitionColor.Disabled;
             selectable.colors = colorBlock;
 
-            return true;
+            return 1;
         }
 
         private string GetHierarchyPath(Transform transform)

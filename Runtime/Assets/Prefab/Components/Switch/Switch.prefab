@@ -462,19 +462,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3342166798136427021}
-        m_TargetAssemblyTypeName: Limitex.MonoUI.Udon.SwitchManager, dev.limitex.mono-ui.udon
-        m_MethodName: SendCustomEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: ToggleSwitch
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 0
 --- !u!114 &5198089320718963270
 MonoBehaviour:
@@ -498,8 +486,15 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 3342166798136427021}
-  animator: {fileID: 136474084092588301}
+  button: {fileID: 0}
   toggle: {fileID: 4459262184116628633}
+  toggleGroup: {fileID: 0}
+  slider: {fileID: 0}
+  scrollbar: {fileID: 0}
+  scrollRect: {fileID: 0}
+  tmpDropdown: {fileID: 0}
+  tmpInputField: {fileID: 0}
+  animator: {fileID: 136474084092588301}
   switchParameterName: SwitchValueEnabled
 --- !u!114 &3342166798136427021
 MonoBehaviour:
@@ -564,10 +559,13 @@ MonoBehaviour:
   - component: {fileID: 4317178899873093162}
     colorType: 432419634
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 9090937451976390251}
     colorType: 598842521
     transitionColorType: 897758581
+    colorFields: []
   - component: {fileID: 3262854178820295099}
     colorType: 121473958
     transitionColorType: 897758581
+    colorFields: []
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}

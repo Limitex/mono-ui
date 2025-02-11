@@ -18,14 +18,19 @@ namespace Limitex.MonoUI.Editor.Utils
     {
         private List<PrefabAssetData> prefabAssetDatas = new List<PrefabAssetData>();
 
-        public PrefabComponentFinder(string guid, bool includeInactive = false) : base(guid, includeInactive) { }
+        public PrefabComponentFinder(string guid, bool includeInactive = false, Transform parent = null) : base(guid, includeInactive, parent) { }
 
-        protected override void FindComponents(string guid, bool includeInactive)
+        protected override void FindComponents(string guid = null, bool includeInactive = false, Transform parent = null)
         {
             if (string.IsNullOrEmpty(guid))
             {
-                Debug.LogWarning("GUID is null or empty.");
+                Debug.LogError("GUID is null or empty.");
                 return;
+            }
+
+            if (parent != null)
+            {
+                Debug.LogWarning("Parent is not null. Use HierarchyComponentFinder instead.");
             }
 
             string assetPath = AssetDatabase.GUIDToAssetPath(guid);

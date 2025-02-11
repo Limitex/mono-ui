@@ -9,6 +9,8 @@ using UnityEditor.SceneManagement;
 using Limitex.MonoUI.Editor.Components;
 using Limitex.MonoUI.Editor.Data;
 using Limitex.MonoUI.Editor.Utils;
+using System.Reflection;
+using UnityEngine.UI;
 
 namespace Limitex.MonoUI.Editor.Inspector
 {
@@ -21,49 +23,32 @@ namespace Limitex.MonoUI.Editor.Inspector
             Prefab
         }
 
-        private struct ProcessingStats
-        {
-            public int Total;
-            public int Processed;
-
-            public ProcessingStats(int total = 0, int processed = 0)
-            {
-                Total = total;
-                Processed = processed;
-            }
-
-            public float Progress => Total > 0 ? (float)Processed / Total : 0f;
-
-            public override string ToString() => $"Processed {Processed}/{Total} ({Progress * 100:F2}%)";
-
-            public static ProcessingStats operator +(ProcessingStats a, ProcessingStats b) => new ProcessingStats
-            {
-                Total = a.Total + b.Total,
-                Processed = a.Processed + b.Processed
-            };
-        }
-
         private readonly string[] SEATCH_DIRECTORIES = new[] { "Packages/dev.limitex.mono-ui/", "Assets/" };
 
         private static bool showChildColorManagers = false;
 
         public override void OnInspectorGUI()
         {
+            var colorManager = ((ColorManager)target).transform;
+
             DrawDefaultInspector();
 
             EditorGUILayout.Space(10);
 
             EditorGUILayout.LabelField("Color Manager Actions", EditorStyles.boldLabel);
 
-            DrawActionRow("Refresh All Color Managers",
-                () => UpdateAllColors(TargetScope.Hierarchy),
-                () => UpdateAllColors(TargetScope.Prefab));
-            DrawActionRow("Apply Preset to All Managers",
-                () => ApplyPresetToAllManagers(TargetScope.Hierarchy),
-                () => ApplyPresetToAllManagers(TargetScope.Prefab));
-            DrawActionRow("Remove Invalid ComponentColors",
-                () => RemoveInvalidComponentColors(TargetScope.Hierarchy),
-                () => RemoveInvalidComponentColors(TargetScope.Prefab));
+            DrawActionRow("Refresh All Color Managers", new() {
+                { "Children", () => UpdateAllColors(TargetScope.Hierarchy, colorManager) },
+                { "Hierarchies", () => UpdateAllColors(TargetScope.Hierarchy) },
+                { "Prefabs", () => UpdateAllColors(TargetScope.Prefab) }});
+            DrawActionRow("Apply Preset to All Managers", new() {
+                { "Children", () => ApplyPresetToAllManagers(TargetScope.Hierarchy, colorManager) },
+                { "Hierarchies", () => ApplyPresetToAllManagers(TargetScope.Hierarchy) },
+                { "Prefabs", () => ApplyPresetToAllManagers(TargetScope.Prefab) }});
+            DrawActionRow("Remove Invalid ComponentColors", new() {
+                { "Children", () => RemoveInvalidComponentColors(TargetScope.Hierarchy, colorManager) },
+                { "Hierarchies", () => RemoveInvalidComponentColors(TargetScope.Hierarchy) },
+                { "Prefabs",() => RemoveInvalidComponentColors(TargetScope.Prefab) }});
 
             EditorGUILayout.Space(10);
 
@@ -76,28 +61,28 @@ namespace Limitex.MonoUI.Editor.Inspector
 
         #region Action Methods
 
-        private void UpdateAllColors(TargetScope targetScope)
+        private void UpdateAllColors(TargetScope targetScope, Transform parent = null)
         {
-            ProcessingStats processingStats = ProcessManagersIn(targetScope, "Update Colors", 
-                manager => manager.ValidateComponentColors());
+            int processingStats = ProcessManagersIn(targetScope, "Update Colors", 
+                manager => manager.ValidateComponentColors(), parent);
             string logMessage = targetScope == TargetScope.Hierarchy ? "hierarchy" : "prefabs";
             Debug.Log($"Updated {processingStats} ColorManager(s) in {logMessage}.");
         }
 
-        private void ApplyPresetToAllManagers(TargetScope targetScope)
+        private void ApplyPresetToAllManagers(TargetScope targetScope, Transform parent = null)
         {
             ColorPresetAsset newPreset = GetColorPresetAsset();
             if (newPreset == null) return;
-            ProcessingStats processingStats = ProcessManagersIn(targetScope, "Apply New Preset", 
-                manager => manager.SetColorPreset(newPreset));
+            int processingStats = ProcessManagersIn(targetScope, "Apply New Preset", 
+                manager => manager.SetColorPreset(newPreset), parent);
             string logMessage = targetScope == TargetScope.Hierarchy ? "hierarchy" : "prefabs";
             Debug.Log($"Applied new preset to {processingStats} ColorManager(s) in {logMessage}.");
         }
 
-        private void RemoveInvalidComponentColors(TargetScope targetScope)
+        private void RemoveInvalidComponentColors(TargetScope targetScope, Transform parent = null)
         {
-            ProcessingStats processingStats = ProcessManagersIn(targetScope, "Remove Invalid ComponentColors", 
-                manager => RemoveInvalidComponents(manager));
+            int processingStats = ProcessManagersIn(targetScope, "Remove Invalid ComponentColors", 
+                manager => RemoveInvalidComponents(manager), parent);
             string logMessage = targetScope == TargetScope.Hierarchy ? "hierarchy" : "prefabs";
             Debug.Log($"Removed {processingStats} invalid ComponentColors from {logMessage}.");
         }
@@ -106,32 +91,20 @@ namespace Limitex.MonoUI.Editor.Inspector
 
         #region Draw Methods
 
-        private void DrawActionRow(string label, Action hierarchiesAction, Action prefabsAction)
+        private void DrawActionRow(string label, Dictionary<string, Action> actions)
         {
+            EditorGUILayout.Space(5);
+            EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
             EditorGUILayout.BeginHorizontal();
-
-            try
+            foreach (var action in actions)
             {
-                EditorGUILayout.LabelField(label);
-
-                GUILayout.FlexibleSpace();
-
-                if (GUILayout.Button("Hierarchies", GUILayout.Width(80)))
+                if (GUILayout.Button(action.Key))
                 {
-                    hierarchiesAction.Invoke();
-                    GUIUtility.ExitGUI();
-                }
-
-                if (GUILayout.Button("Prefabs", GUILayout.Width(80)))
-                {
-                    prefabsAction.Invoke();
+                    action.Value.Invoke();
                     GUIUtility.ExitGUI();
                 }
             }
-            finally
-            {
-                EditorGUILayout.EndHorizontal();
-            }
+            EditorGUILayout.EndHorizontal();
         }
 
         private void DrawChildColorManagerPositions()
@@ -182,33 +155,32 @@ namespace Limitex.MonoUI.Editor.Inspector
 
         #region Helper Methods
 
-        private ProcessingStats ProcessManagersIn(TargetScope targetScope, string undoRecordText, Func<ColorManager, bool> action)
+        private int ProcessManagersIn(TargetScope targetScope, string undoRecordText, Func<ColorManager, int> action, Transform parent)
         {
-            ProcessingStats ProcessManagerAction(ColorManager manager) => new ProcessingStats(1, action(manager) ? 1 : 0);
-            ProcessingStats processingStats = new ProcessingStats();
+            int processingStats = 0;
             switch (targetScope)
             {
                 case TargetScope.Hierarchy:
-                    processingStats = ProcessManagersIn<HierarchyComponentFinder<ColorManager>>(ProcessManagerAction, undoRecordText, includeInactive: true);
+                    processingStats = ProcessManagersIn<HierarchyComponentFinder<ColorManager>>(action, undoRecordText, includeInactive: true, parent: parent);
                     break;
                 case TargetScope.Prefab:
                     if (PrefabStageUtility.GetCurrentPrefabStage() != null)
                     {
                         Debug.LogWarning("Prefab mode detected. Prefab actions cannot be performed.");
-                        return new ProcessingStats();
+                        return 0;
                     }
                     string[] guids = AssetDatabase.FindAssets("t:Prefab", SEATCH_DIRECTORIES);
                     foreach (string guid in guids)
-                        processingStats += ProcessManagersIn<PrefabComponentFinder<ColorManager>>(ProcessManagerAction, undoRecordText, guid, includeInactive: true);
+                        processingStats += ProcessManagersIn<PrefabComponentFinder<ColorManager>>(action, undoRecordText, guid, includeInactive: true);
                     break;
             }
             return processingStats;
         }
 
-        private ProcessingStats ProcessManagersIn<T>(Func<ColorManager, ProcessingStats> action, string undoRecordText, string guid = null, bool includeInactive = false) where T : ComponentFinderBase<ColorManager>
+        private int ProcessManagersIn<T>(Func<ColorManager, int> action, string undoRecordText, string guid = null, bool includeInactive = false, Transform parent = null) where T : ComponentFinderBase<ColorManager>
         {
-            ProcessingStats processingStats = new ProcessingStats();
-            using (var finder = (T)Activator.CreateInstance(typeof(T), guid, includeInactive))
+            int processingStats = 0;
+            using (var finder = (T)Activator.CreateInstance(typeof(T), guid, includeInactive, parent))
             {
                 foreach (var manager in finder)
                 {
@@ -241,15 +213,15 @@ namespace Limitex.MonoUI.Editor.Inspector
             return newPreset;
         }
 
-        private bool RemoveInvalidComponents(ColorManager manager)
+        private int RemoveInvalidComponents(ColorManager manager)
         {
             var serializedObject = new SerializedObject(manager);
             var componentColorsProperty = serializedObject.FindProperty("componentColors");
 
-            if (componentColorsProperty == null || !componentColorsProperty.isArray) return false;
+            if (componentColorsProperty == null || !componentColorsProperty.isArray) return 0;
 
-            HashSet<UnityEngine.Object> seenComponents = new HashSet<UnityEngine.Object>();
-            List<int> indicesToRemove = new List<int>();
+            var components = new Dictionary<UnityEngine.Object, SerializedProperty>();
+            var invalidIndices = new List<int>();
 
             for (int i = 0; i < componentColorsProperty.arraySize; i++)
             {
@@ -258,25 +230,58 @@ namespace Limitex.MonoUI.Editor.Inspector
                 var colorType = (ColorType)element.FindPropertyRelative("colorType").intValue;
                 var transitionColorType = (TransitionColorType)element.FindPropertyRelative("transitionColorType").intValue;
 
-                if (component != null && !seenComponents.Add(component))
+                if (component == null ||
+                    ((component is Graphic or Selectable) && colorType == ColorType.None && transitionColorType == TransitionColorType.None) ||
+                    components.ContainsKey(component))
                 {
-                    indicesToRemove.Add(i);
+                    invalidIndices.Add(i);
                     continue;
                 }
 
-                if (component == null || (colorType == ColorType.None && transitionColorType == TransitionColorType.None))
-                {
-                    indicesToRemove.Add(i);
-                }
+                components.Add(component, element);
+
+                var colorFields = element.FindPropertyRelative("colorFields");
+                if (colorFields == null || !colorFields.isArray) continue;
+
+                CleanupInvalidColorFields(component, colorFields);
             }
 
-            foreach (int index in indicesToRemove.OrderByDescending(i => i))
+            foreach (int index in invalidIndices.OrderByDescending(i => i))
             {
                 componentColorsProperty.DeleteArrayElementAtIndex(index);
             }
 
             serializedObject.ApplyModifiedProperties();
-            return indicesToRemove.Count > 0;
+            return invalidIndices.Count;
+        }
+
+        private void CleanupInvalidColorFields(UnityEngine.Object component, SerializedProperty colorFields)
+        {
+            var validFields = new HashSet<string>(
+                component.GetType()
+                    .GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                    .Select(field => field.Name));
+
+            var validColorFields = new Dictionary<string, SerializedProperty>();
+            var invalidFieldIndices = new List<int>();
+            for (int j = 0; j < colorFields.arraySize; j++)
+            {
+                var fieldElement = colorFields.GetArrayElementAtIndex(j);
+                var fieldName = fieldElement.FindPropertyRelative("fieldName").stringValue;
+                var fieldColorType = (ColorType)fieldElement.FindPropertyRelative("colorType").intValue;
+                if (string.IsNullOrEmpty(fieldName) || fieldColorType == ColorType.None || 
+                    !validFields.Contains(fieldName) || validColorFields.ContainsKey(fieldName))
+                {
+                    invalidFieldIndices.Add(j);
+                    continue;
+                }
+                validColorFields.Add(fieldName, fieldElement);
+            }
+
+            foreach (int index in invalidFieldIndices.OrderByDescending(i => i))
+            {
+                colorFields.DeleteArrayElementAtIndex(index);
+            }
         }
 
         #endregion

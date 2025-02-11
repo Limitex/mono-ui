@@ -370,6 +370,7 @@ MonoBehaviour:
   - component: {fileID: 3240766117169723684}
     colorType: 471083450
     transitionColorType: 897758581
+    colorFields: []
   colorPreset: {fileID: 11400000, guid: 8fa99d3a39f9d6144a6fa842ac872a17, type: 2}
 --- !u!1 &1361299913255099237
 GameObject:

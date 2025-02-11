@@ -1,22 +1,26 @@
-﻿
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
-using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Limitex.MonoUI.Udon
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class SwitchManager : UdonSharpBehaviour
+    public class SwitchManager : MonoUIBehaviour
     {
         [SerializeField] private Animator animator;
-        [SerializeField] private Toggle toggle;
         [SerializeField] private string switchParameterName;
 
-        void Start() => animator.SetBool(switchParameterName, toggle.isOn);
+        private int parameterHash;
 
-        public void ToggleSwitch() => animator.SetBool(switchParameterName, toggle.isOn);
+        void Start()
+        {
+            parameterHash = Animator.StringToHash(switchParameterName);
+            InvokeAllHandlers();
+        }
+
+        void OnEnable() => InvokeAllHandlers();
+
+        protected override void OnToggleValueChanged(Toggle toggle) => animator.SetBool(parameterHash, toggle.isOn);
     }
 }
 
