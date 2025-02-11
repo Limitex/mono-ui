@@ -66,7 +66,7 @@ namespace Limitex.MonoUI.Editor.Data
 
     #endregion
 
-    [CreateAssetMenu(fileName = "NewColorPreset", menuName = "Mono UI/Color Preset")]
+    [CreateAssetMenu(fileName = "NewColorPreset", menuName = "Mono UI/Color Preset/New Color Preset")]
     public class ColorPresetAsset : ScriptableObject
     {
         [Header("Base Colors")]
