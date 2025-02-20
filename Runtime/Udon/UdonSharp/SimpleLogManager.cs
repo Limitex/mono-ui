@@ -35,6 +35,7 @@ namespace Limitex.MonoUI.Udon
         [SerializeField] private ScrollRect _scrollRect;
         [SerializeField] private Transform _parentTransform;
         [SerializeField] private GameObject _textPrefab;
+        [SerializeField] private GameObject _dateSperatorPrefab;
 
         [Header("Settings")]
         [SerializeField] private int _dateFontSize;
@@ -47,6 +48,14 @@ namespace Limitex.MonoUI.Udon
         private const int BYTE_SIZE = 1;
         private const int ENTRY_SIZE = UINT_SIZE + BYTE_SIZE + BYTE_SIZE; // timestamp + logType + nameLength
         private readonly DateTime EPOCH = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc); // 2025-01-01 00:00:00 UTC as reference point
+        private readonly int[] DATE_SPERATOR_TEXT_PATH = new int[] { 1, 0 };
+
+        #endregion
+
+        #region Fields
+
+        private Text _dataSperatorTemlateText;
+        private int _beforeTimestamp = -1;
 
         #endregion
 
@@ -84,6 +93,15 @@ namespace Limitex.MonoUI.Udon
             offset += BYTE_SIZE;
             logText = Encoding.UTF8.GetString(_serializedData, offset, playerBytesLength);
             dataLength = ENTRY_SIZE + playerBytesLength;
+        }
+
+        #endregion
+
+        #region Unity Callbacks
+
+        private void Start()
+        {
+            _dataSperatorTemlateText = GetComponentByHierarchyPath(_dateSperatorPrefab.transform, DATE_SPERATOR_TEXT_PATH).GetComponent<Text>();
         }
 
         #endregion
@@ -131,9 +149,15 @@ namespace Limitex.MonoUI.Udon
 
         private void AddLine(DateTime timestamp, LogType logType, string logText)
         {
+            DateTime local = timestamp.ToLocalTime();
+            if (_beforeTimestamp != local.Day)
+            {
+                AddDateLine(local);
+                _beforeTimestamp = local.Day;
+            }
+
             GameObject item = Instantiate(_textPrefab, _parentTransform);
             Text text = item.GetComponent<Text>();
-            DateTime local = timestamp.ToLocalTime();
 
             StringBuilder sb = new StringBuilder();
             sb.Append(Colorize(
@@ -149,6 +173,14 @@ namespace Limitex.MonoUI.Udon
             sb.Append(Colorize(logText, _defaultColor));
 
             text.text = sb.ToString();
+            item.SetActive(true);
+            ScrollToBottom();
+        }
+
+        private void AddDateLine(DateTime timestamp)
+        {
+            _dataSperatorTemlateText.text = timestamp.ToString("yyyy/MM/dd");
+            GameObject item = Instantiate(_dateSperatorPrefab, _parentTransform);
             item.SetActive(true);
             ScrollToBottom();
         }
@@ -208,6 +240,20 @@ namespace Limitex.MonoUI.Udon
             int b = (int)(color.b * 255);
 
             return string.Format("{0:X2}{1:X2}{2:X2}", r, g, b);
+        }
+
+        private Transform GetComponentByHierarchyPath(Transform parent, int[] hierarchyPath)
+        {
+            if (parent == null || hierarchyPath == null) return null;
+
+            Transform current = parent;
+            int pathLength = hierarchyPath.Length;
+
+            for (int i = 0; i < pathLength && current != null; i++)
+            {
+                current = current.GetChild(hierarchyPath[i]);
+            }
+            return current;
         }
 
         #endregion

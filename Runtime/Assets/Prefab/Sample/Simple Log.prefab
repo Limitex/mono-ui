@@ -132,6 +132,7 @@ MonoBehaviour:
   _scrollRect: {fileID: 8916206325328686313}
   _parentTransform: {fileID: 7326688896295906491}
   _textPrefab: {fileID: 1988286075020593063}
+  _dateSperatorPrefab: {fileID: 1091702072092013346}
   _dateFontSize: 20
 --- !u!114 &7744021891181753937
 MonoBehaviour:
