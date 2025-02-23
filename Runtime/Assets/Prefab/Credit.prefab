@@ -1715,6 +1715,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6115056172970259949, guid: 943412fd901d12b4e83271a9de8bb798,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -160
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115056172970259949, guid: 943412fd901d12b4e83271a9de8bb798,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -70
+      objectReference: {fileID: 0}
     - target: {fileID: 6425546014865614753, guid: 943412fd901d12b4e83271a9de8bb798,
         type: 3}
       propertyPath: m_text
@@ -1724,6 +1734,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Avatar With Text (Developer)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481521756746877541, guid: 943412fd901d12b4e83271a9de8bb798,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -270
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481521756746877541, guid: 943412fd901d12b4e83271a9de8bb798,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 7825486200121439387, guid: 943412fd901d12b4e83271a9de8bb798,
         type: 3}
