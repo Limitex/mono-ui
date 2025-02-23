@@ -34,8 +34,8 @@ namespace Limitex.MonoUI.Editor.Components
         [SerializeField] private ComponentColor[] componentColors;
         [SerializeField] private ColorPresetAsset colorPreset;
 
-        private readonly string DEFAULT_COLOR_PRESET_NAME = "DefaultColorPreset";
-        private readonly string[] SEATCH_DIRECTORIES = new[] { "Packages/dev.limitex.mono-ui/Editor/Assets/ColorPreset/" };
+        private readonly string DEFAULT_COLOR_PRESET_NAME = "Color Preset (Default)";
+        private readonly string[] SEATCH_DIRECTORIES = new[] { "Packages/dev.limitex.mono-ui/Editor/Assets/ColorPresets/" };
 
         private void Reset()
         {
