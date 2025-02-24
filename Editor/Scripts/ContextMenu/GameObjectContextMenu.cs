@@ -254,7 +254,10 @@ namespace Limitex.MonoUI.Editor.ContextMenu
         [MenuItem(MENU_PROVIDER + "Dialog", false, PROVIDER_PRIORITY)]
         private static void CreateProvider() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Providers/Dialog Provider.prefab", true);
 
-        [MenuItem(MENU_PROVIDER + "Toast", false, PROVIDER_PRIORITY + 1)]
+        [MenuItem(MENU_PROVIDER + "Dialog (bool)", false, PROVIDER_PRIORITY + 1)]
+        private static void CreateProviderBool() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Providers/Dialog Provider (bool).prefab", true);
+
+        [MenuItem(MENU_PROVIDER + "Toast", false, PROVIDER_PRIORITY + 2)]
         private static void CreateToast() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Providers/Toast Provider.prefab", true);
         #endregion
 
