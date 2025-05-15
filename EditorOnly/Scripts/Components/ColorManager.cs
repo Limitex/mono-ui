@@ -12,6 +12,7 @@ using System.Linq;
 
 namespace Limitex.MonoUI.Editor.Components
 {
+    [AddComponentMenu("Mono UI/MI Color Manager")]
     [DisallowMultipleComponent]
     public class ColorManager : MonoBehaviour
     {
