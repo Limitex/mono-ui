@@ -5,6 +5,7 @@ using VRC.Udon;
 
 namespace Limitex.MonoUI.Udon
 {
+    [AddComponentMenu("")]
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class DialogManager : UdonSharpBehaviour
     {

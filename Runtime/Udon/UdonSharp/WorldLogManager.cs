@@ -27,6 +27,7 @@ namespace Limitex.MonoUI.Udon
 
     # endregion
 
+    [AddComponentMenu("")]
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class WorldLogManager : UdonSharpBehaviour
     {
