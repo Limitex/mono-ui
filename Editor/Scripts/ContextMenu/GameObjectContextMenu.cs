@@ -113,6 +113,10 @@ namespace Limitex.MonoUI.Editor.ContextMenu
 
         [MenuItem(MENU_SAMPLE + "Platform Statistics", false, SAMPLE_PRIORITY + 4)]
         private static void CreatePlatformStatistics() => SpawnPrefab(PREFAB_ROOT + "Sample/Platform Statistics.prefab");
+
+        [MenuItem(MENU_SAMPLE + "Simpe Mirror", false, SAMPLE_PRIORITY + 5)]
+        private static void CreateSimpleMirror() => SpawnPrefab(PREFAB_ROOT + "Sample/Simple Mirror.prefab");
+
         #endregion
 
         #region Layout Menu Items
