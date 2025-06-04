@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Limitex.MonoUI.Udon
 {
+    [AddComponentMenu("")]
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class QuizManager : UdonSharpBehaviour
     {

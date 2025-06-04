@@ -10,6 +10,7 @@ using System.Linq;
 
 namespace Limitex.MonoUI.Udon
 {
+    [AddComponentMenu("")]
     public class MonoUIBehaviour : UdonSharpBehaviour
     {
         [HideInInspector] public Button button;

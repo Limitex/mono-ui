@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace Limitex.MonoUI.Udon
 {
+    [AddComponentMenu("")]
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class SwitchManager : MonoUIBehaviour
     {
