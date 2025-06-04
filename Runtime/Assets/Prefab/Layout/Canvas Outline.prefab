@@ -74,7 +74,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 2
 --- !u!1001 &308326098116659107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87,6 +87,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 233565090807697394, guid: c1c2e4cf3605aa644baebd986da3902e,
+        type: 3}
+      propertyPath: componentColors.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 233565090807697394, guid: c1c2e4cf3605aa644baebd986da3902e,
+        type: 3}
+      propertyPath: componentColors.Array.data[1].colorType
+      value: 694730041
+      objectReference: {fileID: 0}
+    - target: {fileID: 233565090807697394, guid: c1c2e4cf3605aa644baebd986da3902e,
+        type: 3}
+      propertyPath: componentColors.Array.data[1].component
+      value: 
+      objectReference: {fileID: 4379917677795663956}
+    - target: {fileID: 233565090807697394, guid: c1c2e4cf3605aa644baebd986da3902e,
+        type: 3}
+      propertyPath: componentColors.Array.data[1].transitionColorType
+      value: 897758581
       objectReference: {fileID: 0}
     - target: {fileID: 1432797977358093523, guid: c1c2e4cf3605aa644baebd986da3902e,
         type: 3}

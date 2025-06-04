@@ -318,6 +318,8 @@ MonoBehaviour:
   audioSource: {fileID: 5984146211346323816}
   successClip: {fileID: 8300000, guid: 5b54c6d7fdfb1d342bd2809bc9cd3706, type: 3}
   failureClip: {fileID: 8300000, guid: 064f04e868eb8e445b9fc05e94edd0f7, type: 3}
+  retryCount: 0
+  randomizeQuestions: 1
   requiredSuccesses: 3
   successMessage: Success!
   failureMessage: Failure!
@@ -900,7 +902,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3871765523434015843}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2661491309031159289, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7034140676823611468}
   m_SourcePrefab: {fileID: 100100000, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a, type: 3}
 --- !u!224 &2947931349722997259 stripped
 RectTransform:
@@ -908,6 +914,59 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1449103363761097796}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3527369548608747965 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2661491309031159289, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1449103363761097796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7034140676823611468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3527369548608747965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5984146211346323816}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: b319a2e4ff8f5d840b82d8635b645d22,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5984146211346323816}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: d14b106713a74b448bcab90869f1706e,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1830203290243879872
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1100,7 +1159,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5022003721959376678}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2661491309031159289, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5568802139270547060}
   m_SourcePrefab: {fileID: 100100000, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a, type: 3}
 --- !u!224 &2707551881974726031 stripped
 RectTransform:
@@ -1108,6 +1171,59 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1830203290243879872}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4434273274342123065 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2661491309031159289, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1830203290243879872}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5568802139270547060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4434273274342123065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5984146211346323816}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: b319a2e4ff8f5d840b82d8635b645d22,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5984146211346323816}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: d14b106713a74b448bcab90869f1706e,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &2698954377322759231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1116,6 +1232,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2947931349722997259}
     m_Modifications:
+    - target: {fileID: 416230651906435162, guid: 7531dfba2a198df4987094ddd3b7eb84,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].colorType
+      value: 711723875
+      objectReference: {fileID: 0}
     - target: {fileID: 565790068734358489, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_Name
@@ -1466,8 +1587,65 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5189937989982777340}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2661491309031159289, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2228542956329627772}
   m_SourcePrefab: {fileID: 100100000, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a, type: 3}
+--- !u!1 &967245149375826469 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2661491309031159289, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2991476917759344604}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2228542956329627772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967245149375826469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5984146211346323816}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: b319a2e4ff8f5d840b82d8635b645d22,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5984146211346323816}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: d14b106713a74b448bcab90869f1706e,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!224 &1546639358136979859 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4392443560871849551, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
@@ -1482,6 +1660,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7849550316309019206}
     m_Modifications:
+    - target: {fileID: 416230651906435162, guid: 7531dfba2a198df4987094ddd3b7eb84,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].colorType
+      value: 711723875
+      objectReference: {fileID: 0}
     - target: {fileID: 565790068734358489, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_Name
@@ -1832,7 +2015,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6476483763501858843}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2661491309031159289, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2534101590964556273}
   m_SourcePrefab: {fileID: 100100000, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a, type: 3}
 --- !u!224 &7849550316309019206 stripped
 RectTransform:
@@ -1840,6 +2027,59 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 5771974568626394121}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8427827508762108400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2661491309031159289, guid: e0fe57fd7a8ba3c4087b855e4b3ba33a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5771974568626394121}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2534101590964556273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8427827508762108400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5984146211346323816}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: b319a2e4ff8f5d840b82d8635b645d22,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5984146211346323816}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: d14b106713a74b448bcab90869f1706e,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &6160474904538419066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1848,6 +2088,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2707551881974726031}
     m_Modifications:
+    - target: {fileID: 416230651906435162, guid: 7531dfba2a198df4987094ddd3b7eb84,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].colorType
+      value: 711723875
+      objectReference: {fileID: 0}
     - target: {fileID: 565790068734358489, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_Name
@@ -2014,6 +2259,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1546639358136979859}
     m_Modifications:
+    - target: {fileID: 416230651906435162, guid: 7531dfba2a198df4987094ddd3b7eb84,
+        type: 3}
+      propertyPath: componentColors.Array.data[0].colorType
+      value: 711723875
+      objectReference: {fileID: 0}
     - target: {fileID: 565790068734358489, guid: 7531dfba2a198df4987094ddd3b7eb84,
         type: 3}
       propertyPath: m_Name
