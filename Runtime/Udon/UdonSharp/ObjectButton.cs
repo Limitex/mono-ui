@@ -112,7 +112,7 @@ namespace Limitex.MonoUI.Udon
             ApplyMaskToTargets();
         }
 
-        protected override void OnButtonClick(Button button)
+        public void TriggerAction()
         {
             if (!Networking.IsOwner(gameObject))
             {
@@ -141,6 +141,11 @@ namespace Limitex.MonoUI.Udon
             }
 
             RequestSerialization();
+        }
+
+        protected override void OnButtonClick(Button button)
+        {
+            TriggerAction();
         }
     }
 }
