@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace Limitex.MonoUI.Udon
 {
     [AddComponentMenu("")]
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class SwitchManager : MonoUIBehaviour
     {
         [SerializeField] private Animator animator;
