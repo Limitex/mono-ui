@@ -8,7 +8,7 @@ namespace Limitex.MonoUI.Udon
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class ObjectButtonTrigger : MonoUIBehaviour
     {
-        [SerializeField] private ObjectButton _targetObjectButton;
+        [SerializeField] public ObjectButton _targetObjectButton;
 
         protected override void OnButtonClick(Button button)
         {
