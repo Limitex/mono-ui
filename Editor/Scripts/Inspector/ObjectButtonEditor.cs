@@ -21,7 +21,7 @@ namespace Limitex.MonoUI.Editor.Inspector
             ReferencedByDrawer.Draw<ObjectButton, ObjectButtonTrigger>(
                 ref showReferencedBy,
                 (ObjectButton)target,
-                nameof(ObjectButtonTrigger._targetObjectButton));
+                ObjectButtonTrigger.TargetObjectButtonName);
         }
     }
 }

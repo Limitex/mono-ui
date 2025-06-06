@@ -16,6 +16,8 @@ namespace Limitex.MonoUI.Udon
 
         [HideInInspector] public ObjectToggleTrigger[] _linkedToggles;
 
+        public const string LinkedTogglesName = nameof(_linkedToggles);
+
         private const int MAX_MASK_SIZE = sizeof(int) * 8;
 
         [UdonSynced(UdonSyncMode.None)] private bool _invertMask;

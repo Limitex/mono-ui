@@ -11,7 +11,9 @@ namespace Limitex.MonoUI.Udon
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class ObjectToggleTrigger : MonoUIBehaviour
     {
-        [SerializeField] public ObjectToggle _targetObjectToggle;
+        [SerializeField] private ObjectToggle _targetObjectToggle;
+
+        public const string TargetObjectToggleName = nameof(_targetObjectToggle);
 
         private void Start()
         {

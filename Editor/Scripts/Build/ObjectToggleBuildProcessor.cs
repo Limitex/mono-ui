@@ -60,7 +60,7 @@ class ObjectToggleBuildProcessor : IProcessSceneWithReport
 
         foreach (var trigger in triggers)
         {
-            var targetObjectToggle = (ObjectToggle)trigger.GetProgramVariable(nameof(ObjectToggleTrigger._targetObjectToggle));
+            var targetObjectToggle = (ObjectToggle)trigger.GetProgramVariable(ObjectToggleTrigger.TargetObjectToggleName);
 
             if (targetObjectToggle != null && linkMap.ContainsKey(targetObjectToggle))
             {
@@ -86,7 +86,7 @@ class ObjectToggleBuildProcessor : IProcessSceneWithReport
 
             if (togglesToLink.Count > 0)
             {
-                objectToggle.SetProgramVariable(nameof(ObjectToggle._linkedToggles), togglesToLink.ToArray());
+                objectToggle.SetProgramVariable(ObjectToggle.LinkedTogglesName, togglesToLink.ToArray());
                 totalLinks += togglesToLink.Count;
             }
         }

@@ -21,7 +21,7 @@ namespace Limitex.MonoUI.Editor.Inspector
             ReferencedByDrawer.Draw<ObjectToggle, ObjectToggleTrigger>(
                 ref showReferencedBy,
                 (ObjectToggle)target,
-                nameof(ObjectToggleTrigger._targetObjectToggle));
+                ObjectToggleTrigger.TargetObjectToggleName);
         }
     }
 }
