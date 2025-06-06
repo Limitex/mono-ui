@@ -41,7 +41,7 @@ namespace Limitex.MonoUI.Udon
             {
                 if (_targets[i] == null)
                 {
-                    Debug.LogError($"Target at index {i} is null. Please assign a Transform.", this);
+                    Debug.LogWarning($"Target at index {i} is null. Please assign a Transform.", this);
                     continue;
                 }
 
@@ -103,6 +103,12 @@ namespace Limitex.MonoUI.Udon
         {
             for (int i = 0; i < MaxTargets; i++)
             {
+                if (_targets[i] == null)
+                {
+                    Debug.LogWarning($"Target at index {i} is null. Please assign a Transform.", this);
+                    continue;
+                }
+
                 _targets[i].gameObject.SetActive(GetMask(i));
             }
         }
