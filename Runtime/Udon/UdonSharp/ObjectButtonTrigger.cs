@@ -1,6 +1,7 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace Limitex.MonoUI.Udon
 {
     [AddComponentMenu("Mono UI/MI Object Button Trigger")]
