@@ -17,6 +17,7 @@ namespace Limitex.MonoUI.Udon
     public class ObjectButton : MonoUIBehaviour
     {
         [SerializeField] private bool _isGlobal;
+        [SerializeField] private bool _defaultTargetState = true;
         [SerializeField] private ButtonType _buttonType = ButtonType.Invert;
         [SerializeField] private Transform[] _targets;
 
@@ -42,6 +43,7 @@ namespace Limitex.MonoUI.Udon
                 if (_targets[i] == null)
                 {
                     Debug.LogWarning($"Target at index {i} is null. Please assign a Transform.", this);
+                    SetMask(i, _defaultTargetState);
                     continue;
                 }
 

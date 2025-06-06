@@ -12,6 +12,7 @@ namespace Limitex.MonoUI.Udon
     public class ObjectToggle : MonoUIBehaviour
     {
         [SerializeField] private bool _isGlobal;
+        [SerializeField] private bool _defaultTargetState = true;
         [SerializeField] private Transform[] _targets;
 
         [HideInInspector] public ObjectToggleTrigger[] _linkedToggles;
@@ -41,6 +42,7 @@ namespace Limitex.MonoUI.Udon
                 if (_targets[i] == null)
                 {
                     Debug.LogWarning($"Target at index {i} is null. Please assign a Transform.", this);
+                    SetMask(i, _defaultTargetState);
                     continue;
                 }
 
