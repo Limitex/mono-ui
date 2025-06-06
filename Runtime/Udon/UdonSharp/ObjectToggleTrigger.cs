@@ -13,6 +13,17 @@ namespace Limitex.MonoUI.Udon
     {
         [SerializeField] public ObjectToggle _targetObjectToggle;
 
+        private void Start()
+        {
+            if (_targetObjectToggle == null)
+            {
+                Debug.LogError("Target ObjectToggle is not assigned.", this);
+                return;
+            }
+
+            SetToggleState(_targetObjectToggle.GetToggleState());
+        }
+
         public void SetToggleState(bool isActive)
         {
             toggle.isOn = isActive;

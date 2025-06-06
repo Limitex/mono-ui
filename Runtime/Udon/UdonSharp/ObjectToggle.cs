@@ -104,6 +104,11 @@ namespace Limitex.MonoUI.Udon
             RequestSerialization();
         }
 
+        public bool GetToggleState()
+        {
+            return toggle.isOn;
+        }
+
         protected override void OnToggleValueChanged(Toggle toggle)
         {
             TriggerAction(toggle.isOn);
