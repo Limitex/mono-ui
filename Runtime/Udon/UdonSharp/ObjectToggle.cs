@@ -50,6 +50,7 @@ namespace Limitex.MonoUI.Udon
             }
 
             _invertMask = toggle.isOn;
+            ApplyMaskToTargets();
         }
 
         private void SetMask(int index, bool value)
