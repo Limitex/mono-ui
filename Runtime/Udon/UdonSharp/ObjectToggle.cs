@@ -14,6 +14,8 @@ namespace Limitex.MonoUI.Udon
         [SerializeField] private bool _isGlobal;
         [SerializeField] private Transform[] _targets;
 
+        [HideInInspector] public ObjectToggleTrigger[] _linkedToggles;
+
         private const int MAX_MASK_SIZE = sizeof(int) * 8;
 
         [UdonSynced(UdonSyncMode.None)] private bool _invertMask;
@@ -70,6 +72,12 @@ namespace Limitex.MonoUI.Udon
                 _targets[i].gameObject.SetActive(GetMask(i) ^ _invertMask);
             }
             toggle.isOn = _invertMask;
+
+            foreach (var linkedToggle in _linkedToggles)
+            {
+                if (linkedToggle == null) continue;
+                linkedToggle.SetToggleState(_invertMask);
+            }
         }
 
         public override void OnDeserialization()
