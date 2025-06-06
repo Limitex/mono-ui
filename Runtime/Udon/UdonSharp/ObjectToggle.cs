@@ -21,14 +21,16 @@ namespace Limitex.MonoUI.Udon
 
         private const int MAX_MASK_SIZE = sizeof(int) * 8;
 
-        [UdonSynced(UdonSyncMode.None)] private bool _invertMask;
+        [UdonSynced(UdonSyncMode.None)] private bool _invertMask = false;
 
         private int _mask = 0;
         private int MaxTargets;
+        private bool InitialToggleState;
 
         private void Start()
         {
             MaxTargets = Mathf.Min(_targets.Length, MAX_MASK_SIZE);
+            InitialToggleState = toggle.isOn;
 
             if (_targets.Length > MAX_MASK_SIZE)
             {
@@ -49,7 +51,6 @@ namespace Limitex.MonoUI.Udon
                 SetMask(i, _targets[i].gameObject.activeSelf);
             }
 
-            _invertMask = toggle.isOn;
             ApplyMaskToTargets();
         }
 
@@ -82,12 +83,14 @@ namespace Limitex.MonoUI.Udon
 
                 _targets[i].gameObject.SetActive(GetMask(i) ^ _invertMask);
             }
-            toggle.isOn = _invertMask;
+
+            bool currentToggleState = _invertMask ^ InitialToggleState;
+            toggle.isOn = currentToggleState;
 
             foreach (var linkedToggle in _linkedToggles)
             {
                 if (linkedToggle == null) continue;
-                linkedToggle.SetToggleState(_invertMask);
+                linkedToggle.SetToggleState(currentToggleState);
             }
         }
 
@@ -103,7 +106,7 @@ namespace Limitex.MonoUI.Udon
                 Networking.SetOwner(Networking.LocalPlayer, gameObject);
             }
 
-            _invertMask = isActive;
+            _invertMask = isActive ^ InitialToggleState;
 
             ApplyMaskToTargets();
 
