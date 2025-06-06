@@ -71,10 +71,10 @@ namespace Limitex.MonoUI.Udon
             // Inverts all bits within the 'MaxTargets' range.
 
             // Create a mask consisting of 'MaxTargets' number of ones.
-            int inversionMask = (1 << MaxTargets) - 1;
+            int inversionMask = (1 << MaxTargets) - 1;
 
             // Use the XOR operator to flip every bit within the mask.
-            _mask ^= inversionMask;
+            _mask ^= inversionMask;
         }
 
 
