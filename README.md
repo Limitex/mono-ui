@@ -49,6 +49,7 @@ The package includes ready-to-use sample scenes and prefabs:
 - **Platform Statistics**: Real-time platform usage statistics display
 - **World Log**: World event logging system
 - **Quiz Menu**: Interactive quiz system with object enable/disable
+- **Simple Mirror**: Basic mirror setup for VRChat worlds
 
 To use the samples:
 
@@ -59,56 +60,6 @@ To use the samples:
 
 For detailed documentation, visit:
 [https://docs.limitex.dev/vrc/monoui](https://docs.limitex.dev/vrc/monoui)
-
-## 📚 Main Components
-
-### Layout
-
-`Canvas` `Canvas Outline` `Sidebar`
-
-### Button
-
-`Primary` `Secondary` `Destructive` `Outline` `Ghost`
-
-### Text
-
-`Text (TMP)` `h1` `h2` `h3` `h4` `h5` `h6`
-
-### Toggle
-
-`Toggle` `Toggle Outline` `Toggle Group` `Radio Toggle` `Radio Toggle Group`
-
-### Card
-
-`Card` `Card Outline`
-
-### Switch
-
-`Switch` `Switch with Text (Left)` `Switch with Text (Right)`
-
-### Input Controls
-
-`Dropdown` `Input Field` `Slider`
-
-### Navigation
-
-`Scroll View` `Scrollbar` `Carousel`
-
-### Utility
-
-`Progress` `Span` `Separator` `Table`
-
-### Loading
-
-`Loading Bar` `Loading Circle`
-
-### Provider
-
-`Dialog` `Toast`
-
-### Icon
-
-`Lucide Icon`
 
 ## 📞 Support
 
