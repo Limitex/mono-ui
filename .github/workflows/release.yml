@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  PACKAGE_NAME: mono-ui
+
 jobs:
   check-and-release:
     runs-on: ubuntu-latest
@@ -43,11 +46,11 @@ jobs:
 
       - name: Create ZIP archive
         run: |
-          zip -r mono-ui-${{ steps.get-version.outputs.version }}.zip . -x "*.git*"
+          zip -r ${{ env.PACKAGE_NAME }}-${{ steps.get-version.outputs.version }}.zip . -x "*.git*"
 
       - name: Update package.json URL
         run: |
-          jq '.url = "https://github.com/Limitex/mono-ui/releases/download/v${{ steps.get-version.outputs.version }}/mono-ui-${{ steps.get-version.outputs.version }}.zip"' package.json > updated-package.json
+          jq '.url = "https://github.com/Limitex/${{ env.PACKAGE_NAME }}/releases/download/v${{ steps.get-version.outputs.version }}/${{ env.PACKAGE_NAME }}-${{ steps.get-version.outputs.version }}.zip"' package.json > updated-package.json
           mv updated-package.json package.json
 
       - name: Create Tag
@@ -60,8 +63,9 @@ jobs:
         with:
           tag_name: v${{ steps.get-version.outputs.version }}
           name: Release v${{ steps.get-version.outputs.version }}
+          generate_release_notes: true
           files: |
-            mono-ui-${{ steps.get-version.outputs.version }}.zip
+            ${{ env.PACKAGE_NAME }}-${{ steps.get-version.outputs.version }}.zip
             package.json
           draft: false
           prerelease: ${{ steps.check-prerelease.outputs.is_prerelease }}
