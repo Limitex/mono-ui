@@ -14,6 +14,7 @@ namespace Limitex.MonoUI.Udon
 
     #endregion
 
+    [AddComponentMenu("")]
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class CarouselManager : UdonSharpBehaviour
     {

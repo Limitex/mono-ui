@@ -44,7 +44,7 @@ namespace Limitex.MonoUI.Editor.ContextMenu
         #endregion
 
         #region Utility Methods
-        private static GameObject SpawnPrefab(string path, Transform parent = null)
+        private static GameObject SpawnPrefab(string path, Transform parent = null, bool resetOffset = false)
         {
             var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
             if (prefab == null)
@@ -70,21 +70,31 @@ namespace Limitex.MonoUI.Editor.ContextMenu
             instance.transform.localRotation = Quaternion.identity;
             instance.transform.localScale = originalScale;
 
+            if (resetOffset)
+            {
+                RectTransform rectTransform = instance.GetComponent<RectTransform>();
+                if (rectTransform != null)
+                {
+                    rectTransform.offsetMax = Vector2.zero;
+                    rectTransform.offsetMin = Vector2.zero;
+                }
+            }
+
             Undo.RegisterCreatedObjectUndo(instance, $"Create {instance.name}");
             Selection.activeGameObject = instance;
 
             return instance;
         }
 
-        private static GameObject SpawnPrefabWithCanvas(string path, bool forceUnderCanvas = false)
+        private static GameObject SpawnPrefabWithCanvas(string path, bool forceUnderCanvas = false, bool resetOffset = false)
         {
             Canvas canvas = Selection.activeTransform?.GetComponentInParent<Canvas>();
 
             if (canvas != null)
-                return SpawnPrefab(path, forceUnderCanvas ? canvas.transform : null);
+                return SpawnPrefab(path, forceUnderCanvas ? canvas.transform : null, resetOffset);
 
             GameObject canvasObject = SpawnPrefab(PREFAB_ROOT + "Layout/Canvas.prefab");
-            return SpawnPrefab(path, canvasObject.transform);
+            return SpawnPrefab(path, canvasObject.transform, resetOffset);
         }
         #endregion
 
@@ -103,6 +113,10 @@ namespace Limitex.MonoUI.Editor.ContextMenu
 
         [MenuItem(MENU_SAMPLE + "Platform Statistics", false, SAMPLE_PRIORITY + 4)]
         private static void CreatePlatformStatistics() => SpawnPrefab(PREFAB_ROOT + "Sample/Platform Statistics.prefab");
+
+        [MenuItem(MENU_SAMPLE + "Simpe Mirror", false, SAMPLE_PRIORITY + 5)]
+        private static void CreateSimpleMirror() => SpawnPrefab(PREFAB_ROOT + "Sample/Simple Mirror.prefab");
+
         #endregion
 
         #region Layout Menu Items
@@ -252,13 +266,13 @@ namespace Limitex.MonoUI.Editor.ContextMenu
 
         #region Provider Menu Items
         [MenuItem(MENU_PROVIDER + "Dialog", false, PROVIDER_PRIORITY)]
-        private static void CreateProvider() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Providers/Dialog Provider.prefab", true);
+        private static void CreateProvider() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Providers/Dialog Provider.prefab", true, true);
 
         [MenuItem(MENU_PROVIDER + "Dialog (bool)", false, PROVIDER_PRIORITY + 1)]
-        private static void CreateProviderBool() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Providers/Dialog Provider (bool).prefab", true);
+        private static void CreateProviderBool() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Providers/Dialog Provider (bool).prefab", true, true);
 
         [MenuItem(MENU_PROVIDER + "Toast", false, PROVIDER_PRIORITY + 2)]
-        private static void CreateToast() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Providers/Toast Provider.prefab", true);
+        private static void CreateToast() => SpawnPrefabWithCanvas(PREFAB_ROOT + "Providers/Toast Provider.prefab", true, true);
         #endregion
 
         #region Credit
