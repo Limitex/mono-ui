@@ -6,9 +6,7 @@
   "unity": "2022.3",
   "unityRelease": "22f1",
   "dependencies": {
-    "com.unity.textmeshpro": "3.0.6",
-    "com.vrchat.base" : "3.7.0",
-    "com.vrchat.worlds" : "3.7.0"
+    "com.unity.textmeshpro": "3.0.9"
   },
   "keywords": [],
   "author": {
